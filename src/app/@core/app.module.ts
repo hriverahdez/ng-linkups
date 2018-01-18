@@ -21,16 +21,9 @@ import * as fromContainers from "./containers";
 
 // components
 import * as fromComponents from "./components/";
-import { NavbarComponent } from "./components/navbar/navbar.component";
-import { NavDropdownComponent } from './components/nav-dropdown/nav-dropdown.component';
 
 @NgModule({
-  declarations: [
-    ...fromContainers.containers,
-    ...fromComponents.components,
-    NavbarComponent,
-    NavDropdownComponent
-  ],
+  declarations: [...fromContainers.containers, ...fromComponents.components],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
