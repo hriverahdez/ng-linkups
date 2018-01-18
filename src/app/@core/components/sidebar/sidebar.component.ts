@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { MenuItem, APP_MENU } from "../../app-menu";
+import { MenuItem, APP_MENU } from "../../utils/app-menu";
 
 @Component({
   selector: "lnk-sidebar",
