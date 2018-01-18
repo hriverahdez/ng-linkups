@@ -19,6 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "lnk",
       "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "./assets/sass/material-dashboard.scss",
         "styles.scss"
       ],
       "scripts": [],
