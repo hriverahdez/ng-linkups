@@ -6,3 +6,7 @@ export const toEntities = (array: any[], initial) => {
     };
   }, initial);
 };
+
+export function toArray(entities) {
+  return Object.keys(entities).map(_id => entities[_id]);
+}

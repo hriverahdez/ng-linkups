@@ -1,4 +1,4 @@
-import { toEntities } from "../../../@shared/utils/entityToArrayConverter";
+import { toEntities } from "../../../@shared/utils/entities-array-helper";
 
 import { Institution } from "../../models/institution.model";
 

@@ -26,7 +26,7 @@
                           <div class="tab-pane active" id="profile">
                               <table class="table">
                                   <tbody>
-                                      <tr *ngFor="let institution of institutions">
+                                      <tr *ngFor="let institution of institutions$ | async">
                                           <td>                                                
                                               {{institution.type}}
                                           </td>
