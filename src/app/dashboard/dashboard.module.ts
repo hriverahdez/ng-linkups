@@ -2,6 +2,8 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
 
+import { SharedModule } from "../@shared/shared.module";
+
 // containers
 import * as fromContainers from "./containers";
 
@@ -16,7 +18,7 @@ const ROUTES: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(ROUTES)],
+  imports: [CommonModule, SharedModule, RouterModule.forChild(ROUTES)],
   declarations: [...fromContainers.containers, ...fromComponents.components],
   exports: []
 })
