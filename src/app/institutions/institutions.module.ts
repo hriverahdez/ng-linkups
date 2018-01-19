@@ -4,8 +4,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { InstitutionsRoutingModule } from "./institutions-routing.module";
 
 import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
 
-import { reducers } from "./store";
+import { reducers, effects } from "./store";
 
 // containers
 import * as fromContainers from "./containers";
@@ -16,10 +17,12 @@ import * as fromServices from "./services";
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     InstitutionsRoutingModule,
-    StoreModule.forFeature("institutions", reducers)
+    StoreModule.forFeature("institutions", reducers),
+    EffectsModule.forFeature(effects)
   ],
   declarations: [...fromContainers.containers],
-  providers: [HttpClientModule, ...fromServices.services]
+  providers: [...fromServices.services]
 })
 export class InstitutionsModule {}

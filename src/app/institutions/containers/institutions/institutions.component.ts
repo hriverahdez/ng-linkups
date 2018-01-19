@@ -20,6 +20,6 @@ export class InstitutionsComponent implements OnInit {
 
   ngOnInit() {
     this.institutions$ = this.store.select(fromStore.getAllInstitutions);
-    this.store.dispatch(new fromStore.LoadInstitutionsSuccess(DATA));
+    this.store.dispatch(new fromStore.LoadInstitutions());
   }
 }
