@@ -19,6 +19,10 @@ const routes: Routes = [
         path: "institutions",
         loadChildren: "../institutions/institutions.module#InstitutionsModule"
       },
+      {
+        path: "categories",
+        loadChildren: "../categories/categories.module#CategoriesModule"
+      },
       { path: "", redirectTo: "/app/dashboard", pathMatch: "full" }
     ]
   }
