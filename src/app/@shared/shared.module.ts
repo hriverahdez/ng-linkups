@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 import {
   MatCardModule,
@@ -42,12 +43,18 @@ const NG_MAT_MODULES = [
   MatSnackBarModule
 ];
 
+import { LoaderComponent } from "./components/loader/loader.component";
+
 // services
 import * as fromServices from "./services";
 
+// guards
+import * as fromGuards from "./guards";
+
 @NgModule({
-  imports: [...NG_MAT_MODULES],
-  providers: [...fromServices.services],
-  exports: [...NG_MAT_MODULES]
+  imports: [...NG_MAT_MODULES, CommonModule],
+  declarations: [LoaderComponent],
+  providers: [...fromServices.services, ...fromGuards.guards],
+  exports: [...NG_MAT_MODULES, LoaderComponent]
 })
 export class SharedModule {}

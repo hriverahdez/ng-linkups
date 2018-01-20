@@ -10,6 +10,8 @@ import * as fromContainers from "./containers";
 // components
 import * as fromComponents from "./components";
 
+import * as fromSharedGuards from "../@shared/guards";
+
 const ROUTES: Routes = [
   {
     path: "",

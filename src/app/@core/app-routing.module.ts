@@ -6,15 +6,15 @@ import * as fromContainers from "./containers";
 
 const routes: Routes = [
   {
-    path: "app",
-    loadChildren: "../@layout/layout.module#LayoutModule"
-  },
-  {
     path: "login",
     component: fromContainers.LoginComponent
   },
-  { path: "", redirectTo: "/app/dashboard", pathMatch: "full" },
-  { path: "**", redirectTo: "app" }
+  {
+    path: "app",
+    loadChildren: "../@layout/layout.module#LayoutModule"
+  },
+  { path: "", redirectTo: "/login", pathMatch: "full" },
+  { path: "**", redirectTo: "login" }
 ];
 
 @NgModule({

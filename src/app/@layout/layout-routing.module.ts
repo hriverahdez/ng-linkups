@@ -3,11 +3,13 @@ import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from "@angular/router";
 
 import * as fromContainers from "./containers";
+import * as fromSharedGuards from "../@shared/guards";
 
 const routes: Routes = [
   {
     path: "",
     component: fromContainers.LayoutComponent,
+    canActivate: [fromSharedGuards.AuthGuard],
     children: [
       {
         path: "dashboard",
