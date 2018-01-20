@@ -6,7 +6,10 @@ import {
 } from "@angular/router";
 import { ActionReducerMap, createFeatureSelector } from "@ngrx/store";
 
+import * as fromUser from "./user.reducer";
+
 export interface AppState {
+  user: fromUser.UserState;
   routerReducer: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
@@ -17,12 +20,15 @@ export interface RouterStateUrl {
 }
 
 export const reducers: ActionReducerMap<AppState> = {
+  user: fromUser.reducer,
   routerReducer: fromRouter.routerReducer
 };
 
 export const getRouterState = createFeatureSelector<
   fromRouter.RouterReducerState<RouterStateUrl>
 >("routerReducer");
+
+export const getUserState = createFeatureSelector<fromUser.UserState>("user");
 
 export class CustomSerializer
   implements fromRouter.RouterStateSerializer<RouterStateUrl> {
