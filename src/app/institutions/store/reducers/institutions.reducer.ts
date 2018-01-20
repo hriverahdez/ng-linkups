@@ -46,6 +46,30 @@ export function reducer(
         loading: false
       };
     }
+
+    case fromInstitutions.ADD_INSTITUTION: {
+      return {
+        ...state,
+        loading: true
+      };
+    }
+
+    case fromInstitutions.ADD_INSTITUTION_FAIL: {
+      return {
+        ...state,
+        loading: false
+      };
+    }
+
+    case fromInstitutions.ADD_INSTITUTION_SUCCESS: {
+      const institution = action.payload;
+      const entities = { ...state.entities, institution };
+      return {
+        ...state,
+        entities,
+        loading: false
+      };
+    }
   }
 
   return state;

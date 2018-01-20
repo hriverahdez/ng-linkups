@@ -13,6 +13,7 @@ import * as fromContainers from "./containers";
 
 // services
 import * as fromServices from "./services";
+import { InstitutionItemComponent } from "./containers/institution-item/institution-item.component";
 
 @NgModule({
   imports: [

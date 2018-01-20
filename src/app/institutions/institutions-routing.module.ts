@@ -8,6 +8,10 @@ const ROUTES: Routes = [
   {
     path: "",
     component: fromContainers.InstitutionsComponent
+  },
+  {
+    path: "add",
+    component: fromContainers.InstitutionItemComponent
   }
 ];
 
