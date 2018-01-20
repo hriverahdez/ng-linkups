@@ -1,17 +1,24 @@
 import { Effect, Actions } from "@ngrx/effects";
 import { Injectable } from "@angular/core";
 
+import { Store } from "@ngrx/store";
+
+import { of } from "rxjs/observable/of";
+import { map, switchMap, catchError } from "rxjs/operators";
+
+import * as fromStore from '../../store';
 import * as fromRouter from "../actions/router.actions";
 import * as fromSharedServices from "../../../@shared/services";
 import * as userActions from "../actions";
-import { of } from "rxjs/observable/of";
-import { map, switchMap, catchError } from "rxjs/operators";
+import { CustomError } from "../../../@shared/utils/custom-error";
 
 @Injectable()
 export class UserEffects {
   constructor(
     private actions$: Actions,
-    private authService: fromSharedServices.AuthenticationService
+    private store: Store<fromStore.AppState>,
+    private authService: fromSharedServices.AuthenticationService,
+    private snackbar: fromSharedServices.SnackBarService,
   ) {}
 
   @Effect()
@@ -36,6 +43,18 @@ export class UserEffects {
         })
     )
   );
+
+  @Effect({dispatch: false})
+  loginFail$ = this.actions$.ofType(userActions.LOGIN_FAIL).pipe(
+    switchMap(action =>
+      this.store
+        .select(fromStore.getLoginError)
+        .pipe(
+          map((error: CustomError) =>
+            this.snackbar.openSimpleSnackBar(error.message)
+          )
+        )
+  )
 
   @Effect()
   logout$ = this.actions$.ofType(userActions.LOGOUT).pipe(

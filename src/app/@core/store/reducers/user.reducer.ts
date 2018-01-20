@@ -1,15 +1,20 @@
 import * as fromUser from "../actions";
 
+import { CustomError } from "../../../@shared/utils/custom-error";
+import { httpErrorMessages } from "../../../@shared/utils/http-error-messages";
+
 export interface UserState {
   isLoggedIn: boolean;
   currentUser: any;
   loading: boolean;
+  error: CustomError;
 }
 
 export const initialState: UserState = {
   isLoggedIn: false,
   currentUser: {},
-  loading: false
+  loading: false,
+  error: {}
 };
 
 export function reducer(state = initialState, action: fromUser.UserActions) {
@@ -22,9 +27,20 @@ export function reducer(state = initialState, action: fromUser.UserActions) {
     }
 
     case fromUser.LOGIN_FAIL: {
+      const { status } = action.payload;
+
+      const error: CustomError = {
+        code: status,
+        message:
+          status === 401
+            ? "Usuario o contraseña incorrectos"
+            : httpErrorMessages[status]
+      };
+
       return {
         ...state,
-        loading: false
+        loading: false,
+        error
       };
     }
 
@@ -54,3 +70,4 @@ export function reducer(state = initialState, action: fromUser.UserActions) {
 export const isLoggedIn = (state: UserState) => state.isLoggedIn;
 export const getCurrentUser = (state: UserState) => state.currentUser;
 export const getLoading = (state: UserState) => state.loading;
+export const getError = (state: UserState) => state.error;

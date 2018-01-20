@@ -17,3 +17,8 @@ export const getLoginLoading = createSelector(
   fromRoot.getUserState,
   fromUser.getLoading
 );
+
+export const getLoginError = createSelector(
+  fromRoot.getUserState,
+  fromUser.getError
+);
