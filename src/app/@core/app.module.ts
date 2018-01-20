@@ -21,11 +21,11 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
   ? [storeFreeze]
   : [];
 
-import { reducers, CustomSerializer } from "./store";
+import { reducers, CustomSerializer, effects } from "./store";
 
 // containers
 import * as fromContainers from "./containers";
-import { LoginComponent } from './containers/login/login.component';
+import { LoginComponent } from "./containers/login/login.component";
 
 @NgModule({
   declarations: [...fromContainers.containers, LoginComponent],
@@ -35,7 +35,7 @@ import { LoginComponent } from './containers/login/login.component';
     SharedModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot(effects),
     StoreRouterConnectingModule
   ],
   providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
