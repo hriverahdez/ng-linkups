@@ -42,8 +42,12 @@ const NG_MAT_MODULES = [
   MatSnackBarModule
 ];
 
+// services
+import * as fromServices from "./services";
+
 @NgModule({
   imports: [...NG_MAT_MODULES],
+  providers: [...fromServices.services],
   exports: [...NG_MAT_MODULES]
 })
 export class SharedModule {}

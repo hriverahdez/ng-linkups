@@ -34,7 +34,7 @@ export class AuthenticationService {
     });
     return this.http
       .post<User>(
-        `${environment.apiURL}/api/auth`,
+        `${environment.apiURL}/auth`,
         { access_token: environment.masterKey },
         { headers: headers, reportProgress: true }
       )

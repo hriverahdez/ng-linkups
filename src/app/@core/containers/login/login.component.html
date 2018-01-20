@@ -11,17 +11,7 @@
               <div class="col-xs-12">
                 <h4>Iniciar Sesión</h4>  
               </div>
-              <div class="col-md-6 col-md-offset-3">
-                <mat-form-field class="full-width">
-                  <input matInput placeholder="Usuario" name="user">        
-                </mat-form-field>
-
-                <mat-form-field class="full-width">
-                  <input type="password" matInput placeholder="Contraseña" name="password">        
-                </mat-form-field>
-
-                <a routerLink="/app/dashboard" mat-raised-button color="primary">Login</a>
-              </div>
+              <lnk-login-form (onLogin)="login($event)"></lnk-login-form>
             </div>
           </div>
         </div>

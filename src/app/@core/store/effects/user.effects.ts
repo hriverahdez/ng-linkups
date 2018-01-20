@@ -32,7 +32,7 @@ export class UserEffects {
     map(
       () =>
         new fromRouter.Go({
-          path: ["/departments"]
+          path: ["/app/dashboard"]
         })
     )
   );

@@ -1,0 +1,23 @@
+<div class="col-md-6 col-md-offset-3">
+  <form [formGroup]="loginForm">
+    <mat-form-field class="full-width" style="padding-bottom: 20px">
+      <input matInput placeholder="Usuario" 
+             name="email" formControlName="email">
+        <mat-error *ngIf="emailControlInvalid">
+          El email es 
+          <strong>inválido</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input type="password" matInput placeholder="Contraseña" 
+             name="password" formControlName="password">
+      <mat-error *ngIf="passwordControlInvalid">
+        La contraseña es
+        <strong>obligatoria</strong>
+      </mat-error>
+    </mat-form-field>
+  
+    <button [disabled]="!loginForm.valid" (click)="login(loginForm)" mat-raised-button color="primary">Login</button>
+  </form>
+</div>

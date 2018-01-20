@@ -1,6 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 import { SharedModule } from "../@shared/shared.module";
 import { AppRoutingModule } from "./app-routing.module";
@@ -25,14 +27,18 @@ import { reducers, CustomSerializer, effects } from "./store";
 
 // containers
 import * as fromContainers from "./containers";
-import { LoginComponent } from "./containers/login/login.component";
+
+// components
+import * as fromComponents from "./components";
 
 @NgModule({
-  declarations: [...fromContainers.containers, LoginComponent],
+  declarations: [...fromContainers.containers, ...fromComponents.components],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
