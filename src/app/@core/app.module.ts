@@ -25,9 +25,10 @@ import { reducers, CustomSerializer } from "./store";
 
 // containers
 import * as fromContainers from "./containers";
+import { LoginComponent } from './containers/login/login.component';
 
 @NgModule({
-  declarations: [...fromContainers.containers],
+  declarations: [...fromContainers.containers, LoginComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

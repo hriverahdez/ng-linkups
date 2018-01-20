@@ -1,0 +1,15 @@
+.login-wrapper {
+  padding-top: 20vh;
+  background: url(/assets/img/landing.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+
+  .card {
+    max-width: 950px;
+    .card-content {
+      padding: 50px 30px 100px !important;
+  
+    }
+  }
+}
