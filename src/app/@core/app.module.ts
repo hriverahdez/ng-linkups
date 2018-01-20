@@ -2,7 +2,15 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
+import { SharedModule } from "../@shared/shared.module";
+import { AppRoutingModule } from "./app-routing.module";
+
 import { StoreModule, MetaReducer } from "@ngrx/store";
+import {
+  RouterStateSerializer,
+  StoreRouterConnectingModule
+} from "@ngrx/router-store";
+
 import { EffectsModule } from "@ngrx/effects";
 
 import { storeFreeze } from "ngrx-store-freeze";
@@ -13,10 +21,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
   ? [storeFreeze]
   : [];
 
-import { SharedModule } from "../@shared/shared.module";
-import { AppRoutingModule } from "./app-routing.module";
-
-import { reducers } from "./store";
+import { reducers, CustomSerializer } from "./store";
 
 // containers
 import * as fromContainers from "./containers";
@@ -29,12 +34,13 @@ import * as fromComponents from "./components/";
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    SharedModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([]),
-    SharedModule
+    StoreRouterConnectingModule
   ],
-  providers: [],
+  providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
   bootstrap: [fromContainers.AppComponent]
 })
 export class AppModule {}

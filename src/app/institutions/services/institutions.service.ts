@@ -16,4 +16,10 @@ export class InstitutionsService {
       .get<Institution[]>(`${environment.apiURL}/institutions`)
       .pipe(catchError(err => Observable.throw(err.json())));
   }
+
+  addInstitution(inst: Institution): Observable<Institution> {
+    return this.http
+      .post<Institution>(`${environment.apiURL}/institutions`, inst)
+      .pipe(catchError(error => Observable.throw(error.json())));
+  }
 }

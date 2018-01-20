@@ -17,11 +17,13 @@ import {
   MatCheckboxModule,
   MatTableModule,
   MatSnackBarModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatInputModule
 } from "@angular/material";
 
 const NG_MAT_MODULES = [
   MatCardModule,
+  MatInputModule,
   MatStepperModule,
   MatTabsModule,
   MatTableModule,

@@ -29,4 +29,23 @@ export class InstitutionEffects {
         of(new institutionActions.LoadInstitutionsFail(error))
       )
     );
+
+  @Effect()
+  create$ = this.actions$
+    .ofType(institutionActions.ADD_INSTITUTION)
+    .pipe(
+      map((action: institutionActions.AddInstitution) => action.payload),
+      switchMap(institution =>
+        this.institutionsService
+          .addInstitution(institution)
+          .pipe(
+            map(
+              newInst => new institutionActions.AddInstitutionSuccess(newInst)
+            ),
+            catchError(error =>
+              of(new institutionActions.AddInstitutionFail(error))
+            )
+          )
+      )
+    );
 }

@@ -1,0 +1,115 @@
+<form [formGroup]="institutionForm">
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Tipo" name="type" formControlName="type">
+        <!-- <mat-error *ngIf="typeControlInvalid">
+          El tipo es
+          <strong>requerido</strong>
+        </mat-error> -->
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Número de línea" name="line_number" formControlName="line_number">
+        <mat-error *ngIf="lineNumberControlInvalid">
+          El número de línea es
+          <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Nombre" name="name" formControlName="name">
+        <mat-error *ngIf="nameControlInvalid">
+          El nombre es
+          <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Localidad" name="location" formControlName="location">
+        <mat-error *ngIf="lineNumberControlInvalid">
+          La localidad es 
+          <strong>requerida</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="WAN" name="wan" formControlName="wan">
+        <mat-error *ngIf="wanControlInvalid">
+          La dirección WAN es
+          <strong>requerida</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="LAN" name="lan" formControlName="lan">        
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Bandwidth" name="bandwidth" formControlName="bandwidth">        
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Estado" name="state" formControlName="state">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Destino" name="final_destination" formControlName="final_destination">        
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Tipo de puerta" name="gate_type" formControlName="gate_type">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Número de Teléfono" name="phone_number" formControlName="phone_number">        
+      </mat-form-field>
+    </div>
+    <div class="col-md-6">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Último reporte" name="last_report" formControlName="last_report">
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <div class="pull-right">
+    <button mat-raised-button color="primary" 
+            *ngIf="!exists" [disabled]="!institutionForm.valid" 
+            (click)="create(institutionForm)">Agregar</button>
+
+    <button mat-raised-button color="primary" 
+            *ngIf="exists" [disabled]="!institution.valid" 
+            (click)="update(institutionForm)">Actualizar</button>
+
+    <a routerLink="/institutions" mat-raised-button color="basic">Cancelar</a>
+  </div>
+  <!-- <button type="submit" class="btn btn-danger pull-right">Update Profile</button> -->
+  <div class="clearfix"></div>
+</form>

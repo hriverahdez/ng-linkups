@@ -11,8 +11,6 @@ export interface Institution {
   lan?: string;
   final_destination?: string;
   gate_type?: string;
-  last_modification_by?: string;
-  last_modification_time?: string;
   notes?: string;
   phone_number?: string;
   has_internet?: boolean;
