@@ -16,6 +16,8 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
 import { SharedModule } from "../@shared/shared.module";
 import { AppRoutingModule } from "./app-routing.module";
 
+import { reducers } from "./store";
+
 // containers
 import * as fromContainers from "./containers";
 
@@ -28,7 +30,7 @@ import * as fromComponents from "./components/";
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, { metaReducers }),
+    StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([]),
     SharedModule
   ],

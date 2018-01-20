@@ -3,10 +3,10 @@ import { Action } from "@ngrx/store";
 import { Institution } from "../../models/institution.model";
 
 // LOAD
-export const LOAD_INSTITUTIONS = "[INSTITUTIONS] Load Institutions";
-export const LOAD_INSTITUTIONS_FAIL = "[INSTITUTIONS] Load Institutions Fail";
+export const LOAD_INSTITUTIONS = "[Institutions] Load Institutions";
+export const LOAD_INSTITUTIONS_FAIL = "[Institutions] Load Institutions Fail";
 export const LOAD_INSTITUTIONS_SUCCESS =
-  "[INSTITUTIONS] Load Institutions Success";
+  "[Institutions] Load Institutions Success";
 
 export class LoadInstitutions implements Action {
   readonly type = LOAD_INSTITUTIONS;
@@ -23,9 +23,9 @@ export class LoadInstitutionsSuccess implements Action {
 }
 
 // ADD
-export const ADD_INSTITUTION = "[INSTITUTIONS] Add Institution";
-export const ADD_INSTITUTION_FAIL = "[INSTITUTIONS] Add Institution Fail";
-export const ADD_INSTITUTION_SUCCESS = "[INSTITUTIONS] Add Institution Success";
+export const ADD_INSTITUTION = "[Institutions] Add Institution";
+export const ADD_INSTITUTION_FAIL = "[Institutions] Add Institution Fail";
+export const ADD_INSTITUTION_SUCCESS = "[Institutions] Add Institution Success";
 
 export class AddInstitution implements Action {
   readonly type = ADD_INSTITUTION;
