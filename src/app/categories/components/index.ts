@@ -1,5 +1,10 @@
-import { CategoryComponent } from "./category/category.component";
+import { CategoryDetailComponent } from "./category-detail/category-detail.component";
+import { CategoryFormComponent } from "./category-form/category-form.component";
 
-export const components: any[] = [CategoryComponent];
+export const components: any[] = [
+  CategoryDetailComponent,
+  CategoryFormComponent
+];
 
-export * from "./category/category.component";
+export * from "./category-detail/category-detail.component";
+export * from "./category-form/category-form.component";

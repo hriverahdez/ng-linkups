@@ -1,0 +1,36 @@
+<form [formGroup]="categoryForm">
+  
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Nombre" name="name" formControlName="name">
+          <mat-error *ngIf="nameControlInvalid">
+            El tipo es
+            <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Icono" name="icon" formControlName="icon">
+          
+        </mat-form-field>
+  
+      </div>
+    </div>
+  
+  
+    <div class="pull-right">
+      <button mat-raised-button color="primary" 
+              *ngIf="!exists" [disabled]="!categoryForm.valid" 
+              (click)="create(categoryForm)">Agregar</button>
+  
+      <button mat-raised-button color="primary" 
+              *ngIf="exists" [disabled]="!categoryForm.valid" 
+              (click)="update(categoryForm)">Actualizar</button>
+  
+      <a routerLink="/app/categories" mat-raised-button color="basic">Cancelar</a>
+    </div>
+    
+    <div class="clearfix"></div>
+  </form>

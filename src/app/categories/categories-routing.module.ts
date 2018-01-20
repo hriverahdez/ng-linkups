@@ -8,6 +8,10 @@ const ROUTES: Routes = [
   {
     path: "",
     component: fromContainers.CategoriesComponent
+  },
+  {
+    path: "add",
+    component: fromContainers.CategoryItemComponent
   }
 ];
 
