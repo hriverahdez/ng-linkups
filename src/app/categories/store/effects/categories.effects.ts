@@ -34,4 +34,12 @@ export class CategoriesEffects {
           )
       )
     );
+
+  // @Effect()
+  // createCategory$ = this.actions$.ofType(categoryActions.ADD_CATEGORY).pipe(
+  //   map((action: categoryActions.AddCategory) => action.payload),
+  //   switchMap(category => {
+
+  //   })
+  // )
 }

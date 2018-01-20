@@ -55,6 +55,38 @@ export function reducer(
         loading: false
       };
     }
+
+    case categoryActions.ADD_CATEGORY: {
+      return {
+        ...state,
+        loading: true
+      };
+    }
+
+    case categoryActions.ADD_CATEGORY_FAIL: {
+      const { status } = action.payload;
+      const error: CustomError = {
+        code: status,
+        message: httpErrorMessages[status]
+      };
+
+      return {
+        ...state,
+        loading: false,
+        error
+      };
+    }
+
+    case categoryActions.ADD_CATEGORY_SUCCESS: {
+      const category = action.payload;
+      const entities = { ...state.entities, category };
+
+      return {
+        ...state,
+        entities,
+        loading: false
+      };
+    }
   }
 
   return state;

@@ -21,7 +21,30 @@ export class LoadCategoriesSuccess implements Action {
   constructor(public payload: Category[]) {}
 }
 
+// ADD
+export const ADD_CATEGORY = "[Category] Add Category";
+export const ADD_CATEGORY_FAIL = "[Category] Add Category Fail";
+export const ADD_CATEGORY_SUCCESS = "[Category] Add Category Success";
+
+export class AddCategory implements Action {
+  readonly type = ADD_CATEGORY;
+  constructor(public payload: Category) {}
+}
+
+export class AddCategoryFail implements Action {
+  readonly type = ADD_CATEGORY_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class AddCategorySuccess implements Action {
+  readonly type = ADD_CATEGORY_SUCCESS;
+  constructor(public payload: Category) {}
+}
+
 export type CategoryActions =
   | LoadCategories
   | LoadCategoriesFail
-  | LoadCategoriesSuccess;
+  | LoadCategoriesSuccess
+  | AddCategory
+  | AddCategoryFail
+  | AddCategorySuccess;
