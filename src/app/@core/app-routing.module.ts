@@ -13,8 +13,8 @@ const routes: Routes = [
     path: "app",
     loadChildren: "../@layout/layout.module#LayoutModule"
   },
-  { path: "", redirectTo: "/login", pathMatch: "full" },
-  { path: "**", redirectTo: "login" }
+  { path: "", redirectTo: "/app/dashboard", pathMatch: "full" },
+  { path: "**", redirectTo: "app" }
 ];
 
 @NgModule({

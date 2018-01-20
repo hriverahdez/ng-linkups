@@ -43,7 +43,8 @@ const NG_MAT_MODULES = [
   MatSnackBarModule
 ];
 
-import { LoaderComponent } from "./components/loader/loader.component";
+// components
+import * as fromComponents from "./components";
 
 // services
 import * as fromServices from "./services";
@@ -53,8 +54,8 @@ import * as fromGuards from "./guards";
 
 @NgModule({
   imports: [...NG_MAT_MODULES, CommonModule],
-  declarations: [LoaderComponent],
+  declarations: [...fromComponents.components],
   providers: [...fromServices.services, ...fromGuards.guards],
-  exports: [...NG_MAT_MODULES, LoaderComponent]
+  exports: [...NG_MAT_MODULES, ...fromComponents.components]
 })
 export class SharedModule {}
