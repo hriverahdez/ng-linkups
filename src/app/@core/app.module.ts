@@ -26,11 +26,8 @@ import { reducers, CustomSerializer } from "./store";
 // containers
 import * as fromContainers from "./containers";
 
-// components
-import * as fromComponents from "./components/";
-
 @NgModule({
-  declarations: [...fromContainers.containers, ...fromComponents.components],
+  declarations: [...fromContainers.containers],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
