@@ -5,6 +5,10 @@
   width: 100%;
 }
 
+a:focus, button:focus {
+  outline: none !important
+}
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;

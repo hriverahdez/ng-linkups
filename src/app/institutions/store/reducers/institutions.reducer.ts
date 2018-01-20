@@ -37,10 +37,8 @@ export function reducer(
     }
 
     case fromInstitutions.LOAD_INSTITUTIONS_SUCCESS: {
-      console.log(action.payload);
       const entities = toEntities(action.payload, { ...state.entities });
 
-      console.log(entities);
       return {
         ...state,
         entities,
