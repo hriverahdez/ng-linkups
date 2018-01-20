@@ -11,10 +11,9 @@
 
                     <div class="card-content">
                         <div class="row">
-                            <div class="col-lg-2 col-md-3 col-sm-6"><lnk-category></lnk-category></div>
-                            <div class="col-lg-2 col-md-3 col-sm-6"><lnk-category></lnk-category></div>
-                            <div class="col-lg-2 col-md-3 col-sm-6"><lnk-category></lnk-category></div>
-                            <div class="col-lg-2 col-md-3 col-sm-6"><lnk-category></lnk-category></div>
+                            <lnk-category *ngFor="let category of categories$ | async" 
+                                [category]="category"                                
+                                class="col-lg-2 col-md-3 col-sm-6"></lnk-category>
                         </div>
                     </div>
                 </div>

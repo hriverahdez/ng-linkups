@@ -1,4 +1,10 @@
 import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
+
+import { Observable } from "rxjs/Observable";
+
+import * as fromStore from "../../store";
+import { Category } from "../../models/category.model";
 
 @Component({
   selector: "lnk-categories",
@@ -6,9 +12,13 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./categories.component.scss"]
 })
 export class CategoriesComponent implements OnInit {
-  constructor() {}
+  categories$: Observable<Category[]>;
+  constructor(private store: Store<fromStore.CategoriesState>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.categories$ = this.store.select(fromStore.getAllCategories);
+    this.store.dispatch(new fromStore.LoadCategories());
+  }
 
   addCategory() {
     console.log("now");
