@@ -8,7 +8,9 @@
             <p class="category">Llene los datos para crear una nueva categoría</p>
           </div>
           <div class="card-content">
-            <lnk-category-form (onCreate)="create($event)"></lnk-category-form>
+            <lnk-category-form [category]="category$ | async" 
+                               (onCreate)="create($event)"
+                               (onUpdate)="update($event)"></lnk-category-form>
           </div>
         </div>
       </div>

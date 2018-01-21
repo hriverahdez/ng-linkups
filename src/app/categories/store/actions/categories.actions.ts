@@ -41,10 +41,33 @@ export class AddCategorySuccess implements Action {
   constructor(public payload: Category) {}
 }
 
+// UPDATE
+export const UPDATE_CATEGORY = "[Category] Update Category";
+export const UPDATE_CATEGORY_FAIL = "[Category] Update Category Fail";
+export const UPDATE_CATEGORY_SUCCESS = "[Category] Update Category Success";
+
+export class UpdateCategory implements Action {
+  readonly type = UPDATE_CATEGORY;
+  constructor(public payload: Category) {}
+}
+
+export class UpdateCategoryFail implements Action {
+  readonly type = UPDATE_CATEGORY_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class UpdateCategorySuccess implements Action {
+  readonly type = UPDATE_CATEGORY_SUCCESS;
+  constructor(public payload: Category) {}
+}
+
 export type CategoryActions =
   | LoadCategories
   | LoadCategoriesFail
   | LoadCategoriesSuccess
   | AddCategory
   | AddCategoryFail
-  | AddCategorySuccess;
+  | AddCategorySuccess
+  | UpdateCategory
+  | UpdateCategoryFail
+  | UpdateCategorySuccess;

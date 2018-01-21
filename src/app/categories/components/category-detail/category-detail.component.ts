@@ -9,7 +9,18 @@ import { Category } from "../../models/category.model";
 export class CategoryDetailComponent implements OnInit {
   @Input() category: Category;
 
+  @Output() onUpdateRequest = new EventEmitter<Category>();
+  @Output() onDeleteRequest = new EventEmitter<Category>();
+
   constructor() {}
 
   ngOnInit() {}
+
+  requestUpdate() {
+    this.onUpdateRequest.emit(this.category);
+  }
+
+  requestDelete() {
+    this.onDeleteRequest.emit(this.category);
+  }
 }

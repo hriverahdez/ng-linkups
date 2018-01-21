@@ -1,9 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { Category } from "../../models/category.model";
 
 import { Store } from "@ngrx/store";
 
 import * as fromStore from "../../store";
+import { Observable } from "rxjs/Observable";
+import { tap } from "rxjs/operators";
+
+import { Category } from "../../models/category.model";
 
 @Component({
   selector: "lnk-category-item",
@@ -11,11 +14,21 @@ import * as fromStore from "../../store";
   styleUrls: ["./category-item.component.scss"]
 })
 export class CategoryItemComponent implements OnInit {
+  category$: Observable<Category>;
+
   constructor(private store: Store<fromStore.CategoriesState>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.category$ = this.store
+      .select(fromStore.getSelectedCategory)
+      .pipe(tap((category: Category = null) => category));
+  }
 
   create(category: Category) {
     this.store.dispatch(new fromStore.AddCategory(category));
+  }
+
+  update(category: Category) {
+    this.store.dispatch(new fromStore.UpdateCategory(category));
   }
 }

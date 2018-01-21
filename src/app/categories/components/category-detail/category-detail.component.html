@@ -7,10 +7,10 @@
   </mat-expansion-panel-header>
 
   <mat-action-row>
-    <button mat-icon-button>
+    <a [routerLink]="['/app/categories', category._id]" mat-icon-button>
       <mat-icon>edit</mat-icon>
-    </button>
-    <button mat-icon-button>
+    </a>
+    <button mat-icon-button (click)="requestDelete()">
       <mat-icon>delete</mat-icon>
     </button>
   </mat-action-row>

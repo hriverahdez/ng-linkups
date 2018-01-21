@@ -55,7 +55,7 @@ export class CategoryFormComponent implements OnChanges {
   update(form: FormGroup) {
     const { valid, value } = form;
     if (valid) {
-      this.onUpdate.emit(value);
+      this.onUpdate.emit({ ...this.category, ...value });
     }
   }
 

@@ -63,6 +63,7 @@ export function reducer(
       };
     }
 
+    case categoryActions.UPDATE_CATEGORY_FAIL:
     case categoryActions.ADD_CATEGORY_FAIL: {
       const { status } = action.payload;
       const error: CustomError = {
@@ -77,9 +78,10 @@ export function reducer(
       };
     }
 
+    case categoryActions.UPDATE_CATEGORY_SUCCESS:
     case categoryActions.ADD_CATEGORY_SUCCESS: {
       const category = action.payload;
-      const entities = { ...state.entities, category };
+      const entities = { ...state.entities, [category._id]: category };
 
       return {
         ...state,
