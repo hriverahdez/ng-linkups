@@ -54,6 +54,7 @@ import * as fromGuards from "./guards";
 
 @NgModule({
   imports: [...NG_MAT_MODULES, CommonModule],
+  entryComponents: [fromComponents.ConfirmDialogComponent],
   declarations: [...fromComponents.components],
   providers: [...fromServices.services, ...fromGuards.guards],
   exports: [...NG_MAT_MODULES, ...fromComponents.components]

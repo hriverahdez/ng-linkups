@@ -28,11 +28,13 @@
 											<td> {{institution.wan}} </td>
 											<td> {{institution.lan || 'NOT AVAILABLE'}} </td>
 											<td class="td-actions text-right">
-												<a [routerLink]="['/app/institutions', institution._id]" rel="tooltip" title="Edit Task" mat-icon-button class="btn btn-primary btn-simple">
+												<a [routerLink]="['/app/institutions', institution._id]" rel="tooltip" 
+													title="Edit Task" mat-icon-button class="btn btn-primary btn-simple">
 													<mat-icon>edit</mat-icon>
 												</a>
 												<button type="button" rel="tooltip" title="Remove" 
-																mat-icon-button class="btn btn-danger btn-simple btn-xs">
+													mat-icon-button class="btn btn-danger btn-simple btn-xs"
+													(click)="delete(institution)">
 													<mat-icon>delete</mat-icon>
 												</button>
 											</td>
