@@ -7,18 +7,21 @@ import { Effect, Actions } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 
 import * as fromRoot from "../../../@core/store";
-
+import * as fromStore from "../../store";
 import * as institutionActions from "../actions";
 import * as fromServices from "../../services";
-import { Action } from "rxjs/scheduler/Action";
+import * as fromSharedServices from "../../../@shared/services";
+
 import { Institution } from "../../models/institution.model";
 
 @Injectable()
 export class InstitutionEffects {
   constructor(
     private actions$: Actions,
-    private store: Store<fromRoot.AppState>,
-    private institutionsService: fromServices.InstitutionsService
+    private rootSstore: Store<fromRoot.AppState>,
+    private store: Store<fromStore.InstitutionsState>,
+    private institutionsService: fromServices.InstitutionsService,
+    private snackbar: fromSharedServices.SnackBarService
   ) {}
 
   @Effect()
@@ -75,10 +78,44 @@ export class InstitutionEffects {
     );
 
   @Effect()
+  deleteInstitution$ = this.actions$
+    .ofType(institutionActions.DELETE_INSTITUTION)
+    .pipe(
+      map((action: institutionActions.DeleteInstitution) => action.payload),
+      switchMap(institution =>
+        this.institutionsService
+          .delete(institution)
+          .pipe(
+            map(
+              () => new institutionActions.DeleteInstitutionSuccess(institution)
+            ),
+            catchError(error =>
+              of(new institutionActions.DeleteInstitutionFail(error))
+            )
+          )
+      )
+    );
+
+  @Effect()
   handleInstitutionSuccess$ = this.actions$
     .ofType(
       institutionActions.ADD_INSTITUTION_SUCCESS,
       institutionActions.UPDATE_INSTITUTION_SUCCESS
     )
     .pipe(map(() => new fromRoot.Go({ path: ["/app/institutions"] })));
+
+  @Effect({ dispatch: false })
+  handleInstitutionFailure$ = this.actions$
+    .ofType(
+      institutionActions.ADD_INSTITUTION_FAIL,
+      institutionActions.UPDATE_INSTITUTION_FAIL,
+      institutionActions.DELETE_INSTITUTION_FAIL
+    )
+    .pipe(
+      map(() =>
+        this.store
+          .select(fromStore.getInstitutionsError)
+          .pipe(map(error => this.snackbar.openSimpleSnackBar(error.message)))
+      )
+    );
 }

@@ -59,6 +59,7 @@ export function reducer(
       };
     }
 
+    case fromInstitutions.DELETE_INSTITUTION_FAIL:
     case fromInstitutions.UPDATE_INSTITUTION_FAIL:
     case fromInstitutions.ADD_INSTITUTION_FAIL: {
       const { status } = action.payload;
@@ -66,6 +67,8 @@ export function reducer(
         code: status,
         message: httpErrorMessages[status]
       };
+
+      console.log(action.payload);
 
       return {
         ...state,
@@ -78,6 +81,16 @@ export function reducer(
     case fromInstitutions.ADD_INSTITUTION_SUCCESS: {
       const institution = action.payload;
       const entities = { ...state.entities, institution };
+      return {
+        ...state,
+        entities,
+        loading: false
+      };
+    }
+
+    case fromInstitutions.DELETE_INSTITUTION_SUCCESS: {
+      const institution = action.payload;
+      const { [institution._id]: removedItem, ...entities } = state.entities;
       return {
         ...state,
         entities,

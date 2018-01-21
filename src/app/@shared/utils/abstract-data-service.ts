@@ -2,10 +2,11 @@ import { HttpClient } from "@angular/common/http";
 
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs/Observable";
+import { of } from "rxjs/observable/of";
 import { catchError } from "rxjs/operators";
 
 export abstract class AbstractDataService<T> {
-  constructor(private http: HttpClient, protected endpointName: string) {}
+  constructor(protected http: HttpClient, protected endpointName: string) {}
 
   /**
    * Makes an Http GET request to fetch all entities from the REST API backend
@@ -13,7 +14,7 @@ export abstract class AbstractDataService<T> {
   getAll(): Observable<T[]> {
     return this.http
       .get<T[]>(`${environment.apiURL}/${this.endpointName}`)
-      .pipe(catchError(error => Observable.throw(error.json())));
+      .pipe(catchError(error => Observable.throw(error)));
   }
 
   /**
@@ -23,7 +24,7 @@ export abstract class AbstractDataService<T> {
   getOne(id: string): Observable<T> {
     return this.http
       .get<T>(`${environment.apiURL}/${this.endpointName}/${id}`)
-      .pipe(catchError(error => Observable.throw(error.json())));
+      .pipe(catchError(error => Observable.throw(error)));
   }
 
   /**
@@ -33,7 +34,12 @@ export abstract class AbstractDataService<T> {
   add(entity: T): Observable<T> {
     return this.http
       .post<T>(`${environment.apiURL}/${this.endpointName}`, entity)
-      .pipe(catchError(error => Observable.throw(error.json())));
+      .pipe(
+        catchError(error => {
+          console.log(error);
+          return Observable.throw(of(error));
+        })
+      );
   }
 
   /**
@@ -46,7 +52,7 @@ export abstract class AbstractDataService<T> {
         `${environment.apiURL}/${this.endpointName}/${(entity as any)._id}`,
         entity
       )
-      .pipe(catchError(error => Observable.throw(error.json())));
+      .pipe(catchError(error => Observable.throw(error)));
   }
 
   /**
@@ -58,6 +64,6 @@ export abstract class AbstractDataService<T> {
       .delete<any>(
         `${environment.apiURL}/${this.endpointName}/${(entity as any)._id}`
       )
-      .pipe(catchError(error => Observable.throw(error.json())));
+      .pipe(catchError(error => Observable.throw(error)));
   }
 }

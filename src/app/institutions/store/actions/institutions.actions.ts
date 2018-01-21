@@ -63,6 +63,27 @@ export class UpdateInstitutionSuccess implements Action {
   constructor(public payload: Institution) {}
 }
 
+// DELETE
+export const DELETE_INSTITUTION = "[Institutions] Delete Institution";
+export const DELETE_INSTITUTION_FAIL = "[Institutions] Delete Institution Fail";
+export const DELETE_INSTITUTION_SUCCESS =
+  "[Institutions] Delete Institution Success";
+
+export class DeleteInstitution implements Action {
+  readonly type = DELETE_INSTITUTION;
+  constructor(public payload: Institution) {}
+}
+
+export class DeleteInstitutionFail implements Action {
+  readonly type = DELETE_INSTITUTION_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class DeleteInstitutionSuccess implements Action {
+  readonly type = DELETE_INSTITUTION_SUCCESS;
+  constructor(public payload: Institution) {}
+}
+
 export type InstitutionActions =
   | LoadInstitutions
   | LoadInstitutionsFail
@@ -72,4 +93,7 @@ export type InstitutionActions =
   | AddInstitutionSuccess
   | UpdateInstitution
   | UpdateInstitutionFail
-  | UpdateInstitutionSuccess;
+  | UpdateInstitutionSuccess
+  | DeleteInstitution
+  | DeleteInstitutionFail
+  | DeleteInstitutionSuccess;
