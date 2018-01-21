@@ -21,7 +21,6 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {
     this.categories$ = this.store.select(fromStore.getAllCategories);
-    this.store.dispatch(new fromStore.LoadCategories());
   }
 
   addCategory() {

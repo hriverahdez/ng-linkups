@@ -4,10 +4,14 @@ import { RouterModule, Routes } from "@angular/router";
 // containers
 import * as fromContainers from "./containers";
 
+// guards
+import * as fromGuards from "./guards";
+
 const ROUTES: Routes = [
   {
     path: "",
-    component: fromContainers.CategoriesComponent
+    component: fromContainers.CategoriesComponent,
+    canActivate: [fromGuards.CategoriesGuard]
   },
   {
     path: "add",

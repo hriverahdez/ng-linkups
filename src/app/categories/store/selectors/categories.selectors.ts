@@ -23,4 +23,9 @@ export const getSelectedCategory = createSelector(
   }
 );
 
+export const getCategoriesLoaded = createSelector(
+  getState,
+  fromCategories.getCategoriesLoaded
+);
+
 export const getAllCategories = createSelector(getCategoriesEntities, toArray);

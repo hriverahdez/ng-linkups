@@ -22,6 +22,9 @@ import * as fromComponents from "./components";
 // services
 import * as fromServices from "./services";
 
+// guards
+import * as fromGuards from "./guards";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -33,6 +36,6 @@ import * as fromServices from "./services";
     EffectsModule.forFeature(effects)
   ],
   declarations: [...fromContainers.containers, ...fromComponents.components],
-  providers: [...fromServices.services, AppInterceptor]
+  providers: [...fromServices.services, ...fromGuards.guards, AppInterceptor]
 })
 export class CategoriesModule {}
