@@ -20,7 +20,7 @@ export class InstitutionEffects {
   institutions$ = this.actions$
     .ofType(institutionActions.LOAD_INSTITUTIONS)
     .pipe(
-      switchMap(() => this.institutionsService.getInstitutions()),
+      switchMap(() => this.institutionsService.getAll()),
       map(
         institutions =>
           new institutionActions.LoadInstitutionsSuccess(institutions)
@@ -37,7 +37,7 @@ export class InstitutionEffects {
       map((action: institutionActions.AddInstitution) => action.payload),
       switchMap(institution =>
         this.institutionsService
-          .addInstitution(institution)
+          .add(institution)
           .pipe(
             map(
               newInst => new institutionActions.AddInstitutionSuccess(newInst)

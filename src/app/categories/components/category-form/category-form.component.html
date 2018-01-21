@@ -10,6 +10,18 @@
           </mat-error>
         </mat-form-field>
       </div>
+
+      <div class="col-md-6 pull-right text-right">
+        <button mat-raised-button color="primary" 
+                *ngIf="!exists" [disabled]="!categoryForm.valid" 
+                (click)="create(categoryForm)">Agregar</button>
+    
+        <button mat-raised-button color="primary" 
+                *ngIf="exists" [disabled]="!categoryForm.valid" 
+                (click)="update(categoryForm)">Actualizar</button>
+    
+        <a routerLink="/app/categories" mat-raised-button color="basic">Cancelar</a>
+      </div>
       
     </div>
 
@@ -17,17 +29,5 @@
       <lnk-category-icons formControlName="icon"></lnk-category-icons>
     </div>  
   
-    <div class="pull-right">
-      <button mat-raised-button color="primary" 
-              *ngIf="!exists" [disabled]="!categoryForm.valid" 
-              (click)="create(categoryForm)">Agregar</button>
-  
-      <button mat-raised-button color="primary" 
-              *ngIf="exists" [disabled]="!categoryForm.valid" 
-              (click)="update(categoryForm)">Actualizar</button>
-  
-      <a routerLink="/app/categories" mat-raised-button color="basic">Cancelar</a>
-    </div>
-    
     <div class="clearfix"></div>
   </form>

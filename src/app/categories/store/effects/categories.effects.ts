@@ -22,7 +22,7 @@ export class CategoriesEffects {
     .pipe(
       switchMap(() =>
         this.categoriesService
-          .getAllCategories()
+          .getAll()
           .pipe(
             map(
               categories =>
@@ -35,11 +35,16 @@ export class CategoriesEffects {
       )
     );
 
-  // @Effect()
-  // createCategory$ = this.actions$.ofType(categoryActions.ADD_CATEGORY).pipe(
-  //   map((action: categoryActions.AddCategory) => action.payload),
-  //   switchMap(category => {
-
-  //   })
-  // )
+  @Effect()
+  createCategory$ = this.actions$.ofType(categoryActions.ADD_CATEGORY).pipe(
+    map((action: categoryActions.AddCategory) => action.payload),
+    switchMap(category => {
+      return this.categoriesService
+        .add(category)
+        .pipe(
+          map(category => new categoryActions.AddCategorySuccess(category)),
+          catchError(error => of(new categoryActions.AddCategoryFail(error)))
+        );
+    })
+  );
 }

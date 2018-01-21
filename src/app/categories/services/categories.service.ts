@@ -6,14 +6,11 @@ import { catchError } from "rxjs/operators";
 
 import { Category } from "../models/category.model";
 import { environment } from "../../../environments/environment";
+import { AbstractDataService } from "../../@shared/utils/abstract-data-service";
 
 @Injectable()
-export class CategoriesService {
-  constructor(private http: HttpClient) {}
-
-  getAllCategories(): Observable<Category[]> {
-    return this.http
-      .get<Category[]>(`${environment.apiURL}/categories`)
-      .pipe(catchError(error => Observable.throw(error.json())));
+export class CategoriesService extends AbstractDataService<Category> {
+  constructor(http: HttpClient) {
+    super(http, "categories");
   }
 }
