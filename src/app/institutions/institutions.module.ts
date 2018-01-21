@@ -4,6 +4,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { InstitutionsRoutingModule } from "./institutions-routing.module";
+import { SharedModule } from "../@shared/shared.module";
 
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
@@ -20,7 +21,9 @@ import * as fromComponents from "./components";
 
 // services
 import * as fromServices from "./services";
-import { SharedModule } from "../@shared/shared.module";
+
+// guards
+import * as fromGuards from "./guards";
 
 @NgModule({
   imports: [
@@ -33,6 +36,6 @@ import { SharedModule } from "../@shared/shared.module";
     EffectsModule.forFeature(effects)
   ],
   declarations: [...fromContainers.containers, ...fromComponents.conmponents],
-  providers: [...fromServices.services, AppInterceptor]
+  providers: [...fromServices.services, ...fromGuards.guards, AppInterceptor]
 })
 export class InstitutionsModule {}

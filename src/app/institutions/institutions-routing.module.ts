@@ -4,10 +4,14 @@ import { RouterModule, Routes } from "@angular/router";
 // containers
 import * as fromContainers from "./containers";
 
+// guards
+import * as fromGuards from "./guards";
+
 const ROUTES: Routes = [
   {
     path: "",
-    component: fromContainers.InstitutionsComponent
+    component: fromContainers.InstitutionsComponent,
+    canActivate: [fromGuards.InstitutionsGuard]
   },
   {
     path: "add",
@@ -15,7 +19,8 @@ const ROUTES: Routes = [
   },
   {
     path: ":institutionId",
-    component: fromContainers.InstitutionItemComponent
+    component: fromContainers.InstitutionItemComponent,
+    canActivate: [fromGuards.InstitutionExistsGuard]
   }
 ];
 
