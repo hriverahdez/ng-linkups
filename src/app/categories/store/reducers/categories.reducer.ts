@@ -63,6 +63,7 @@ export function reducer(
       };
     }
 
+    case categoryActions.DELETE_CATEGORY_FAIL:
     case categoryActions.UPDATE_CATEGORY_FAIL:
     case categoryActions.ADD_CATEGORY_FAIL: {
       const { status } = action.payload;
@@ -82,6 +83,17 @@ export function reducer(
     case categoryActions.ADD_CATEGORY_SUCCESS: {
       const category = action.payload;
       const entities = { ...state.entities, [category._id]: category };
+
+      return {
+        ...state,
+        entities,
+        loading: false
+      };
+    }
+
+    case categoryActions.DELETE_CATEGORY_SUCCESS: {
+      const category = action.payload;
+      const { [category._id]: removedCategory, ...entities } = state.entities;
 
       return {
         ...state,

@@ -70,6 +70,23 @@ export class CategoriesEffects {
     );
 
   @Effect()
+  deleteCategory$ = this.actions$
+    .ofType(categoryActions.DELETE_CATEGORY)
+    .pipe(
+      map((action: categoryActions.DeleteCategory) => action.payload),
+      switchMap(category =>
+        this.categoriesService
+          .delete(category)
+          .pipe(
+            map(() => new categoryActions.DeleteCategorySuccess(category)),
+            catchError(error =>
+              of(new categoryActions.DeleteCategoryFail(error))
+            )
+          )
+      )
+    );
+
+  @Effect()
   handleCategorySuccess$ = this.actions$
     .ofType(
       categoryActions.ADD_CATEGORY_SUCCESS,

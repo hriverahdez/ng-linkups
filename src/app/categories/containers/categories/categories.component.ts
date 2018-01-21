@@ -31,4 +31,8 @@ export class CategoriesComponent implements OnInit {
       })
     );
   }
+
+  delete(category: Category) {
+    this.store.dispatch(new fromStore.DeleteCategory(category));
+  }
 }

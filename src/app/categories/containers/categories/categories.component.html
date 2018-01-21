@@ -12,7 +12,8 @@
                     <div class="card-content">
                         <div class="row">
                             <lnk-category *ngFor="let category of categories$ | async" 
-                                [category]="category"                                
+                                [category]="category"
+                                (onDeleteRequest)="delete($event)"
                                 class="col-lg-2 col-md-3 col-sm-6"></lnk-category>
                         </div>
                     </div>

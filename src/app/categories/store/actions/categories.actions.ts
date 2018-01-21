@@ -61,6 +61,26 @@ export class UpdateCategorySuccess implements Action {
   constructor(public payload: Category) {}
 }
 
+// DELETE
+export const DELETE_CATEGORY = "[Category] Delete Category";
+export const DELETE_CATEGORY_FAIL = "[Category] Delete Category Fail";
+export const DELETE_CATEGORY_SUCCESS = "[Category] Delete Category Success";
+
+export class DeleteCategory implements Action {
+  readonly type = DELETE_CATEGORY;
+  constructor(public payload: Category) {}
+}
+
+export class DeleteCategoryFail implements Action {
+  readonly type = DELETE_CATEGORY_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class DeleteCategorySuccess implements Action {
+  readonly type = DELETE_CATEGORY_SUCCESS;
+  constructor(public payload: Category) {}
+}
+
 export type CategoryActions =
   | LoadCategories
   | LoadCategoriesFail
@@ -70,4 +90,7 @@ export type CategoryActions =
   | AddCategorySuccess
   | UpdateCategory
   | UpdateCategoryFail
-  | UpdateCategorySuccess;
+  | UpdateCategorySuccess
+  | DeleteCategory
+  | DeleteCategoryFail
+  | DeleteCategorySuccess;
