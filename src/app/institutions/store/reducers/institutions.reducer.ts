@@ -4,16 +4,21 @@ import { Institution } from "../../models/institution.model";
 
 import * as fromInstitutions from "../actions";
 
+import { CustomError } from "../../../@shared/utils/custom-error";
+import { httpErrorMessages } from "../../../@shared/utils/http-error-messages";
+
 export interface State {
   entities: { [_id: string]: Institution };
   loaded: boolean;
   loading: boolean;
+  error: CustomError;
 }
 
 export const initialState: State = {
   entities: {},
   loaded: false,
-  loading: false
+  loading: false,
+  error: {}
 };
 
 export function reducer(
@@ -54,13 +59,22 @@ export function reducer(
       };
     }
 
+    case fromInstitutions.UPDATE_INSTITUTION_FAIL:
     case fromInstitutions.ADD_INSTITUTION_FAIL: {
+      const { status } = action.payload;
+      const error: CustomError = {
+        code: status,
+        message: httpErrorMessages[status]
+      };
+
       return {
         ...state,
-        loading: false
+        loading: false,
+        error
       };
     }
 
+    case fromInstitutions.UPDATE_INSTITUTION_SUCCESS:
     case fromInstitutions.ADD_INSTITUTION_SUCCESS: {
       const institution = action.payload;
       const entities = { ...state.entities, institution };
@@ -78,3 +92,4 @@ export function reducer(
 export const getInstitutionsEntities = (state: State) => state.entities;
 export const getInstitutionsLoaded = (state: State) => state.loaded;
 export const getInstitutionsLoading = (state: State) => state.loading;
+export const getInstitutionsError = (state: State) => state.error;

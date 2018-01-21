@@ -42,10 +42,34 @@ export class AddInstitutionSuccess implements Action {
   constructor(public payload: Institution) {}
 }
 
+// UPDATE
+export const UPDATE_INSTITUTION = "[Institutions] Update Institution";
+export const UPDATE_INSTITUTION_FAIL = "[Institutions] Update Institution Fail";
+export const UPDATE_INSTITUTION_SUCCESS =
+  "[Institutions] Update Institution Success";
+
+export class UpdateInstitution implements Action {
+  readonly type = UPDATE_INSTITUTION;
+  constructor(public payload: Institution) {}
+}
+
+export class UpdateInstitutionFail implements Action {
+  readonly type = UPDATE_INSTITUTION_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class UpdateInstitutionSuccess implements Action {
+  readonly type = UPDATE_INSTITUTION_SUCCESS;
+  constructor(public payload: Institution) {}
+}
+
 export type InstitutionActions =
   | LoadInstitutions
   | LoadInstitutionsFail
   | LoadInstitutionsSuccess
   | AddInstitution
   | AddInstitutionFail
-  | AddInstitutionSuccess;
+  | AddInstitutionSuccess
+  | UpdateInstitution
+  | UpdateInstitutionFail
+  | UpdateInstitutionSuccess;

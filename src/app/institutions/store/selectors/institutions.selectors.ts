@@ -18,3 +18,13 @@ export const getAllInstitutions = createSelector(
   getInstitutionsEntities,
   toArray
 );
+
+export const getInstitutionsLoaded = createSelector(
+  getState,
+  fromInstitutions.getInstitutionsLoaded
+);
+
+export const getInstitutionsError = createSelector(
+  getState,
+  fromInstitutions.getInstitutionsError
+);

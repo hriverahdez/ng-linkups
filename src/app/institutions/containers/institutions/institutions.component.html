@@ -20,7 +20,7 @@
                                   <tbody>
                                       <tr *ngFor="let institution of institutions$ | async">
                                           <td>                                                
-                                              {{institution.type}}
+                                              <mat-icon>{{institution.category.icon}}</mat-icon>
                                           </td>
                                           <td>{{institution.name}} <span class="text-muted">[{{institution.line_number}}]</span></td>
                                           <td> {{institution.wan}} </td>
