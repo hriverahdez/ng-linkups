@@ -19,7 +19,8 @@ const ROUTES: Routes = [
   },
   {
     path: ":categoryId",
-    component: fromContainers.CategoryItemComponent
+    component: fromContainers.CategoryItemComponent,
+    canActivate: [fromGuards.CategoryExistsGuard]
   }
 ];
 
