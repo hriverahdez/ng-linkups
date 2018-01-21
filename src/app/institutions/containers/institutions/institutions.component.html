@@ -1,50 +1,50 @@
 <div class="main-content">
 
-  <div class="container-fluid">
-      
-      <div class="row">
-          <div class="col-md-12">
-              <div class="card card-nav-tabs" >
-                  <div class="card-header" data-background-color="purple">
-                      <div class="nav-tabs-navigation">
-                          <div class="nav-tabs-wrapper">                              
-                            <lnk-add-new-button [text]="'Agregar Nueva'" (clicked)="addInstitution()"></lnk-add-new-button>
-                          </div>
-                      </div>
-                  </div>
+	<div class="container-fluid">
 
-                  <div class="card-content">
-                      <div class="tab-content">
-                          <div class="tab-pane active" id="profile">
-                              <table class="table institutions-table">
-                                  <tbody>
-                                      <tr *ngFor="let institution of institutions$ | async">
-                                          <td>                                                
-                                              <mat-icon>{{institution.category.icon}}</mat-icon>
-                                          </td>
-                                          <td>{{institution.name}} <span class="text-muted">[{{institution.line_number}}]</span></td>
-                                          <td> {{institution.wan}} </td>
-                                          <td> {{institution.lan || 'NOT AVAILABLE'}} </td>
-                                          <td class="td-actions text-right">
-                                              <button type="button" rel="tooltip" 
-                                                      title="Edit Task" mat-icon-button class="btn btn-primary btn-simple">
-                                                  <mat-icon>edit</mat-icon>
-                                              </button>
-                                              <button type="button" rel="tooltip" 
-                                                      title="Remove" mat-icon-button class="btn btn-danger btn-simple btn-xs">
-                                                  <mat-icon>delete</mat-icon>
-                                              </button>
-                                          </td>
-                                      </tr>
-                                      
-                                  </tbody>
-                              </table>
-                          </div>                          
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card card-nav-tabs">
+					<div class="card-header" data-background-color="purple">
+						<div class="nav-tabs-navigation">
+							<div class="nav-tabs-wrapper">
+								<lnk-add-new-button [text]="'Agregar Nueva'" (clicked)="addInstitution()"></lnk-add-new-button>
+							</div>
+						</div>
+					</div>
+
+					<div class="card-content">
+						<div class="tab-content">
+							<div class="tab-pane active" id="profile">
+								<table class="table institutions-table">
+									<tbody>
+										<tr *ngFor="let institution of institutions$ | async">
+											<td>
+												<mat-icon>{{institution.category?.icon}}</mat-icon>
+											</td>
+											<td>{{institution.name}}
+												<span class="text-muted">[{{institution.line_number}}]</span>
+											</td>
+											<td> {{institution.wan}} </td>
+											<td> {{institution.lan || 'NOT AVAILABLE'}} </td>
+											<td class="td-actions text-right">
+												<a [routerLink]="['/app/institutions', institution._id]" rel="tooltip" title="Edit Task" mat-icon-button class="btn btn-primary btn-simple">
+													<mat-icon>edit</mat-icon>
+												</a>
+												<button type="button" rel="tooltip" title="Remove" 
+																mat-icon-button class="btn btn-danger btn-simple btn-xs">
+													<mat-icon>delete</mat-icon>
+												</button>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-

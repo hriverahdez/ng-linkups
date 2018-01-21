@@ -124,7 +124,7 @@
             (click)="create(institutionForm)">Agregar</button>
 
     <button mat-raised-button color="primary" 
-            *ngIf="exists" [disabled]="!institution.valid" 
+            *ngIf="exists" [disabled]="!institutionForm.valid" 
             (click)="update(institutionForm)">Actualizar</button>
 
     <a routerLink="/institutions" mat-raised-button color="basic">Cancelar</a>

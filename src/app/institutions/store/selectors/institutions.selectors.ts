@@ -1,6 +1,7 @@
 import { createSelector } from "@ngrx/store";
 import { toArray } from "../../../@shared/utils//entities-array-helper";
 
+import * as fromRoot from "../../../@core/store";
 import * as fromFeature from "../reducers";
 import * as fromInstitutions from "../reducers/institutions.reducer";
 
@@ -22,6 +23,14 @@ export const getAllInstitutions = createSelector(
 export const getInstitutionsLoaded = createSelector(
   getState,
   fromInstitutions.getInstitutionsLoaded
+);
+
+export const getSelectedInstitution = createSelector(
+  getInstitutionsEntities,
+  fromRoot.getRouterState,
+  (entities, router) => {
+    return router.state && entities[router.state.params.institutionId];
+  }
 );
 
 export const getInstitutionsError = createSelector(

@@ -12,6 +12,10 @@ const ROUTES: Routes = [
   {
     path: "add",
     component: fromContainers.InstitutionItemComponent
+  },
+  {
+    path: ":institutionId",
+    component: fromContainers.InstitutionItemComponent
   }
 ];
 

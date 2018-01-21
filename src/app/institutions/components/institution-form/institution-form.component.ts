@@ -25,6 +25,7 @@ export class InstitutionFormComponent implements OnChanges {
 
   @Input() institution: Institution;
   @Output() onCreate = new EventEmitter<Institution>();
+  @Output() onUpdate = new EventEmitter<Institution>();
 
   constructor(private fb: FormBuilder) {}
 
@@ -39,6 +40,13 @@ export class InstitutionFormComponent implements OnChanges {
     const { valid, value } = form;
     if (valid) {
       this.onCreate.emit(value);
+    }
+  }
+
+  update(form: FormGroup) {
+    const { valid, value } = form;
+    if (valid) {
+      this.onUpdate.emit({ ...this.institution, ...value });
     }
   }
 

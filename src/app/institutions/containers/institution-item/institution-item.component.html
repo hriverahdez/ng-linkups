@@ -8,7 +8,9 @@
             <p class="category">Llene los datos para crear una nueva institución</p>
           </div>
           <div class="card-content">
-            <lnk-institution-form (onCreate)="create($event)"></lnk-institution-form>
+            <lnk-institution-form [institution]="institution$ | async" 
+                                  (onCreate)="create($event)"
+                                  (onUpdate)="update($event)"></lnk-institution-form>
           </div>
         </div>
       </div>
