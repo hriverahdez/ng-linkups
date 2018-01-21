@@ -11,6 +11,8 @@ import { SharedModule } from "../@shared/shared.module";
 
 import { reducers, effects } from "./store";
 
+import { AppInterceptor } from "../@shared/utils/interceptor/token.interceptor";
+
 // containers
 import * as fromContainers from "./containers";
 
@@ -31,6 +33,6 @@ import * as fromServices from "./services";
     EffectsModule.forFeature(effects)
   ],
   declarations: [...fromContainers.containers, ...fromComponents.components],
-  providers: [...fromServices.services]
+  providers: [...fromServices.services, AppInterceptor]
 })
 export class CategoriesModule {}

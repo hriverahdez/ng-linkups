@@ -13,7 +13,7 @@ export const APP_MENU: MenuItem[] = [
     icon: "location_city",
     class: ""
   },
-  { path: "categories", title: "Categorías", icon: "content_paste", class: "" },
+  { path: "categories", title: "Categorías", icon: "view_module", class: "" },
   { path: "typography", title: "Typography", icon: "library_books", class: "" },
   { path: "icons", title: "Icons", icon: "bubble_chart", class: "" },
   { path: "maps", title: "Maps", icon: "location_on", class: "" },

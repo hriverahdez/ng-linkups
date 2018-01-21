@@ -10,6 +10,8 @@ import { EffectsModule } from "@ngrx/effects";
 
 import { reducers, effects } from "./store";
 
+import { AppInterceptor } from "../@shared/utils/interceptor/token.interceptor";
+
 // containers
 import * as fromContainers from "./containers";
 
@@ -31,6 +33,6 @@ import { SharedModule } from "../@shared/shared.module";
     EffectsModule.forFeature(effects)
   ],
   declarations: [...fromContainers.containers, ...fromComponents.conmponents],
-  providers: [...fromServices.services]
+  providers: [...fromServices.services, AppInterceptor]
 })
 export class InstitutionsModule {}
