@@ -15,6 +15,7 @@ import {
 
 import { EffectsModule } from "@ngrx/effects";
 
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { storeFreeze } from "ngrx-store-freeze";
 
 import { environment } from "../../environments/environment";
@@ -42,7 +43,8 @@ import * as fromComponents from "./components";
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
-    StoreRouterConnectingModule
+    StoreRouterConnectingModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
   bootstrap: [fromContainers.AppComponent]

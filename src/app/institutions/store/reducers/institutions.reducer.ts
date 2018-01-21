@@ -80,7 +80,7 @@ export function reducer(
     case fromInstitutions.UPDATE_INSTITUTION_SUCCESS:
     case fromInstitutions.ADD_INSTITUTION_SUCCESS: {
       const institution = action.payload;
-      const entities = { ...state.entities, institution };
+      const entities = { ...state.entities, [institution._id]: institution };
       return {
         ...state,
         entities,
