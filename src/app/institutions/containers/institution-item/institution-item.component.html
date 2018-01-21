@@ -9,6 +9,7 @@
           </div>
           <div class="card-content">
             <lnk-institution-form [institution]="institution$ | async" 
+                                  [categories]="availableCategories$ | async"
                                   (onCreate)="create($event)"
                                   (onUpdate)="update($event)"></lnk-institution-form>
           </div>

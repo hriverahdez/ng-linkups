@@ -2,11 +2,14 @@ import { Component, OnInit } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 
-import * as fromStore from "../../store";
 import { Observable } from "rxjs/Observable";
-import { tap } from "rxjs/operators";
+import { tap, filter, take, map } from "rxjs/operators";
 
 import { Institution } from "../../models/institution.model";
+import { Category } from "../../../categories/models/category.model";
+
+import * as fromStore from "../../store";
+import * as fromCategoriesFeature from "../../../categories/store";
 
 @Component({
   selector: "lnk-institution-item",
@@ -15,9 +18,17 @@ import { Institution } from "../../models/institution.model";
 })
 export class InstitutionItemComponent implements OnInit {
   institution$: Observable<Institution>;
-  constructor(private store: Store<fromStore.InstitutionsState>) {}
+  availableCategories$: Observable<Category[]>;
+
+  constructor(
+    private store: Store<fromStore.InstitutionsState>,
+    private categoryStore: Store<fromCategoriesFeature.CategoriesState>
+  ) {}
 
   ngOnInit() {
+    this.availableCategories$ = this.categoryStore.select(
+      fromCategoriesFeature.getAllCategories
+    );
     this.institution$ = this.store
       .select(fromStore.getSelectedInstitution)
       .pipe(tap((institution: Institution = null) => institution));

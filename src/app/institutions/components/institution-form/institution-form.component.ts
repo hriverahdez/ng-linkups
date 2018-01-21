@@ -6,13 +6,15 @@ import {
   EventEmitter,
   SimpleChanges
 } from "@angular/core";
-import { Institution } from "../../models/institution.model";
 import {
   FormGroup,
   FormBuilder,
   Validators,
   FormControl
 } from "@angular/forms";
+
+import { Institution } from "../../models/institution.model";
+import { Category } from "../../../categories/models/category.model";
 
 @Component({
   selector: "lnk-institution-form",
@@ -24,6 +26,7 @@ export class InstitutionFormComponent implements OnChanges {
   institutionForm: FormGroup = this.toFormGroup();
 
   @Input() institution: Institution;
+  @Input() categories: Category[];
   @Output() onCreate = new EventEmitter<Institution>();
   @Output() onUpdate = new EventEmitter<Institution>();
 
@@ -52,7 +55,7 @@ export class InstitutionFormComponent implements OnChanges {
 
   toFormGroup() {
     return this.fb.group({
-      type: [""],
+      category: [""],
       line_number: ["", Validators.required],
       name: ["", Validators.required],
       location: ["", Validators.required],
@@ -82,6 +85,14 @@ export class InstitutionFormComponent implements OnChanges {
 
   get lineNumberControlInvalid() {
     return this.lineNumberControl.hasError("required");
+  }
+
+  get locationControl() {
+    return this.institutionForm.get("location") as FormControl;
+  }
+
+  get locationControlInvalid() {
+    return this.locationControl.hasError("required");
   }
 
   get wanControl() {

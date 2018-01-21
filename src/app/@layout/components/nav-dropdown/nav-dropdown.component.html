@@ -1,6 +1,6 @@
 <!-- <div class="dropdown"> -->
-    <a  href="javascript:void(0);"  class="dropdown-toggle" data-toggle="dropdown" (click)="toggle()" (blur)="toggle()">
-        <mat-icon>{{icon}}</mat-icon>
+    <a  href="javascript:void(0);"  class="dropdown-toggle" data-toggle="dropdown" (click)="toggle()" (blur)="hide()">
+            <i class="material-icons">{{icon}}</i>
         <span *ngIf="hasBadge" class="notification">{{badgeCount}}</span>
         <p class="hidden-lg hidden-md">Notifications</p>
     </a>

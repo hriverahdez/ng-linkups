@@ -19,10 +19,17 @@ export class NavDropdownComponent implements OnInit {
 
   ngOnInit() {}
 
+  show() {
+    this.renderer.addClass(this.hostElement.nativeElement, "open");
+    this.toggled = true;
+  }
+
+  hide() {
+    this.renderer.removeClass(this.hostElement.nativeElement, "open");
+    this.toggled = false;
+  }
+
   toggle() {
-    this.toggled
-      ? this.renderer.removeClass(this.hostElement.nativeElement, "open")
-      : this.renderer.addClass(this.hostElement.nativeElement, "open");
-    this.toggled = !this.toggled;
+    this.toggled ? this.hide() : this.show();
   }
 }
