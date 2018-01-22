@@ -15,6 +15,7 @@ import {
 
 import { Institution } from "../../models/institution.model";
 import { Category } from "../../../categories/models/category.model";
+import { IpMaskRegexp } from "../../../@shared/utils/ip-regex";
 
 @Component({
   selector: "lnk-institution-form",
@@ -24,6 +25,8 @@ import { Category } from "../../../categories/models/category.model";
 export class InstitutionFormComponent implements OnChanges {
   exists: boolean = false;
   institutionForm: FormGroup = this.toFormGroup();
+
+  ipmaskRegexp = IpMaskRegexp;
 
   @Input() institution: Institution;
   @Input() categories: Category[];
@@ -36,7 +39,11 @@ export class InstitutionFormComponent implements OnChanges {
     if (this.institution) {
       this.exists = true;
       this.institutionForm.patchValue(this.institution);
+      this.institutionForm
+        .get("category")
+        .setValue(this.institution.category.name);
     }
+    console.log(this.ipmaskRegexp);
   }
 
   create(form: FormGroup) {
@@ -59,7 +66,7 @@ export class InstitutionFormComponent implements OnChanges {
       line_number: ["", Validators.required],
       name: ["", Validators.required],
       location: ["", Validators.required],
-      wan: ["", Validators.required],
+      wan: ["", [Validators.required, Validators.pattern(this.ipmaskRegexp)]],
       lan: [""],
       bandwidth: [""],
       state: [""],
@@ -71,20 +78,20 @@ export class InstitutionFormComponent implements OnChanges {
     });
   }
 
-  get nameControl() {
-    return this.institutionForm.get("name") as FormControl;
-  }
-
-  get nameControlInvalid() {
-    return this.nameControl.hasError("required");
-  }
-
   get lineNumberControl() {
     return this.institutionForm.get("line_number") as FormControl;
   }
 
   get lineNumberControlInvalid() {
     return this.lineNumberControl.hasError("required");
+  }
+
+  get nameControl() {
+    return this.institutionForm.get("name") as FormControl;
+  }
+
+  get nameControlInvalid() {
+    return this.nameControl.hasError("required");
   }
 
   get locationControl() {

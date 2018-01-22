@@ -4,10 +4,11 @@
   <hr class="form-section-divider">
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-6">
      
       <mat-form-field class="full-width">
-        <mat-select placeholder="Categoría" formControlName="category" required>          
+        <mat-select placeholder="Categoría" name="category" 
+          formControlName="category" required>          
           <mat-option *ngFor="let category of categories" [value]="category">
             {{category.name}}
           </mat-option>
@@ -17,7 +18,7 @@
       
       
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <mat-form-field class="full-width">
         <input matInput placeholder="Número de línea" name="line_number" formControlName="line_number" required>
         <mat-error *ngIf="lineNumberControlInvalid">
@@ -30,7 +31,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <mat-form-field class="full-width">
         <input matInput placeholder="Nombre" name="name" formControlName="name" required>
         <mat-error *ngIf="nameControlInvalid">
@@ -39,7 +40,7 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <mat-form-field class="full-width">
         <input matInput placeholder="Localidad" name="location" formControlName="location" required>
         <mat-error *ngIf="locationControlInvalid">
@@ -54,7 +55,7 @@
   <hr class="form-section-divider">
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <mat-form-field class="full-width">
         <input matInput placeholder="WAN" name="wan" formControlName="wan" required>
         <mat-error *ngIf="wanControlInvalid">
@@ -63,7 +64,7 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <mat-form-field class="full-width">
         <input matInput placeholder="LAN" name="lan" formControlName="lan">        
       </mat-form-field>
@@ -71,28 +72,39 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-3">
       <mat-form-field class="full-width">
         <input matInput placeholder="Bandwidth" name="bandwidth" formControlName="bandwidth">        
       </mat-form-field>
+      
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-3">
+
       <mat-form-field class="full-width">
-        <input matInput placeholder="Estado" name="state" formControlName="state">
+        <input matInput placeholder="Tipo de puerta" name="gate_type" formControlName="gate_type">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-6">
+      <mat-form-field class="full-width">        
+        <mat-select placeholder="Estado" name="state" formControlName="state">
+          <mat-option value="active">Activo</mat-option>
+          <mat-option value="inactive">Inactivo</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <mat-form-field class="full-width">
-        <input matInput placeholder="Destino" name="final_destination" formControlName="final_destination">        
+        <mat-select placeholder="Destino" name="final_destination" formControlName="final_destination">
+          <mat-option value="vpnprov">VPN Provincial</mat-option>
+          <mat-option value="infomed">Infomed</mat-option>
+        </mat-select>        
       </mat-form-field>
     </div>
-    <div class="col-md-6">
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Tipo de puerta" name="gate_type" formControlName="gate_type">
-      </mat-form-field>
+    <div class="col-sm-6">
+      <mat-checkbox formControlName="has_internet" name="has_internet">¿Tiene Internet?</mat-checkbox>
     </div>
   </div>
   <br>
@@ -100,12 +112,12 @@
   <hr class="form-section-divider">
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <mat-form-field class="full-width">
         <input matInput placeholder="Número de Teléfono" name="phone_number" formControlName="phone_number">        
       </mat-form-field>
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <mat-form-field class="full-width">
         <input matInput placeholder="Último reporte" name="last_report" formControlName="last_report">
       </mat-form-field>
