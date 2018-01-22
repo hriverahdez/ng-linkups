@@ -1,13 +1,7 @@
 <nav class="navbar navbar-transparent navbar-absolute">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                (click)="sidebarToggle()">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+        <div class="navbar-header">            
+            <lnk-nav-toggler></lnk-nav-toggler>
             <a class="navbar-brand" href="#">TITLE</a>
         </div>
         <div class="collapse navbar-collapse">
@@ -15,7 +9,7 @@
                 <li>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">                        
                         <mat-icon>tune</mat-icon>
-                        <p class="hidden-lg hidden-md">Dashboard</p>
+                        <p class="hidden-lg hidden-md">Configuración</p>
                     </a>
                 </li>                
                 <li lnk-nav-dropdown class="dropdown" 
