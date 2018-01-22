@@ -13,5 +13,7 @@ export class InstitutionDetailComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Institution
   ) {}
 
+  customDateFormat = "d MMM y, h:m a";
+
   ngOnInit() {}
 }

@@ -5,9 +5,12 @@
 <div class="card">
   <div class="card-header" data-background-color="purple">
     <h4 class="title">
-      <mat-icon style="color: white"> {{data.category?.icon || 'more_horz' }} </mat-icon> [{{ (data.category?.name || 'GENERICO') | uppercase }}] - {{data.name}}
+      <mat-icon style="color: white"> {{data.category?.icon || 'more_horz' }} </mat-icon> 
+      [{{ (data.category?.name || 'GENERICO') | uppercase }}] - {{data.name}}
     </h4>
-    <p class="category" *ngIf="data.user">Creado por: {{ data.user.name }} ({{ data.user.email }})</p>
+    <p class="category" *ngIf="data.user">
+      Creado por: {{ data.user.name }} ({{ data.user.email }}) el {{ data.createdAt | date:customDateFormat }}
+    </p>
   </div>
   <div class="card-content">
     
@@ -73,6 +76,12 @@
             
           </mat-list>
           
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="text-muted">Última actualización: {{ data.updatedAt | date:customDateFormat }}</div>
         </div>
       </div>
       <br>
