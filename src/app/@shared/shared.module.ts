@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 
 import {
   MatCardModule,
+  MatSelectModule,
   MatStepperModule,
   MatTabsModule,
   MatExpansionModule,
@@ -25,6 +26,7 @@ import {
 const NG_MAT_MODULES = [
   MatCardModule,
   MatInputModule,
+  MatSelectModule,
   MatStepperModule,
   MatTabsModule,
   MatTableModule,

@@ -39,6 +39,7 @@ export class InstitutionItemComponent implements OnInit {
   }
 
   update(institution: Institution) {
-    this.store.dispatch(new fromStore.UpdateInstitution(institution));
+    console.log(institution);
+    // this.store.dispatch(new fromStore.UpdateInstitution(institution));
   }
 }

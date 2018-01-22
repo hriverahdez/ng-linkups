@@ -5,19 +5,21 @@
 
   <div class="row">
     <div class="col-md-6">
+     
+      <mat-form-field>
+        <mat-select placeholder="Categoría" formControlName="category" required>          
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+        <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error> -->        
+      </mat-form-field>
       
-      <div class="form-group">
-        <label>Select a category</label>
-        <select class="form-control" name="category" formControlName="category">
-          <option [ngValue]="null" disabled> - Choose a category - </option>          
-          <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
-        </select>
-      </div>
       
     </div>
     <div class="col-md-6">
       <mat-form-field class="full-width">
-        <input matInput placeholder="Número de línea" name="line_number" formControlName="line_number">
+        <input matInput placeholder="Número de línea" name="line_number" formControlName="line_number" required>
         <mat-error *ngIf="lineNumberControlInvalid">
           El número de línea es
           <strong>requerido</strong>
@@ -30,7 +32,7 @@
   <div class="row">
     <div class="col-md-6">
       <mat-form-field class="full-width">
-        <input matInput placeholder="Nombre" name="name" formControlName="name">
+        <input matInput placeholder="Nombre" name="name" formControlName="name" required>
         <mat-error *ngIf="nameControlInvalid">
           El nombre es
           <strong>requerido</strong>
@@ -39,7 +41,7 @@
     </div>
     <div class="col-md-6">
       <mat-form-field class="full-width">
-        <input matInput placeholder="Localidad" name="location" formControlName="location">
+        <input matInput placeholder="Localidad" name="location" formControlName="location" required>
         <mat-error *ngIf="locationControlInvalid">
           La localidad es 
           <strong>requerida</strong>
@@ -54,7 +56,7 @@
   <div class="row">
     <div class="col-md-6">
       <mat-form-field class="full-width">
-        <input matInput placeholder="WAN" name="wan" formControlName="wan">
+        <input matInput placeholder="WAN" name="wan" formControlName="wan" required>
         <mat-error *ngIf="wanControlInvalid">
           La dirección WAN es
           <strong>requerida</strong>
