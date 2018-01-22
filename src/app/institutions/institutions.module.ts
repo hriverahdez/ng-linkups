@@ -37,6 +37,7 @@ import { CategoriesModule } from "../categories/categories.module";
     EffectsModule.forFeature(effects),
     CategoriesModule
   ],
+  entryComponents: [fromComponents.InstitutionDetailComponent],
   declarations: [...fromContainers.containers, ...fromComponents.conmponents],
   providers: [...fromServices.services, ...fromGuards.guards, AppInterceptor]
 })

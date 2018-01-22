@@ -3,7 +3,7 @@
         <ul class="nav nav-tabs" data-tabs="tabs">
             <li class="active add-new-btn">
               <a (click)="handleClick()" data-toggle="tab">
-                <i class="material-icons">{{ icon || 'add_box' }}</i>
+                <i class="material-icons">{{ icon && icon !== '' ? icon : 'add_box'  }}</i>
                     {{ text || 'New'}}
                 <div class="ripple-container"></div>
               </a>

@@ -10,6 +10,8 @@ import { DATA } from "./mock.data";
 import { Institution } from "../../models/institution.model";
 import { DialogService } from "../../../@shared/services/index";
 
+import * as fromComponents from "../../components";
+
 @Component({
   selector: "lnk-institutions",
   templateUrl: "./institutions.component.html",
@@ -26,6 +28,17 @@ export class InstitutionsComponent implements OnInit {
 
   ngOnInit() {
     this.institutions$ = this.store.select(fromStore.getAllInstitutions);
+  }
+
+  showDetail(institution: Institution) {
+    this.dialogService.customDialogComponent(
+      fromComponents.InstitutionDetailComponent,
+      {
+        width: "80%",
+        height: "80%",
+        data: institution
+      }
+    );
   }
 
   addInstitution() {

@@ -105,7 +105,7 @@ export function reducer(
 
       const institutions = toArray(state.entities).map(
         (inst: Institution) =>
-          inst.category._id === updatedCategory._id
+          inst.category && inst.category._id === updatedCategory._id
             ? { ...inst, category: updatedCategory }
             : inst
       );
@@ -122,7 +122,7 @@ export function reducer(
 
       const institutions = toArray(state.entities).map(
         (inst: Institution) =>
-          inst.category._id === deletedCategory._id
+          inst.category && inst.category._id === deletedCategory._id
             ? { ...inst, category: null }
             : inst
       );

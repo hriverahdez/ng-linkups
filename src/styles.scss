@@ -5,8 +5,12 @@
   width: 100%;
 }
 
-a:focus, button:focus {
-  outline: none !important
+a {
+  cursor: pointer;
+  &:focus, 
+  button:focus {
+    outline: none !important
+  }
 }
 
 @font-face {

@@ -74,7 +74,8 @@ export class InstitutionFormComponent implements OnChanges {
       gate_type: [""],
       last_report: [""],
       phone_number: [""],
-      has_internet: [""]
+      has_internet: [""],
+      notes: [""]
     });
   }
 

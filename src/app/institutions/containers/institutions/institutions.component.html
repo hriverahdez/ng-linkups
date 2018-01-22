@@ -8,21 +8,25 @@
 					<div class="card-header" data-background-color="purple">
 						<div class="nav-tabs-navigation">
 							<div class="nav-tabs-wrapper">
-								<lnk-add-new-button [text]="'Agregar Nueva'" (clicked)="addInstitution()"></lnk-add-new-button>
+								<lnk-add-new-button class="pull-right" [text]="'Agregar Nueva'" (clicked)="addInstitution()"></lnk-add-new-button>
+								<h4 class="title">Instituciones</h4>
+								<p class="category">Haga clic sobre una para ver más detalles</p>
+								<div class="clearfix"></div>
 							</div>
 						</div>
 					</div>
 
 					<div class="card-content">
 						<div class="tab-content">
-							<div class="tab-pane active" id="profile">
+							<div class="tab-pane active">
 								<table class="table institutions-table">
 									<tbody>
 										<tr *ngFor="let institution of institutions$ | async">
 											<td>
 												<mat-icon>{{ institution.category?.icon || 'more_horiz' }}</mat-icon>
 											</td>
-											<td>{{institution.name}}
+											<td>
+												<a (click)="showDetail(institution)">{{institution.name}}</a>
 												<span class="text-muted">[{{institution.line_number}}]</span>
 											</td>
 											<td> {{institution.wan}} </td>
