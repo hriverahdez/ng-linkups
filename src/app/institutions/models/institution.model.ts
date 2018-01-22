@@ -1,3 +1,5 @@
+import { Category } from "../../categories/models/category.model";
+
 export interface Institution {
   _id?: string;
   name?: string;
@@ -14,4 +16,5 @@ export interface Institution {
   notes?: string;
   phone_number?: string;
   has_internet?: boolean;
+  category?: Category;
 }

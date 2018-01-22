@@ -1,8 +1,12 @@
-import { toEntities } from "../../../@shared/utils/entities-array-helper";
+import {
+  toEntities,
+  toArray
+} from "../../../@shared/utils/entities-array-helper";
 
 import { Institution } from "../../models/institution.model";
 
 import * as fromInstitutions from "../actions";
+import * as fromCategories from "../../../categories/store/actions";
 
 import { CustomError } from "../../../@shared/utils/custom-error";
 import { httpErrorMessages } from "../../../@shared/utils/http-error-messages";
@@ -23,7 +27,7 @@ export const initialState: State = {
 
 export function reducer(
   state = initialState,
-  action: fromInstitutions.InstitutionActions
+  action: fromInstitutions.InstitutionActions | fromCategories.CategoryActions
 ): State {
   switch (action.type) {
     case fromInstitutions.LOAD_INSTITUTIONS: {
@@ -68,8 +72,6 @@ export function reducer(
         message: httpErrorMessages[status]
       };
 
-      console.log(action.payload);
-
       return {
         ...state,
         loading: false,
@@ -90,11 +92,45 @@ export function reducer(
 
     case fromInstitutions.DELETE_INSTITUTION_SUCCESS: {
       const institution = action.payload;
-      const { [institution._id]: removedItem, ...entities } = state.entities;
+      const { [institution._id]: removedinst, ...entities } = state.entities;
       return {
         ...state,
         entities,
         loading: false
+      };
+    }
+
+    case fromCategories.UPDATE_CATEGORY_SUCCESS: {
+      const updatedCategory = action.payload;
+
+      const institutions = toArray(state.entities).map(
+        (inst: Institution) =>
+          inst.category._id === updatedCategory._id
+            ? { ...inst, category: updatedCategory }
+            : inst
+      );
+
+      const entities = toEntities(institutions, { ...state.entities });
+      return {
+        ...state,
+        entities
+      };
+    }
+
+    case fromCategories.DELETE_CATEGORY_SUCCESS: {
+      const deletedCategory = action.payload;
+
+      const institutions = toArray(state.entities).map(
+        (inst: Institution) =>
+          inst.category._id === deletedCategory._id
+            ? { ...inst, category: null }
+            : inst
+      );
+
+      const entities = toEntities(institutions, { ...state.entities });
+      return {
+        ...state,
+        entities
       };
     }
   }
