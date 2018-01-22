@@ -44,5 +44,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private store: Store<fromRoot.AppState>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.currentUser$ = this.store.select(fromRoot.getCurrentUser);
+  }
 }

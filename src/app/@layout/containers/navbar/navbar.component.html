@@ -16,7 +16,7 @@
                     [items]="notifItems" [icon]="'notifications'"
                     [hasBadge]="true" [badgeCount]="6"></li>
 
-                <li lnk-nav-dropdown class="dropdown" 
+                <li lnk-nav-dropdown class="dropdown" [title]="(currentUser$ | async).name"
                     [items]="profileItems" [icon]="'person'"></li>
             </ul>
 

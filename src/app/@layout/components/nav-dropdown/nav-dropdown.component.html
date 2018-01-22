@@ -5,6 +5,9 @@
         <p class="hidden-lg hidden-md">Notifications</p>
     </a>
     <ul class="dropdown-menu">
+        <li class="dropdown-title text-muted text-center" *ngIf="title">
+            <h5>{{title}}</h5>
+        </li>
         <li *ngFor="let item of items">
             <a [href]="item.url || '#'">{{item.text}}</a>
         </li>        

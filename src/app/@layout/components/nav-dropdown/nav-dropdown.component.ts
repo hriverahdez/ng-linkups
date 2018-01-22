@@ -8,6 +8,7 @@ import { DropdownItem } from "../../utils/dropdown";
   styleUrls: ["./nav-dropdown.component.scss"]
 })
 export class NavDropdownComponent implements OnInit {
+  @Input() title: string;
   @Input() hasBadge: boolean = false;
   @Input() badgeCount: number;
   @Input() icon: string;
