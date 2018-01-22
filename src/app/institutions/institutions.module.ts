@@ -24,6 +24,7 @@ import * as fromServices from "./services";
 
 // guards
 import * as fromGuards from "./guards";
+import { CategoriesModule } from "../categories/categories.module";
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import * as fromGuards from "./guards";
     SharedModule,
     InstitutionsRoutingModule,
     StoreModule.forFeature("institutions", reducers),
-    EffectsModule.forFeature(effects)
+    EffectsModule.forFeature(effects),
+    CategoriesModule
   ],
   declarations: [...fromContainers.containers, ...fromComponents.conmponents],
   providers: [...fromServices.services, ...fromGuards.guards, AppInterceptor]

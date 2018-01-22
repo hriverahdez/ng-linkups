@@ -6,6 +6,7 @@ import * as fromContainers from "./containers";
 
 // guards
 import * as fromGuards from "./guards";
+import * as categoriesGuards from "../categories/guards";
 
 const ROUTES: Routes = [
   {
@@ -15,12 +16,16 @@ const ROUTES: Routes = [
   },
   {
     path: "add",
-    component: fromContainers.InstitutionItemComponent
+    component: fromContainers.InstitutionItemComponent,
+    canActivate: [categoriesGuards.CategoriesGuard]
   },
   {
     path: ":institutionId",
     component: fromContainers.InstitutionItemComponent,
-    canActivate: [fromGuards.InstitutionExistsGuard]
+    canActivate: [
+      fromGuards.InstitutionExistsGuard,
+      categoriesGuards.CategoriesGuard
+    ]
   }
 ];
 
