@@ -32,7 +32,7 @@ export function reducer(state = initialState, action: fromUser.UserActions) {
       const error: CustomError = {
         code: status,
         message:
-          status === 401
+          status === 401 || status === 400
             ? "Usuario o contraseña incorrectos"
             : httpErrorMessages[status]
       };
@@ -60,6 +60,14 @@ export function reducer(state = initialState, action: fromUser.UserActions) {
         ...state,
         isLoggedIn: true,
         currentUser
+      };
+    }
+
+    case fromUser.LOGOUT: {
+      return {
+        ...state,
+        isLoggedIn: false,
+        currentUser: {}
       };
     }
   }

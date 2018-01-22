@@ -60,8 +60,10 @@ export class UserEffects {
   @Effect()
   logout$ = this.actions$.ofType(userActions.LOGOUT).pipe(
     map(() => {
-      this.authService.logOut;
-      return of(new userActions.Logout());
+      this.authService.logOut();
+      return new fromRouter.Go({
+        path: ["/login"]
+      });
     })
   );
 }

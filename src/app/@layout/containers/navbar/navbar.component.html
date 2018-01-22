@@ -16,8 +16,10 @@
                     [items]="notifItems" [icon]="'notifications'"
                     [hasBadge]="true" [badgeCount]="6"></li>
 
-                <li lnk-nav-dropdown class="dropdown" [title]="(currentUser$ | async).name"
-                    [items]="profileItems" [icon]="'person'"></li>
+                <li lnk-nav-dropdown class="dropdown" 
+                    [title]="(currentUser$ | async).name"
+                    [items]="profileItems" [icon]="'person'"
+                    (onItemClicked)="onUserMenuClick($event)"></li>
             </ul>
 
             <!-- <form class="navbar-form navbar-right" role="search">

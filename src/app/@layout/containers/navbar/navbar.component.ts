@@ -6,6 +6,7 @@ import { Store } from "@ngrx/store";
 
 import * as fromRoot from "../../../@core/store";
 import { User } from "../../../@core/models/user.model";
+import { DropdownItem } from "../../utils/dropdown";
 
 @Component({
   selector: "lnk-navbar",
@@ -33,9 +34,11 @@ export class NavbarComponent implements OnInit {
 
   private profileItems = [
     {
+      id: "PROFILE",
       text: "My Profile"
     },
     {
+      id: "LOGOUT",
       text: "Log out"
     }
   ];
@@ -46,5 +49,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser$ = this.store.select(fromRoot.getCurrentUser);
+  }
+
+  onUserMenuClick(item: DropdownItem) {
+    if (item.id === "LOGOUT") {
+      this.store.dispatch(new fromRoot.Logout());
+    }
   }
 }
