@@ -32,6 +32,9 @@ import * as fromContainers from "./containers";
 // components
 import * as fromComponents from "./components";
 
+// guards
+import * as fromGuards from "./guards";
+
 @NgModule({
   declarations: [...fromContainers.containers, ...fromComponents.components],
   imports: [
@@ -46,7 +49,10 @@ import * as fromComponents from "./components";
     StoreRouterConnectingModule,
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
+  providers: [
+    { provide: RouterStateSerializer, useClass: CustomSerializer },
+    ...fromGuards.guards
+  ],
   bootstrap: [fromContainers.AppComponent]
 })
 export class AppModule {}

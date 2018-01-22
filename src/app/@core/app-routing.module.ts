@@ -2,7 +2,11 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from "@angular/router";
 
+// containers
 import * as fromContainers from "./containers";
+
+// guards
+import * as fromGuards from "./guards";
 
 const routes: Routes = [
   {
@@ -11,7 +15,8 @@ const routes: Routes = [
   },
   {
     path: "app",
-    loadChildren: "../@layout/layout.module#LayoutModule"
+    loadChildren: "../@layout/layout.module#LayoutModule",
+    canActivate: [fromGuards.UserSessionNotExpiredGuard]
   },
   { path: "", redirectTo: "/app/dashboard", pathMatch: "full" },
   { path: "**", redirectTo: "app" }
