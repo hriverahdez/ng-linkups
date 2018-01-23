@@ -59,8 +59,8 @@
       <mat-form-field class="full-width">
         <input matInput placeholder="WAN" name="wan" formControlName="wan" required>
         <mat-error *ngIf="wanControlInvalid">
-          La dirección WAN es
-          <strong>requerida</strong>
+          Escriba una subred válida en el formato
+          <strong>0.0.0.0/XX</strong>
         </mat-error>
       </mat-form-field>
     </div>

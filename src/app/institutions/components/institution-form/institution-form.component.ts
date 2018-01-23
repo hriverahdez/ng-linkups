@@ -15,7 +15,7 @@ import {
 
 import { Institution } from "../../models/institution.model";
 import { Category } from "../../../categories/models/category.model";
-import { IpMaskRegexp } from "../../../@shared/utils/ip-regex";
+import { IP_MASK_REGEXP } from "../../../@shared/utils/ip-regex";
 
 @Component({
   selector: "lnk-institution-form",
@@ -25,8 +25,6 @@ import { IpMaskRegexp } from "../../../@shared/utils/ip-regex";
 export class InstitutionFormComponent implements OnChanges {
   exists: boolean = false;
   institutionForm: FormGroup = this.toFormGroup();
-
-  ipmaskRegexp = IpMaskRegexp;
 
   @Input() institution: Institution;
   @Input() categories: Category[];
@@ -43,14 +41,15 @@ export class InstitutionFormComponent implements OnChanges {
         .get("category")
         .setValue(this.institution.category.name);
     }
-    console.log(this.ipmaskRegexp);
   }
 
   create(form: FormGroup) {
     const { valid, value } = form;
-    if (valid) {
-      this.onCreate.emit(value);
-    }
+    console.log(valid);
+    console.log(this.institutionForm);
+    // if (valid) {
+    //   this.onCreate.emit(value);
+    // }
   }
 
   update(form: FormGroup) {
@@ -66,7 +65,7 @@ export class InstitutionFormComponent implements OnChanges {
       line_number: ["", Validators.required],
       name: ["", Validators.required],
       location: ["", Validators.required],
-      wan: ["", [Validators.required, Validators.pattern(this.ipmaskRegexp)]],
+      wan: ["", [Validators.required, Validators.pattern(IP_MASK_REGEXP)]],
       lan: [""],
       bandwidth: [""],
       state: [""],
@@ -108,6 +107,9 @@ export class InstitutionFormComponent implements OnChanges {
   }
 
   get wanControlInvalid() {
-    return this.wanControl.hasError("required");
+    return (
+      this.wanControl.hasError("required") ||
+      this.wanControl.hasError("pattern")
+    );
   }
 }
