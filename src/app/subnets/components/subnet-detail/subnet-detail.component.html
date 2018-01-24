@@ -1,0 +1,24 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-checkbox [checked]="subnet.available" style="margin-right: 10px" disabled></mat-checkbox>
+      {{ subnet.ip }}/{{ subnet.mask }}
+    </mat-panel-title>    
+  </mat-expansion-panel-header>
+
+  <div>
+    <ul class="subnet-features-list">
+      <li><strong>Máscara: </strong>255.255.255.248</li>
+    </ul>
+  </div>
+
+  <mat-action-row>
+    <a [routerLink]="['/app/subnets']" mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </a>
+    <button mat-icon-button (click)="requestDelete()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-action-row>
+
+</mat-expansion-panel>

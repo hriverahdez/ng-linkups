@@ -13,6 +13,9 @@ import { reducers, effects } from "./store";
 // containers
 import * as fromContainers from "./containers";
 
+// components
+import * as fromComponents from "./components";
+
 // services
 import * as fromServices from "./services";
 
@@ -26,6 +29,6 @@ import * as fromServices from "./services";
     EffectsModule.forFeature(effects)
   ],
   providers: [...fromServices.services],
-  declarations: [...fromContainers.containers]
+  declarations: [...fromContainers.containers, ...fromComponents.components]
 })
 export class SubnetsModule {}

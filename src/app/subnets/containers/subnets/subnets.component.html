@@ -1,3 +1,40 @@
-<p>
-  subnets works!
-</p>
+<div class="main-content">
+
+  <div class="container-fluid">
+    
+    <div class="row">
+			<div class="col-md-12">
+				<div class="card card-nav-tabs">
+					<div class="card-header" data-background-color="blue">
+						<div class="nav-tabs-navigation">
+							<div class="nav-tabs-wrapper">
+                <lnk-add-new-button class="pull-right" [text]="'Agregar Nueva'" (clicked)="addSubnet()"></lnk-add-new-button>
+                <h4 class="title">Subredes</h4>
+                <p class="category">Listado de subredes de la provincia</p>              
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card-content">
+						<div class="tab-content">
+							<div class="tab-pane active">
+                
+                <div class="subnets-container">
+                  <lnk-subnet-detail class="subnet-detail-item"
+                        *ngFor="let subnet of subnets$ | async" 
+                        [subnet]="subnet"></lnk-subnet-detail>
+                </div>
+                
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    
+    <!-- <pre>
+      {{subnets$ | async | json}}
+    </pre> -->
+  </div>
+</div>
