@@ -8,7 +8,7 @@ import { EffectsModule } from "@ngrx/effects";
 import { SharedModule } from "../@shared/shared.module";
 import { SubnetsRoutingModule } from "./subnets-routing.module";
 
-import { reducers } from "./store";
+import { reducers, effects } from "./store";
 
 // containers
 import * as fromContainers from "./containers";
@@ -22,7 +22,8 @@ import * as fromServices from "./services";
     HttpClientModule,
     SharedModule,
     SubnetsRoutingModule,
-    StoreModule.forFeature("subnets", reducers)
+    StoreModule.forFeature("subnets", reducers),
+    EffectsModule.forFeature(effects)
   ],
   providers: [...fromServices.services],
   declarations: [...fromContainers.containers]

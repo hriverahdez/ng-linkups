@@ -18,7 +18,7 @@ import { Institution } from "../../models/institution.model";
 export class InstitutionEffects {
   constructor(
     private actions$: Actions,
-    private rootSstore: Store<fromRoot.AppState>,
+    private rootStore: Store<fromRoot.AppState>,
     private store: Store<fromStore.InstitutionsState>,
     private institutionsService: fromServices.InstitutionsService,
     private snackbar: fromSharedServices.SnackBarService

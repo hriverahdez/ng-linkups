@@ -6,18 +6,18 @@ export const LOAD_SUBNETS = "[Subnets] Load Subnets";
 export const LOAD_SUBNETS_FAIL = "[Subnets] Load Subnets Fail";
 export const LOAD_SUBNETS_SUCCESS = "[Subnets] Load Subnets Success";
 
-export class LoadSubnet implements Action {
+export class LoadSubnets implements Action {
   readonly type = LOAD_SUBNETS;
 }
 
-export class LoadSubnetFail implements Action {
+export class LoadSubnetsFail implements Action {
   readonly type = LOAD_SUBNETS_FAIL;
   constructor(public payload: any) {}
 }
 
-export class LoadSubnetSuccess implements Action {
+export class LoadSubnetsSuccess implements Action {
   readonly type = LOAD_SUBNETS_SUCCESS;
   constructor(public payload: Subnet[]) {}
 }
 
-export type SubnetActions = LoadSubnet | LoadSubnetFail | LoadSubnetSuccess;
+export type SubnetActions = LoadSubnets | LoadSubnetsFail | LoadSubnetsSuccess;
