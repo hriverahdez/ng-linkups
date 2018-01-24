@@ -14,7 +14,7 @@ export const APP_MENU: MenuItem[] = [
     class: ""
   },
   { path: "categories", title: "Categorías", icon: "view_module", class: "" },
-  { path: "typography", title: "Typography", icon: "library_books", class: "" },
+  { path: "subnets", title: "Subredes", icon: "code", class: "" },
   { path: "icons", title: "Icons", icon: "bubble_chart", class: "" },
   { path: "maps", title: "Maps", icon: "location_on", class: "" },
   {

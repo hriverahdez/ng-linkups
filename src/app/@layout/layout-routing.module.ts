@@ -23,6 +23,10 @@ const routes: Routes = [
         path: "categories",
         loadChildren: "../categories/categories.module#CategoriesModule"
       },
+      {
+        path: "subnets",
+        loadChildren: "../subnets/subnets.module#SubnetsModule"
+      },
       { path: "", redirectTo: "/app/dashboard", pathMatch: "full" }
     ]
   }
