@@ -1,6 +1,6 @@
 export interface Subnet {
   _id?: string;
   ip?: string;
-  mask?: string;
+  mask?: number;
   available?: boolean;
 }
