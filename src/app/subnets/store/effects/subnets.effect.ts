@@ -68,24 +68,20 @@ export class SubnetsEffects {
   //     )
   //   );
 
-  // @Effect()
-  // deleteInstitution$ = this.actions$
-  //   .ofType(subnetActions.DELETE_INSTITUTION)
-  //   .pipe(
-  //     map((action: subnetActions.DeleteInstitution) => action.payload),
-  //     switchMap(institution =>
-  //       this.subnetsService
-  //         .delete(institution)
-  //         .pipe(
-  //           map(
-  //             () => new subnetActions.DeleteInstitutionSuccess(institution)
-  //           ),
-  //           catchError(error =>
-  //             of(new subnetActions.DeleteInstitutionFail(error))
-  //           )
-  //         )
-  //     )
-  //   );
+  @Effect()
+  deleteSubnet$ = this.actions$
+    .ofType(subnetActions.DELETE_SUBNET)
+    .pipe(
+      map((action: subnetActions.DeleteSubnet) => action.payload),
+      switchMap(subnet =>
+        this.subnetsService
+          .delete(subnet)
+          .pipe(
+            map(() => new subnetActions.DeleteSubnetSuccess(subnet)),
+            catchError(error => of(new subnetActions.DeleteSubnetFail(error)))
+          )
+      )
+    );
 
   @Effect()
   handleSubnetSuccess$ = this.actions$
@@ -95,18 +91,18 @@ export class SubnetsEffects {
     )
     .pipe(map(() => new fromRoot.Go({ path: ["/app/subnets"] })));
 
-  // @Effect({ dispatch: false })
-  // handleInstitutionFailure$ = this.actions$
-  //   .ofType(
-  //     subnetActions.ADD_INSTITUTION_FAIL,
-  //     subnetActions.UPDATE_INSTITUTION_FAIL,
-  //     subnetActions.DELETE_INSTITUTION_FAIL
-  //   )
-  //   .pipe(
-  //     map(() =>
-  //       this.store
-  //         .select(fromStore.getInstitutionsError)
-  //         .pipe(map(error => this.snackbar.openSimpleSnackBar(error.message)))
-  //     )
-  //   );
+  @Effect({ dispatch: false })
+  handleInstitutionFailure$ = this.actions$
+    .ofType(
+      subnetActions.ADD_SUBNET_FAIL,
+      // subnetActions.UPDATE_INSTITUTION_FAIL,
+      subnetActions.DELETE_SUBNET_FAIL
+    )
+    .pipe(
+      map(() =>
+        this.store
+          .select(fromStore.getSubnetsError)
+          .pipe(map(error => this.snackbar.openSimpleSnackBar(error.message)))
+      )
+    );
 }

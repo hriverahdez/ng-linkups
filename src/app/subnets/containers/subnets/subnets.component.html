@@ -8,7 +8,7 @@
 					<div class="card-header" data-background-color="blue">
 						<div class="nav-tabs-navigation">
 							<div class="nav-tabs-wrapper">
-                <lnk-add-new-button class="pull-right" [text]="'Agregar Nueva'" (clicked)="addSubnet()"></lnk-add-new-button>
+                <lnk-add-new-button class="pull-right" [text]="'Agregar Nueva'" (clicked)="addSubnetPage()"></lnk-add-new-button>
                 <h4 class="title">Subredes</h4>
                 <p class="category">Listado de subredes de la provincia</p>              
 								<div class="clearfix"></div>
@@ -23,7 +23,8 @@
                 <div class="subnets-container">
                   <lnk-subnet-detail class="subnet-detail-item"
                         *ngFor="let subnet of subnets$ | async" 
-                        [subnet]="subnet"></lnk-subnet-detail>
+												[subnet]="subnet"
+												(onDeleteRequest)="deleteSubnet($event)"></lnk-subnet-detail>
                 </div>
 								
 								<hr>

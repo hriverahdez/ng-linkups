@@ -5,6 +5,7 @@ import { Observable } from "rxjs/Observable";
 
 import * as fromRoot from "../../../@core/store";
 import * as fromStore from "../../store";
+import * as fromSharedServices from "../../../@shared/services";
 import { Subnet } from "../../models/subnet.model";
 
 @Component({
@@ -16,7 +17,8 @@ export class SubnetsComponent implements OnInit {
   subnets$: Observable<Subnet[]>;
   constructor(
     private rootStore: Store<fromRoot.AppState>,
-    private store: Store<fromStore.SubnetsState>
+    private store: Store<fromStore.SubnetsState>,
+    private dialogService: fromSharedServices.DialogService
   ) {}
 
   ngOnInit() {
@@ -24,7 +26,18 @@ export class SubnetsComponent implements OnInit {
     this.store.dispatch(new fromStore.LoadSubnets());
   }
 
-  addSubnet() {
+  addSubnetPage() {
     this.rootStore.dispatch(new fromRoot.Go({ path: ["/app/subnets/add"] }));
+  }
+
+  deleteSubnet(subnet: Subnet) {
+    this.dialogService
+      .confirm("¿Está seguro que desea eliminar esta subred?")
+      .subscribe(
+        dialogResult =>
+          dialogResult
+            ? this.store.dispatch(new fromStore.DeleteSubnet(subnet))
+            : false
+      );
   }
 }

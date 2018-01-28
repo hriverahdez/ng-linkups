@@ -59,7 +59,7 @@ export function reducer(
       };
     }
 
-    // case fromSubnets.DELETE_SUBNET_FAIL:
+    case fromSubnets.DELETE_SUBNET_FAIL:
     // case fromSubnets.UPDATE_SUBNET_FAIL:
     case fromSubnets.ADD_SUBNET_FAIL: {
       const { status } = action.payload;
@@ -77,8 +77,18 @@ export function reducer(
 
     // case fromSubnets.UPDATE_SUBNET_SUCCESS:
     case fromSubnets.ADD_SUBNET_SUCCESS: {
-      const institution = action.payload;
-      const entities = { ...state.entities, [institution._id]: institution };
+      const subnet = action.payload;
+      const entities = { ...state.entities, [subnet._id]: subnet };
+      return {
+        ...state,
+        entities,
+        loading: false
+      };
+    }
+
+    case fromSubnets.DELETE_SUBNET_SUCCESS: {
+      const subnet = action.payload;
+      const { [subnet._id]: removedinst, ...entities } = state.entities;
       return {
         ...state,
         entities,

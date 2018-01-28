@@ -40,10 +40,33 @@ export class AddSubnetSuccess implements Action {
   constructor(public payload: Subnet) {}
 }
 
+// DELETE
+export const DELETE_SUBNET = "[Subnets] Delete Subnet";
+export const DELETE_SUBNET_FAIL = "[Subnets] Delete Subnet Fail";
+export const DELETE_SUBNET_SUCCESS = "[Subnets] Delete Subnet Success";
+
+export class DeleteSubnet implements Action {
+  readonly type = DELETE_SUBNET;
+  constructor(public payload: Subnet) {}
+}
+
+export class DeleteSubnetFail implements Action {
+  readonly type = DELETE_SUBNET_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class DeleteSubnetSuccess implements Action {
+  readonly type = DELETE_SUBNET_SUCCESS;
+  constructor(public payload: Subnet) {}
+}
+
 export type SubnetActions =
   | LoadSubnets
   | LoadSubnetsFail
   | LoadSubnetsSuccess
   | AddSubnet
   | AddSubnetFail
-  | AddSubnetSuccess;
+  | AddSubnetSuccess
+  | DeleteSubnet
+  | DeleteSubnetFail
+  | DeleteSubnetSuccess;

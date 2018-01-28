@@ -16,17 +16,17 @@ export const getSubnetsEntities = createSelector(
 
 export const getAllSubnets = createSelector(getSubnetsEntities, toArray);
 
-export const getSubnestLoaded = createSelector(
+export const getSubnetsLoaded = createSelector(
   getState,
   fromSubnets.getSubnetsLoaded
 );
 
-export const getSubnestLoading = createSelector(
+export const getSubnetsLoading = createSelector(
   getState,
   fromSubnets.getSubnetsLoading
 );
 
-export const getSubnestError = createSelector(
+export const getSubnetsError = createSelector(
   getState,
   fromSubnets.getSubnetsError
 );
