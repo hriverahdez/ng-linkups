@@ -29,7 +29,7 @@
 												<a (click)="showDetail(institution)">{{institution.name}}</a>
 												<span class="text-muted">[{{institution.line_number}}]</span>
 											</td>
-											<td> {{institution.wan}} </td>
+											<td> {{ institution.wan.ip }}/{{ institution.wan.mask }} </td>
 											<td> {{institution.lan || 'NOT AVAILABLE'}} </td>
 											<td class="td-actions text-right">
 												<a [routerLink]="['/app/institutions', institution._id]" rel="tooltip" 

@@ -29,6 +29,8 @@ import * as fromServices from "./services";
     EffectsModule.forFeature(effects)
   ],
   providers: [...fromServices.services],
-  declarations: [...fromContainers.containers, ...fromComponents.components]
+  entryComponents: [fromContainers.SubnetsDialogComponent],
+  declarations: [...fromContainers.containers, ...fromComponents.components],
+  exports: [fromContainers.SubnetsDialogComponent, ...fromComponents.components]
 })
 export class SubnetsModule {}

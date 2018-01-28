@@ -1,0 +1,11 @@
+.ip-selector-wrapper {
+  display: flex;
+  height: 44px;
+  padding-top: 8px;
+  .ip-value-input {
+    width: 75%;
+  }
+  .ip-select-btn {
+    margin-left: auto;
+  }
+}

@@ -12,6 +12,8 @@ import { EffectsModule } from "@ngrx/effects";
 import { reducers, effects } from "./store";
 
 import { AppInterceptor } from "../@shared/utils/interceptor/token.interceptor";
+import { CategoriesModule } from "../categories/categories.module";
+import { SubnetsModule } from "../subnets/subnets.module";
 
 // containers
 import * as fromContainers from "./containers";
@@ -24,7 +26,6 @@ import * as fromServices from "./services";
 
 // guards
 import * as fromGuards from "./guards";
-import { CategoriesModule } from "../categories/categories.module";
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { CategoriesModule } from "../categories/categories.module";
     InstitutionsRoutingModule,
     StoreModule.forFeature("institutions", reducers),
     EffectsModule.forFeature(effects),
-    CategoriesModule
+    CategoriesModule,
+    SubnetsModule
   ],
   entryComponents: [fromComponents.InstitutionDetailComponent],
   declarations: [...fromContainers.containers, ...fromComponents.conmponents],

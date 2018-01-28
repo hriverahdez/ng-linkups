@@ -1,0 +1,47 @@
+<div class="card card-nav-tabs" >
+  <div class="card-header" data-background-color="blue">
+      <div class="nav-tabs-navigation">
+          <div class="nav-tabs-wrapper">
+              <span class="nav-tabs-title">Acciones:</span>
+              <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li [class.active]="currentTab === subnetList.id" #subnetList id="subnet-list">
+                      <a (click)="setCurrentTab(subnetList.id)" data-toggle="tab">
+                          <i class="material-icons">format_list_numbered</i>
+                          Disponibles
+                      <div class="ripple-container"></div></a>
+                  </li>
+                  <li [class.active]="currentTab === subnetOne.id" #subnetOne id="subnet-add-one">
+                      <a (click)="setCurrentTab(subnetOne.id)" data-toggle="tab">
+                          <i class="material-icons">exposure_plus_1</i>
+                          Agregar 1
+                      <div class="ripple-container"></div></a>
+                  </li>
+                  <li [class.active]="currentTab === subnetRange.id" #subnetRange id="subnet-add-range">
+                      <a (click)="setCurrentTab(subnetRange.id)" data-toggle="tab">
+                          <i class="material-icons">space_bar</i>
+                          Agregar Rango
+                      <div class="ripple-container"></div></a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+
+  <div class="card-content">
+      <div class="tab-content">
+          <div class="tab-pane" [class.active]="currentTab === 'subnet-list'">
+            <div class="subnets-container">        
+              <mat-card class="mat-card-small subnet-detail-item" *ngFor="let subnet of subnets$ | async">
+                <mat-checkbox>{{subnet.ip + '/' + subnet.mask}}</mat-checkbox>                
+              </mat-card>
+            </div>
+          </div>
+          <div class="tab-pane" [class.active]="currentTab === 'subnet-add-one'">
+              TWO
+          </div>
+          <div class="tab-pane" [class.active]="currentTab === 'subnet-add-range'">
+              THREE
+          </div>
+      </div>
+  </div>
+</div>

@@ -8,8 +8,11 @@ import { IpHelperService } from "../../services/index";
   styleUrls: ["./subnet-detail.component.scss"]
 })
 export class SubnetDetailComponent implements OnInit {
+  isSelected: boolean = false;
+  @Input() isAssigning: boolean = false;
   @Input() subnet: Subnet;
 
+  @Output() onSelect = new EventEmitter<Subnet>();
   @Output() onEditRequest = new EventEmitter<Subnet>();
   @Output() onDeleteRequest = new EventEmitter<Subnet>();
 
@@ -34,5 +37,10 @@ export class SubnetDetailComponent implements OnInit {
 
   requestDelete() {
     this.onDeleteRequest.emit(this.subnet);
+  }
+
+  panelClicked() {
+    console.log("now");
+    if (this.isAssigning) this.onSelect.emit(this.subnet);
   }
 }

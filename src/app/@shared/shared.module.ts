@@ -17,6 +17,7 @@ import {
   MatDialogModule,
   MatIconModule,
   MatCheckboxModule,
+  MatRadioModule,
   MatTableModule,
   MatSnackBarModule,
   MatSlideToggleModule,
@@ -42,6 +43,7 @@ const NG_MAT_MODULES = [
   MatIconModule,
   MatSlideToggleModule,
   MatCheckboxModule,
+  MatRadioModule,
   MatSnackBarModule
 ];
 
