@@ -9,11 +9,11 @@
       <mat-form-field class="full-width">
         <mat-select placeholder="Categoría" name="category" 
           formControlName="category" required>          
-          <mat-option *ngFor="let category of categories" [value]="category">
+          <mat-option *ngFor="let category of categories" [value]="category._id">
             {{category.name}}
           </mat-option>
         </mat-select>
-        <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error> -->        
+        <mat-error *ngIf="categoryControlInvalid">Seleccione una categoría</mat-error>        
       </mat-form-field>
       
       
@@ -54,21 +54,12 @@
   <label for="">Datos Técnicos</label>
   <hr class="form-section-divider">
 
-  <div class="row">
-    <div class="col-sm-6">
-      <!-- <mat-form-field class="full-width">
-        <input matInput placeholder="WAN" name="wan" formControlName="wan" required>
-        <mat-error *ngIf="wanControlInvalid">
-          Escriba una subred válida en el formato
-          <strong>0.0.0.0/XX</strong>
-        </mat-error>
-      </mat-form-field> -->
-      <lnk-ip-selector></lnk-ip-selector>
+  <div class="row" style="padding-bottom: 10px">
+    <div class="col-sm-6">     
+      <lnk-ip-selector [placeholder]="'WAN'" formControlName="wan"></lnk-ip-selector>
     </div>
     <div class="col-sm-6">
-      <mat-form-field class="full-width">
-        <input matInput placeholder="LAN" name="lan" formControlName="lan">        
-      </mat-form-field>
+      <lnk-ip-selector [placeholder]="'LAN'" formControlName="lan"></lnk-ip-selector>
     </div>
   </div>
 

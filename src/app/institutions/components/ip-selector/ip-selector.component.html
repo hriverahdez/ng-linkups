@@ -1,6 +1,6 @@
 <div class="ip-selector-wrapper ">
-  <mat-form-field class="ip-value-input ">
-    <input matInput placeholder="WAN" name="wan" disabled>  
+  <mat-form-field class="ip-value-input">
+    <input matInput [placeholder]="placeholder" name="formattedIp" [value]="formattedValue" disabled>  
   </mat-form-field>
   <button mat-raised-button class="ip-select-btn" color="primary" (click)="openSubnetDialog()">Seleccionar</button>  
 </div>

@@ -45,11 +45,9 @@ export class InstitutionFormComponent implements OnChanges {
 
   create(form: FormGroup) {
     const { valid, value } = form;
-    console.log(valid);
-    console.log(this.institutionForm);
-    // if (valid) {
-    //   this.onCreate.emit(value);
-    // }
+    if (valid) {
+      this.onCreate.emit(value);
+    }
   }
 
   update(form: FormGroup) {
@@ -61,11 +59,11 @@ export class InstitutionFormComponent implements OnChanges {
 
   toFormGroup() {
     return this.fb.group({
-      category: [""],
+      category: ["", Validators.required],
       line_number: ["", Validators.required],
       name: ["", Validators.required],
       location: ["", Validators.required],
-      wan: ["", [Validators.required, Validators.pattern(IP_MASK_REGEXP)]],
+      wan: ["", Validators.required],
       lan: [""],
       bandwidth: [""],
       state: [""],
@@ -76,6 +74,14 @@ export class InstitutionFormComponent implements OnChanges {
       has_internet: [""],
       notes: [""]
     });
+  }
+
+  get categoryControl() {
+    return this.institutionForm.get("category") as FormControl;
+  }
+
+  get categoryControlInvalid() {
+    return this.categoryControl.hasError("required");
   }
 
   get lineNumberControl() {
