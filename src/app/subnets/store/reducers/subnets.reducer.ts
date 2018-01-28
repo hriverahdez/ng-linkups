@@ -3,6 +3,7 @@ import * as fromSubnets from "../actions";
 
 import { CustomError } from "../../../@shared/utils/custom-error";
 import { toEntities } from "../../../@shared/utils/entities-array-helper";
+import { httpErrorMessages } from "../../../@shared/utils/http-error-messages";
 
 export interface State {
   entities: { [_id: string]: Subnet };
@@ -48,6 +49,40 @@ export function reducer(
         loaded: true,
         loading: false,
         entities
+      };
+    }
+
+    case fromSubnets.ADD_SUBNET: {
+      return {
+        ...state,
+        loading: true
+      };
+    }
+
+    // case fromSubnets.DELETE_SUBNET_FAIL:
+    // case fromSubnets.UPDATE_SUBNET_FAIL:
+    case fromSubnets.ADD_SUBNET_FAIL: {
+      const { status } = action.payload;
+      const error: CustomError = {
+        code: status,
+        message: httpErrorMessages[status]
+      };
+
+      return {
+        ...state,
+        loading: false,
+        error
+      };
+    }
+
+    // case fromSubnets.UPDATE_SUBNET_SUCCESS:
+    case fromSubnets.ADD_SUBNET_SUCCESS: {
+      const institution = action.payload;
+      const entities = { ...state.entities, [institution._id]: institution };
+      return {
+        ...state,
+        entities,
+        loading: false
       };
     }
   }

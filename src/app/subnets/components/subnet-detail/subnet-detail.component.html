@@ -2,7 +2,7 @@
   <mat-expansion-panel-header>
     <mat-panel-title>
       <mat-checkbox *ngIf="isAssigning" (checked)="panelClicked()" style="margin-right: 10px"></mat-checkbox>
-      <mat-checkbox *ngIf="!isAssigning" [checked]="subnet.available" style="margin-right: 10px" disabled></mat-checkbox>
+      <mat-checkbox *ngIf="!isAssigning" [checked]="!subnet.available" style="margin-right: 10px" disabled></mat-checkbox>
       {{ subnet.ip }}/{{ subnet.mask }}
     </mat-panel-title>    
   </mat-expansion-panel-header>

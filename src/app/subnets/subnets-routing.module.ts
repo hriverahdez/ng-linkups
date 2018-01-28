@@ -9,6 +9,10 @@ const ROUTES: Routes = [
   {
     path: "",
     component: fromContainers.SubnetsComponent
+  },
+  {
+    path: "add",
+    component: fromContainers.SubnetItemComponent
   }
 ];
 

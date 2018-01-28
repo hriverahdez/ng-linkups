@@ -20,4 +20,30 @@ export class LoadSubnetsSuccess implements Action {
   constructor(public payload: Subnet[]) {}
 }
 
-export type SubnetActions = LoadSubnets | LoadSubnetsFail | LoadSubnetsSuccess;
+// ADD
+export const ADD_SUBNET = "[Subnets] Add Subnet";
+export const ADD_SUBNET_FAIL = "[Subnets] Add Subnet Fail";
+export const ADD_SUBNET_SUCCESS = "[Subnets] Add Subnet Success";
+
+export class AddSubnet implements Action {
+  readonly type = ADD_SUBNET;
+  constructor(public payload: Subnet) {}
+}
+
+export class AddSubnetFail implements Action {
+  readonly type = ADD_SUBNET_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class AddSubnetSuccess implements Action {
+  readonly type = ADD_SUBNET_SUCCESS;
+  constructor(public payload: Subnet) {}
+}
+
+export type SubnetActions =
+  | LoadSubnets
+  | LoadSubnetsFail
+  | LoadSubnetsSuccess
+  | AddSubnet
+  | AddSubnetFail
+  | AddSubnetSuccess;

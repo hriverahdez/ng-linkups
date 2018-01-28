@@ -25,7 +25,11 @@
                         *ngFor="let subnet of subnets$ | async" 
                         [subnet]="subnet"></lnk-subnet-detail>
                 </div>
-                
+								
+								<hr>
+								<label style="margin-right: 15px">Leyenda: </label>
+								<mat-checkbox style="margin-right: 15px" [checked]="true" disabled>En uso</mat-checkbox>
+								<mat-checkbox style="margin-right: 15px" disabled>Disponible</mat-checkbox>
 							</div>
 						</div>
 					</div>

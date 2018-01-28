@@ -1,0 +1,43 @@
+<form [formGroup]="subnetForm">
+  
+    <div class="row">
+      <div class="col-sm-6">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Dirección de subred" 
+              name="ip" formControlName="ip" required>
+          <mat-error *ngIf="ipControlInvalid">
+            Entre una dirección IP válida
+          </mat-error>
+        </mat-form-field>
+  
+      </div>
+      <div class="col-sm-6">
+       
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Máscara (CIDR)" name="mask" 
+            formControlName="mask" required>          
+            <mat-option *ngFor="let mask of availableMasks" [value]="mask">
+              {{mask}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        
+      </div>
+      
+    </div>
+  
+    <div class="pull-right">
+      <button mat-raised-button color="primary" 
+              *ngIf="!exists" [disabled]="!subnetForm.valid" 
+              (click)="create(subnetForm)">Agregar</button>
+  
+      <button mat-raised-button color="primary" 
+              *ngIf="exists" [disabled]="!subnetForm.valid" 
+              (click)="update(subnetForm)">Actualizar</button>
+  
+      <a routerLink="/app/subnets" mat-raised-button color="basic">Cancelar</a>
+    </div>
+    
+    <div class="clearfix"></div>
+  </form>
