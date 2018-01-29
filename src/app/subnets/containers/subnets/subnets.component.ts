@@ -23,7 +23,7 @@ export class SubnetsComponent implements OnInit {
 
   ngOnInit() {
     this.subnets$ = this.store.select(fromStore.getAllSubnets);
-    this.store.dispatch(new fromStore.LoadSubnets());
+    // this.store.dispatch(new fromStore.LoadSubnets());
   }
 
   addSubnetPage() {

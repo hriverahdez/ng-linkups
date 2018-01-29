@@ -21,7 +21,7 @@ export class SubnetsDialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.subnets$ = this.store.select(fromStore.getAllSubnets);
+    this.subnets$ = this.store.select(fromStore.getAllAvailableSubnets);
   }
 
   setCurrentTab(tabID) {
@@ -30,5 +30,9 @@ export class SubnetsDialogComponent implements OnInit {
 
   setSelectedSubnet() {
     this.dialogRef.close(this.selectedSubnet);
+  }
+
+  cancel() {
+    this.dialogRef.close(null);
   }
 }

@@ -21,6 +21,9 @@ import * as fromComponents from "./components";
 // services
 import * as fromServices from "./services";
 
+// guards
+import * as fromGuards from "./guards";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -31,7 +34,7 @@ import * as fromServices from "./services";
     StoreModule.forFeature("subnets", reducers),
     EffectsModule.forFeature(effects)
   ],
-  providers: [...fromServices.services, AppInterceptor],
+  providers: [...fromServices.services, ...fromGuards.guards, AppInterceptor],
   entryComponents: [fromContainers.SubnetsDialogComponent],
   declarations: [...fromContainers.containers, ...fromComponents.components],
   exports: [fromContainers.SubnetsDialogComponent, ...fromComponents.components]

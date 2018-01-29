@@ -35,7 +35,6 @@ export class InstitutionsComponent implements OnInit {
       fromComponents.InstitutionDetailComponent,
       {
         width: "80%",
-        height: "80%",
         data: institution
       }
     );

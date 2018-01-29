@@ -42,16 +42,18 @@ export class IpSelectorComponent implements ControlValueAccessor {
     this.dialogService
       .customDialogComponent(fromSubnetContainers.SubnetsDialogComponent, {
         width: "80%",
-        height: "80%"
+        disableClose: true
       })
       .subscribe(dialogResult => this.setSelectedSubnet(dialogResult));
   }
 
   setSelectedSubnet(subnet: Subnet) {
-    this.displayValue = subnet;
-    this.value = subnet._id;
-    this.onTouch();
-    this.onModelChange(this.value);
+    if (subnet) {
+      this.displayValue = subnet;
+      this.value = subnet._id;
+      this.onTouch();
+      this.onModelChange(this.value);
+    }
   }
 
   get formattedValue() {

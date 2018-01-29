@@ -5,10 +5,14 @@ import { Routes, RouterModule } from "@angular/router";
 // container
 import * as fromContainers from "./containers";
 
+// guards
+import * as fromGuards from "./guards";
+
 const ROUTES: Routes = [
   {
     path: "",
-    component: fromContainers.SubnetsComponent
+    component: fromContainers.SubnetsComponent,
+    canActivate: [fromGuards.SubnetsGuard]
   },
   {
     path: "add",

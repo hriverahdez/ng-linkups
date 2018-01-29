@@ -3,6 +3,7 @@ import { createSelector } from "@ngrx/store";
 import * as fromFeature from "../reducers";
 import * as fromSubnets from "../reducers/subnets.reducer";
 import { toArray } from "../../../@shared/utils/entities-array-helper";
+import { Subnet } from "../../models/subnet.model";
 
 export const getState = createSelector(
   fromFeature.getSubnetsState,
@@ -15,6 +16,13 @@ export const getSubnetsEntities = createSelector(
 );
 
 export const getAllSubnets = createSelector(getSubnetsEntities, toArray);
+
+export const getAllAvailableSubnets = createSelector(
+  getAllSubnets,
+  (subnets: Subnet[]) => {
+    return subnets.filter(s => s.available);
+  }
+);
 
 export const getSubnetsLoaded = createSelector(
   getState,
