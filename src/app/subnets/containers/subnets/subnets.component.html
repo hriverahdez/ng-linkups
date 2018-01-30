@@ -23,7 +23,7 @@
                 <div class="subnets-container">
                   <lnk-subnet-detail class="subnet-detail-item"
                         *ngFor="let subnet of subnets$ | async" 
-												[subnet]="subnet"
+												[subnet]="subnet"												
 												(onDeleteRequest)="deleteSubnet($event)"></lnk-subnet-detail>
                 </div>
 								

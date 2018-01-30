@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges
+} from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -15,10 +23,10 @@ import { CustomErrorStateMatcher } from "../../../@shared/utils/error-state-matc
   templateUrl: "./subnet-form.component.html",
   styleUrls: ["./subnet-form.component.scss"]
 })
-export class SubnetFormComponent implements OnInit {
+export class SubnetFormComponent implements OnChanges {
   exists: boolean = false;
 
-  subnetForm: FormGroup;
+  subnetForm: FormGroup = this.toFormGroup();
   @Input() subnet: Subnet;
 
   @Output() onCreate = new EventEmitter<Subnet>();
@@ -26,8 +34,12 @@ export class SubnetFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {
-    this.subnetForm = this.toFormGroup();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.subnet) {
+      console.log(this.subnet);
+      this.exists = true;
+      this.subnetForm.patchValue(this.subnet);
+    }
   }
 
   toFormGroup() {

@@ -13,6 +13,15 @@
     </p>
   </div>
   <div class="card-content">
+
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <mat-chip-list>
+            <mat-chip class="wan-chip" color="primary" selected="true">WAN:  {{ data.wan ? data.wan.ip + '/' + data.wan?.mask : 'NO DISPONIBLE'}} </mat-chip>
+            <mat-chip class="lan-chip" color="accent" selected="true">LAN:  {{ data.lan ? data.lan.ip + '/' + data.lan?.mask : 'NO DISPONIBLE'}} </mat-chip>            
+          </mat-chip-list>
+        </div>
+      </div>
     
       <div class="row">
         <div class="col-sm-6">

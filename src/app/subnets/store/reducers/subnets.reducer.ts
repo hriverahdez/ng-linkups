@@ -60,7 +60,7 @@ export function reducer(
     }
 
     case fromSubnets.DELETE_SUBNET_FAIL:
-    // case fromSubnets.UPDATE_SUBNET_FAIL:
+    case fromSubnets.UPDATE_SUBNET_FAIL:
     case fromSubnets.ADD_SUBNET_FAIL: {
       const { status } = action.payload;
       const error: CustomError = {
@@ -75,7 +75,7 @@ export function reducer(
       };
     }
 
-    // case fromSubnets.UPDATE_SUBNET_SUCCESS:
+    case fromSubnets.UPDATE_SUBNET_SUCCESS:
     case fromSubnets.ADD_SUBNET_SUCCESS: {
       const subnet = action.payload;
       const entities = { ...state.entities, [subnet._id]: subnet };

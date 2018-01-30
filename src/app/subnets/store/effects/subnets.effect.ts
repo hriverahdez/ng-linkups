@@ -48,25 +48,20 @@ export class SubnetsEffects {
       )
     );
 
-  // @Effect()
-  // updateInstitution$ = this.actions$
-  //   .ofType(subnetActions.UPDATE_INSTITUTION)
-  //   .pipe(
-  //     map((action: subnetActions.UpdateInstitution) => action.payload),
-  //     switchMap((institution: Institution) =>
-  //       this.subnetsService
-  //         .update(institution)
-  //         .pipe(
-  //           map(
-  //             institution =>
-  //               new subnetActions.UpdateInstitutionSuccess(institution)
-  //           ),
-  //           catchError(error =>
-  //             of(new subnetActions.UpdateInstitutionFail(error))
-  //           )
-  //         )
-  //     )
-  //   );
+  @Effect()
+  updateSubnet$ = this.actions$
+    .ofType(subnetActions.UPDATE_SUBNET)
+    .pipe(
+      map((action: subnetActions.UpdateSubnet) => action.payload),
+      switchMap((subnet: Subnet) =>
+        this.subnetsService
+          .update(subnet)
+          .pipe(
+            map(subnet => new subnetActions.UpdateSubnetSuccess(subnet)),
+            catchError(error => of(new subnetActions.UpdateSubnetFail(error)))
+          )
+      )
+    );
 
   @Effect()
   deleteSubnet$ = this.actions$
@@ -86,8 +81,8 @@ export class SubnetsEffects {
   @Effect()
   handleSubnetSuccess$ = this.actions$
     .ofType(
-      subnetActions.ADD_SUBNET_SUCCESS
-      // subnetActions.UPDATE_SUBNET_SUCCESS
+      subnetActions.ADD_SUBNET_SUCCESS,
+      subnetActions.UPDATE_SUBNET_SUCCESS
     )
     .pipe(map(() => new fromRoot.Go({ path: ["/app/subnets"] })));
 
@@ -95,7 +90,7 @@ export class SubnetsEffects {
   handleInstitutionFailure$ = this.actions$
     .ofType(
       subnetActions.ADD_SUBNET_FAIL,
-      // subnetActions.UPDATE_INSTITUTION_FAIL,
+      subnetActions.UPDATE_SUBNET_FAIL,
       subnetActions.DELETE_SUBNET_FAIL
     )
     .pipe(

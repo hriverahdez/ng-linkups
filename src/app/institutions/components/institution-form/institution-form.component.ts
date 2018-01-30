@@ -39,7 +39,7 @@ export class InstitutionFormComponent implements OnChanges {
       this.institutionForm.patchValue(this.institution);
       this.institutionForm
         .get("category")
-        .setValue(this.institution.category.name);
+        .setValue(this.institution.category._id);
     }
   }
 
@@ -74,6 +74,12 @@ export class InstitutionFormComponent implements OnChanges {
       has_internet: [""],
       notes: [""]
     });
+  }
+
+  get selectedCategory() {
+    return this.institution && this.institution.category
+      ? this.institution.category
+      : null;
   }
 
   get categoryControl() {

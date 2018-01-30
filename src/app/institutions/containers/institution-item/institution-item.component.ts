@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 
 import { Observable } from "rxjs/Observable";
-import { tap, filter, take, map } from "rxjs/operators";
+import { tap, map } from "rxjs/operators";
 
 import { Institution } from "../../models/institution.model";
 import { Category } from "../../../categories/models/category.model";

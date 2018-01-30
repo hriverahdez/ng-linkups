@@ -8,7 +8,9 @@
             <p class="category">Llene los datos para crear una nueva subred</p>
           </div>
           <div class="card-content">
-            <lnk-subnet-form (onCreate)="createSubnet($event)"></lnk-subnet-form>
+            <lnk-subnet-form [subnet]="subnet$ | async"
+                             (onCreate)="createSubnet($event)"
+                             (onUpdate)="updateSubnet($event)"></lnk-subnet-form>
           </div>
         </div>
       </div>

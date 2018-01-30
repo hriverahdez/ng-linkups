@@ -7,7 +7,7 @@
     <div class="col-sm-6">
      
       <mat-form-field class="full-width">
-        <mat-select placeholder="Categoría" name="category" 
+        <mat-select placeholder="Categoría" name="category" [value]="selectedCategory"
           formControlName="category" required>          
           <mat-option *ngFor="let category of categories" [value]="category._id">
             {{category.name}}

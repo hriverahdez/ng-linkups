@@ -33,7 +33,10 @@
 	<div class="card-content">
 		<div class="tab-content">
 			<div class="tab-pane subnet-list-tab" [class.active]="currentTab === 'subnet-list'">
-				<div class="subnets-container">
+				<div class="text-center" *ngIf="!(subnets$ | async).length">
+					<h4>No hay subredes disponibles para asignar.</h4>
+				</div>
+				<div class="subnets-container">					
 					<mat-card class="mat-card-small subnet-detail-item" *ngFor="let subnet of subnets$ | async">
 						<mat-radio-button [value]="subnet" 
 							(change)="selectedSubnet = $event.value">{{subnet.ip + '/' + subnet.mask}}</mat-radio-button>
