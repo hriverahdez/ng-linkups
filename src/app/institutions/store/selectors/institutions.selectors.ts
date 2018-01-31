@@ -29,7 +29,7 @@ export const getSelectedInstitution = createSelector(
   getInstitutionsEntities,
   fromRoot.getRouterState,
   (entities, router) => {
-    return router.state && entities[router.state.params.subnetId];
+    return router.state && entities[router.state.params.institutionId];
   }
 );
 
