@@ -7,6 +7,7 @@ import { catchError, switchMap, map } from "rxjs/operators";
 import { Store } from "@ngrx/store";
 
 import * as fromRoot from "../../../@core/store";
+import * as fromLayout from "../../../@layout/store";
 import * as fromStore from "../../store";
 import * as subnetActions from "../actions";
 import * as fromServices from "../../services";
@@ -19,6 +20,7 @@ export class SubnetsEffects {
   constructor(
     private actions$: Actions,
     private rootStore: Store<fromRoot.AppState>,
+    private layoutStore: Store<fromLayout.LayoutState>,
     private store: Store<fromStore.SubnetsState>,
     private subnetsService: fromServices.SubnetsService,
     private snackbar: fromSharedServices.SnackBarService
@@ -99,5 +101,37 @@ export class SubnetsEffects {
           .select(fromStore.getSubnetsError)
           .pipe(map(error => this.snackbar.openSimpleSnackBar(error.message)))
       )
+    );
+
+  @Effect()
+  appLoadingStart$ = this.actions$
+    .ofType(
+      fromStore.LOAD_SUBNETS,
+      fromStore.ADD_SUBNET,
+      fromStore.UPDATE_SUBNET,
+      fromStore.DELETE_SUBNET
+    )
+    .pipe(
+      map(action => {
+        return new fromLayout.ShowLoader();
+      })
+    );
+
+  @Effect()
+  appLoadingDone$ = this.actions$
+    .ofType(
+      fromStore.LOAD_SUBNETS_FAIL,
+      fromStore.LOAD_SUBNETS_SUCCESS,
+      fromStore.ADD_SUBNET_FAIL,
+      fromStore.ADD_SUBNET_SUCCESS,
+      fromStore.UPDATE_SUBNET_FAIL,
+      fromStore.UPDATE_SUBNET_SUCCESS,
+      fromStore.DELETE_SUBNET_FAIL,
+      fromStore.DELETE_SUBNET_SUCCESS
+    )
+    .pipe(
+      map(action => {
+        return new fromLayout.HideLoader();
+      })
     );
 }

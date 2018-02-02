@@ -7,6 +7,7 @@ import { Effect, Actions } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 
 import * as fromRoot from "../../../@core/store";
+import * as fromLayout from "../../../@layout/store";
 import * as fromStore from "../../store";
 import * as institutionActions from "../actions";
 import * as fromServices from "../../services";
@@ -19,6 +20,7 @@ export class InstitutionEffects {
   constructor(
     private actions$: Actions,
     private rootStore: Store<fromRoot.AppState>,
+    private layoutStore: Store<fromLayout.LayoutState>,
     private store: Store<fromStore.InstitutionsState>,
     private institutionsService: fromServices.InstitutionsService,
     private snackbar: fromSharedServices.SnackBarService
@@ -117,5 +119,37 @@ export class InstitutionEffects {
           .select(fromStore.getInstitutionsError)
           .pipe(map(error => this.snackbar.openSimpleSnackBar(error.message)))
       )
+    );
+
+  @Effect()
+  appLoadingStart$ = this.actions$
+    .ofType(
+      fromStore.LOAD_INSTITUTIONS,
+      fromStore.ADD_INSTITUTION,
+      fromStore.UPDATE_INSTITUTION,
+      fromStore.DELETE_INSTITUTION
+    )
+    .pipe(
+      map(action => {
+        return new fromLayout.ShowLoader();
+      })
+    );
+
+  @Effect()
+  appLoadingDone$ = this.actions$
+    .ofType(
+      fromStore.LOAD_INSTITUTIONS_FAIL,
+      fromStore.LOAD_INSTITUTIONS_SUCCESS,
+      fromStore.ADD_INSTITUTION_FAIL,
+      fromStore.ADD_INSTITUTION_SUCCESS,
+      fromStore.UPDATE_INSTITUTION_FAIL,
+      fromStore.UPDATE_INSTITUTION_SUCCESS,
+      fromStore.DELETE_INSTITUTION_FAIL,
+      fromStore.DELETE_INSTITUTION_SUCCESS
+    )
+    .pipe(
+      map(action => {
+        return new fromLayout.HideLoader();
+      })
     );
 }

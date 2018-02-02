@@ -4,6 +4,8 @@ import { Effect, Actions } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 
 import * as fromRoot from "../../../@core/store";
+import * as fromLayout from "../../../@layout/store";
+import * as fromStore from "../../store";
 
 import { of } from "rxjs/observable/of";
 import { catchError, switchMap, map } from "rxjs/operators";
@@ -16,7 +18,8 @@ import * as categoryActions from "../actions";
 export class CategoriesEffects {
   constructor(
     private actions$: Actions,
-    private store: Store<fromRoot.AppState>,
+    private rootStore: Store<fromRoot.AppState>,
+    private layoutStore: Store<fromLayout.LayoutState>,
     private categoriesService: fromServices.CategoriesService
   ) {}
 
@@ -93,4 +96,36 @@ export class CategoriesEffects {
       categoryActions.UPDATE_CATEGORY_SUCCESS
     )
     .pipe(map(() => new fromRoot.Go({ path: ["/app/categories"] })));
+
+  @Effect()
+  appLoadingStart$ = this.actions$
+    .ofType(
+      fromStore.LOAD_CATEGORIES,
+      fromStore.ADD_CATEGORY,
+      fromStore.UPDATE_CATEGORY,
+      fromStore.DELETE_CATEGORY
+    )
+    .pipe(
+      map(action => {
+        return new fromLayout.ShowLoader();
+      })
+    );
+
+  @Effect()
+  appLoadingDone$ = this.actions$
+    .ofType(
+      fromStore.LOAD_CATEGORIES_FAIL,
+      fromStore.LOAD_CATEGORIES_SUCCESS,
+      fromStore.ADD_CATEGORY_FAIL,
+      fromStore.ADD_CATEGORY_SUCCESS,
+      fromStore.UPDATE_CATEGORY_FAIL,
+      fromStore.UPDATE_CATEGORY_SUCCESS,
+      fromStore.DELETE_CATEGORY_FAIL,
+      fromStore.DELETE_CATEGORY_SUCCESS
+    )
+    .pipe(
+      map(action => {
+        return new fromLayout.HideLoader();
+      })
+    );
 }
