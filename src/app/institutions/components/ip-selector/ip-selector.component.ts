@@ -4,6 +4,7 @@ import * as fromSubnetContainers from "../../../subnets/containers";
 import * as fromSharedServices from "../../../@shared/services";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Subnet } from "../../../subnets/models/subnet.model";
+import { DialogPosition } from "@angular/material";
 
 const IP_SELECTOR_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -39,10 +40,15 @@ export class IpSelectorComponent implements ControlValueAccessor {
   }
 
   openSubnetDialog() {
+    let position: DialogPosition = {
+      top: "90px"
+    };
+
     this.dialogService
       .customDialogComponent(fromSubnetContainers.SubnetsDialogComponent, {
         width: "80%",
-        disableClose: true
+        disableClose: true,
+        position
       })
       .subscribe(dialogResult => this.setSelectedSubnet(dialogResult));
   }

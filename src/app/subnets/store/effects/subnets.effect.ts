@@ -51,6 +51,41 @@ export class SubnetsEffects {
     );
 
   @Effect()
+  createSubnetFromModal$ = this.actions$
+    .ofType(subnetActions.ADD_SUBNET_FROM_MODAL)
+    .pipe(
+      map((action: subnetActions.AddSubnetFromModal) => action.payload),
+      switchMap(subnet =>
+        this.subnetsService
+          .add(subnet)
+          .pipe(
+            map(
+              newSubnet =>
+                new subnetActions.AddSubnetFromModalSuccess(newSubnet)
+            ),
+            catchError(error =>
+              of(new subnetActions.AddSubnetFromModalFail(error))
+            )
+          )
+      )
+    );
+
+  @Effect()
+  createSubnetRange$ = this.actions$
+    .ofType(subnetActions.ADD_SUBNET_RANGE)
+    .pipe(
+      map((action: subnetActions.AddSubnetRange) => action.payload),
+      switchMap(data =>
+        this.subnetsService
+          .addSubnetRange(data)
+          .pipe(
+            map(subnets => new subnetActions.AddSubnetRangeSuccess(subnets)),
+            catchError(error => of(new subnetActions.AddSubnetRangeFail(error)))
+          )
+      )
+    );
+
+  @Effect()
   updateSubnet$ = this.actions$
     .ofType(subnetActions.UPDATE_SUBNET)
     .pipe(
@@ -84,14 +119,17 @@ export class SubnetsEffects {
   handleSubnetSuccess$ = this.actions$
     .ofType(
       subnetActions.ADD_SUBNET_SUCCESS,
+      subnetActions.ADD_SUBNET_RANGE_SUCCESS,
       subnetActions.UPDATE_SUBNET_SUCCESS
     )
     .pipe(map(() => new fromRoot.Go({ path: ["/app/subnets"] })));
 
   @Effect({ dispatch: false })
-  handleInstitutionFailure$ = this.actions$
+  handleSubnetFailure$ = this.actions$
     .ofType(
       subnetActions.ADD_SUBNET_FAIL,
+      subnetActions.ADD_SUBNET_FROM_MODAL_FAIL,
+      subnetActions.ADD_SUBNET_RANGE_FAIL,
       subnetActions.UPDATE_SUBNET_FAIL,
       subnetActions.DELETE_SUBNET_FAIL
     )

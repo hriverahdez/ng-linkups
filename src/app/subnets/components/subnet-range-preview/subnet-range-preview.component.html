@@ -1,0 +1,16 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Cantidad de subredes
+    </mat-panel-title>
+    <mat-panel-description>
+      {{ range?.length }}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div *ngIf="!range" class="text-muted">
+    El rango está vacío o es inválido
+  </div>
+  <mat-chip-list *ngIf="range">
+    <mat-chip style="margin-bottom: 5px" *ngFor="let subnet of range" color="basic" selected="true">{{subnet}}</mat-chip>
+  </mat-chip-list>
+</mat-expansion-panel>

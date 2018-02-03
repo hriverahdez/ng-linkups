@@ -56,6 +56,8 @@ export function reducer(
       };
     }
 
+    case fromInstitutions.DELETE_INSTITUTION:
+    case fromInstitutions.UPDATE_INSTITUTION:
     case fromInstitutions.ADD_INSTITUTION: {
       return {
         ...state,

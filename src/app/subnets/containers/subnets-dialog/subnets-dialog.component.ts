@@ -24,6 +24,12 @@ export class SubnetsDialogComponent implements OnInit {
     this.subnets$ = this.store.select(fromStore.getAllAvailableSubnets);
   }
 
+  createSubnet(subnet: Subnet) {
+    this.store.dispatch(new fromStore.AddSubnetFromModal(subnet));
+    this.selectedSubnet = subnet;
+    this.setSelectedSubnet();
+  }
+
   setCurrentTab(tabID) {
     this.currentTab = tabID;
   }

@@ -40,6 +40,49 @@ export class AddSubnetSuccess implements Action {
   constructor(public payload: Subnet) {}
 }
 
+// ADD FROM MODAL
+
+export const ADD_SUBNET_FROM_MODAL = "[Subnets] Add Subnet From Modal";
+export const ADD_SUBNET_FROM_MODAL_FAIL =
+  "[Subnets] Add Subnet From Modal Fail";
+export const ADD_SUBNET_FROM_MODAL_SUCCESS =
+  "[Subnets] Add Subnet From Modal Sucess";
+
+export class AddSubnetFromModal implements Action {
+  readonly type = ADD_SUBNET_FROM_MODAL;
+  constructor(public payload: Subnet) {}
+}
+
+export class AddSubnetFromModalFail implements Action {
+  readonly type = ADD_SUBNET_FROM_MODAL_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class AddSubnetFromModalSuccess implements Action {
+  readonly type = ADD_SUBNET_FROM_MODAL_SUCCESS;
+  constructor(public payload: Subnet) {}
+}
+
+// ADD RANGE
+export const ADD_SUBNET_RANGE = "[Subnets] Add Subnet Range";
+export const ADD_SUBNET_RANGE_FAIL = "[Subnets] Add Subnet Range Fail";
+export const ADD_SUBNET_RANGE_SUCCESS = "[Subnets] Add Subnet Range Success";
+
+export class AddSubnetRange implements Action {
+  readonly type = ADD_SUBNET_RANGE;
+  constructor(public payload: { range: string[]; mask: number }) {}
+}
+
+export class AddSubnetRangeFail implements Action {
+  readonly type = ADD_SUBNET_RANGE_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class AddSubnetRangeSuccess implements Action {
+  readonly type = ADD_SUBNET_RANGE_SUCCESS;
+  constructor(public payload: Subnet[]) {}
+}
+
 // UPDATE
 export const UPDATE_SUBNET = "[Subnet] Update Subnet";
 export const UPDATE_SUBNET_FAIL = "[Subnet] Update Subnet Fail";
@@ -87,6 +130,12 @@ export type SubnetActions =
   | AddSubnet
   | AddSubnetFail
   | AddSubnetSuccess
+  | AddSubnetFromModal
+  | AddSubnetFromModalFail
+  | AddSubnetFromModalSuccess
+  | AddSubnetRange
+  | AddSubnetRangeFail
+  | AddSubnetRangeSuccess
   | UpdateSubnet
   | UpdateSubnetFail
   | UpdateSubnetSuccess

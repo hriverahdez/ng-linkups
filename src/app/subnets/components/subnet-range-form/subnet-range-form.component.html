@@ -1,0 +1,54 @@
+<form [formGroup]="subnetRangeForm">  
+  <div class="row">
+    <div class="col-sm-5">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Dirección de subred inicial" 
+            (change)="previewRange(subnetRangeForm)"
+            name="ip" formControlName="startIp" required>
+        <mat-error *ngIf="startIpInvalid">
+          Entre una dirección IP válida
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="col-sm-5">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Dirección de subred final" 
+            (change)="previewRange(subnetRangeForm)"
+            name="ip" formControlName="endIp" required>
+        <mat-error *ngIf="endIpInvalid">
+          Entre una dirección IP válida
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="col-sm-2">      
+      <mat-form-field class="full-width">
+        <mat-select placeholder="Máscara (CIDR)" name="mask" 
+          (change)="previewRange(subnetRangeForm)"
+          formControlName="mask" required>          
+          <mat-option *ngFor="let mask of availableMasks" [value]="mask">
+            {{mask}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    
+  </div>
+  <div class="row">
+    <div class="col-xs-12 range-preview-container">     
+      <lnk-subnet-range-preview [range]="range"></lnk-subnet-range-preview>      
+    </div>
+  </div>
+
+  <div class="pull-right">
+    <button mat-raised-button color="primary" 
+            [disabled]="!subnetRangeForm.valid" 
+            (click)="createRange(subnetRangeForm)">Agregar</button>
+    <a routerLink="/app/subnets" mat-raised-button color="basic">Cancelar</a>
+  </div>
+  
+  <div class="clearfix"></div>
+</form>

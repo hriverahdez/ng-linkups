@@ -23,6 +23,10 @@ export class SubnetItemComponent implements OnInit {
     this.store.dispatch(new fromStore.AddSubnet(subnet));
   }
 
+  createSubnetRange(rangeData) {
+    this.store.dispatch(new fromStore.AddSubnetRange(rangeData));
+  }
+
   updateSubnet(subnet: Subnet) {
     this.store.dispatch(new fromStore.UpdateSubnet(subnet));
   }

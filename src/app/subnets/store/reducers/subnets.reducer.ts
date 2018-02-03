@@ -52,6 +52,10 @@ export function reducer(
       };
     }
 
+    case fromSubnets.DELETE_SUBNET:
+    case fromSubnets.UPDATE_SUBNET:
+    case fromSubnets.ADD_SUBNET_RANGE:
+    case fromSubnets.ADD_SUBNET_FROM_MODAL:
     case fromSubnets.ADD_SUBNET: {
       return {
         ...state,
@@ -61,6 +65,8 @@ export function reducer(
 
     case fromSubnets.DELETE_SUBNET_FAIL:
     case fromSubnets.UPDATE_SUBNET_FAIL:
+    case fromSubnets.ADD_SUBNET_RANGE_FAIL:
+    case fromSubnets.ADD_SUBNET_FROM_MODAL_FAIL:
     case fromSubnets.ADD_SUBNET_FAIL: {
       const { status } = action.payload;
       const error: CustomError = {
@@ -76,6 +82,7 @@ export function reducer(
     }
 
     case fromSubnets.UPDATE_SUBNET_SUCCESS:
+    case fromSubnets.ADD_SUBNET_FROM_MODAL_SUCCESS:
     case fromSubnets.ADD_SUBNET_SUCCESS: {
       const subnet = action.payload;
       const entities = { ...state.entities, [subnet._id]: subnet };
@@ -93,6 +100,16 @@ export function reducer(
         ...state,
         entities,
         loading: false
+      };
+    }
+
+    case fromSubnets.ADD_SUBNET_RANGE_SUCCESS: {
+      const subnetRangeEntities = toEntities(action.payload, {});
+      const entities = { ...state.entities, ...subnetRangeEntities };
+      return {
+        ...state,
+        loading: false,
+        entities
       };
     }
   }
