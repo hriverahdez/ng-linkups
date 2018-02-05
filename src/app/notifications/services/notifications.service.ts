@@ -12,15 +12,29 @@ import { catchError } from "rxjs/operators";
 export class NotificationsService {
   constructor(private http: HttpClient) {}
 
-  getUnreadNotificationsCountFromServer(): Observable<number> {
+  getUnreadNotificationsCountFromServer(): Observable<{ count: number }> {
     return this.http
-      .get<number>(`${environment.apiURL}/users/unreadNotificationsCount`)
+      .get<{ count: number }>(
+        `${environment.apiURL}/users/unreadNotificationsCount`
+      )
       .pipe(catchError(error => Observable.throw(error.json())));
   }
 
-  getUnreadNotificationsCountFromUser() {
+  getInitialUnreadNotificationsCount() {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     return of(currentUser.unreadNotifications);
+  }
+
+  getNotifications(): Observable<Notification[]> {
+    return this.http
+      .get<Notification[]>(`${environment.apiURL}/users/notifications`)
+      .pipe(catchError(error => Observable.throw(error.json())));
+  }
+
+  getUnreadNotifications(): Observable<Notification[]> {
+    return this.http
+      .get<Notification[]>(`${environment.apiURL}/users/unreadNotifications`)
+      .pipe(catchError(error => Observable.throw(error.json())));
   }
 
   sendNotification(notification: Notification): Observable<Notification> {
@@ -29,9 +43,9 @@ export class NotificationsService {
       .pipe(catchError(error => Observable.throw(error.json())));
   }
 
-  getUnreadNotifications(): Observable<Notification[]> {
+  readAllNotifications(): Observable<Response> {
     return this.http
-      .get<Notification[]>(`${environment.apiURL}/users/unreadNotifications`)
+      .post<any>(`${environment.apiURL}/users/readAllNotifications`, {})
       .pipe(catchError(error => Observable.throw(error.json())));
   }
 }

@@ -19,6 +19,11 @@ export const getAllNotifications = createSelector(
   toArray
 );
 
+export const getUnreadNotifications = createSelector(
+  getAllNotifications,
+  notifications => notifications.filter(n => n.unread)
+);
+
 export const getNotificationsLoading = createSelector(
   getState,
   fromNotifications.getNotificationLoading

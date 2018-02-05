@@ -1,6 +1,9 @@
 import { CustomError } from "../../../@shared/utils/custom-error";
 import { httpErrorMessages } from "../../../@shared/utils/http-error-messages";
-import { toEntities } from "../../../@shared/utils/entities-array-helper";
+import {
+  toEntities,
+  toArray
+} from "../../../@shared/utils/entities-array-helper";
 import * as fromNotifications from "../actions";
 import { Notification } from "../../models/notification.model";
 
@@ -32,6 +35,28 @@ export function reducer(
       return { ...state, unreadCountLoaded: true, unreadCount };
     }
 
+    case fromNotifications.READ_ALL_NOTIFICATIONS: {
+      const unreadCount = 0;
+
+      return {
+        ...state,
+        unreadCount
+      };
+    }
+
+    case fromNotifications.CLEAR_READ_NOTIFICATIONS: {
+      const notificationsArr = toArray(state.entities).map(n => ({
+        ...n,
+        unread: false
+      }));
+
+      const entities = toEntities(notificationsArr, {});
+      return {
+        ...state,
+        entities
+      };
+    }
+
     case fromNotifications.LOAD_NOTIFICATIONS: {
       return {
         ...state,
@@ -56,15 +81,11 @@ export function reducer(
 
     case fromNotifications.LOAD_NOTIFICATIONS_SUCCESS: {
       const notifications = action.payload;
-      let unreadCount;
-      notifications.length > 10
-        ? (unreadCount = state.unreadCount)
-        : (unreadCount = 0);
+
       const entities = toEntities(notifications, { ...state.entities });
       return {
         ...state,
         entities,
-        unreadCount,
         loaded: true,
         loading: false
       };

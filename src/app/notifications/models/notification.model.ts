@@ -6,5 +6,5 @@ export interface Notification {
   user?: User;
   message?: string;
   time?: Date;
-  read?: boolean;
+  unread?: boolean;
 }

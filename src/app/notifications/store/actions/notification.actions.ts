@@ -20,6 +20,21 @@ export class SetUnreadCount implements Action {
   constructor(public payload: number) {}
 }
 
+// READ ALL
+export const READ_ALL_NOTIFICATIONS = "[Notifications] Read All Notifications";
+
+export class ReadAllNotifications implements Action {
+  readonly type = READ_ALL_NOTIFICATIONS;
+}
+
+// CLEAR READ NOTIFICATIONS
+export const CLEAR_READ_NOTIFICATIONS =
+  "[Notifications] Clear Read Notifications";
+
+export class ClearReadNotifications implements Action {
+  readonly type = CLEAR_READ_NOTIFICATIONS;
+}
+
 // LOAD
 export const LOAD_NOTIFICATIONS = "[Notifications] Load Notifications";
 export const LOAD_NOTIFICATIONS_FAIL =
@@ -66,6 +81,8 @@ export type NotificationActions =
   | GetUnreadCount
   | GetUnreadCountFail
   | SetUnreadCount
+  | ReadAllNotifications
+  | ClearReadNotifications
   | LoadNotifications
   | LoadNotificationsFail
   | LoadNotificationsSuccess

@@ -2,7 +2,13 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect } from "@ngrx/effects";
 
 import { of } from "rxjs/observable/of";
-import { switchMap, catchError, map } from "rxjs/operators";
+import {
+  debounceTime,
+  filter,
+  switchMap,
+  catchError,
+  map
+} from "rxjs/operators";
 
 import * as userActions from "../../../@core/store/actions";
 import * as notificationActions from "../actions";
@@ -21,7 +27,7 @@ export class NotificationsEffect {
     .pipe(
       switchMap(() =>
         this.notificationService
-          .getUnreadNotificationsCountFromUser()
+          .getInitialUnreadNotificationsCount()
           .pipe(map(count => new notificationActions.SetUnreadCount(count)))
       )
     );
@@ -34,7 +40,7 @@ export class NotificationsEffect {
         this.notificationService
           .getUnreadNotificationsCountFromServer()
           .pipe(
-            map(count => new notificationActions.SetUnreadCount(count)),
+            map(data => new notificationActions.SetUnreadCount(data.count)),
             catchError(error =>
               of(new notificationActions.GetUnreadCountFail(error))
             )
@@ -48,7 +54,7 @@ export class NotificationsEffect {
     .pipe(
       switchMap(() =>
         this.notificationService
-          .getUnreadNotifications()
+          .getNotifications()
           .pipe(
             map(
               notifications =>
@@ -59,6 +65,30 @@ export class NotificationsEffect {
             )
           )
       )
+    );
+
+  @Effect()
+  readAllNotificationsWhenFew$ = this.actions$
+    .ofType(notificationActions.LOAD_NOTIFICATIONS_SUCCESS)
+    .pipe(
+      map(
+        (action: notificationActions.LoadNotificationsSuccess) => action.payload
+      ),
+      filter(notifications => notifications.filter(n => n.unread).length <= 10),
+      map(() => new notificationActions.ReadAllNotifications())
+    );
+
+  @Effect({ dispatch: false })
+  readAllNotifications$ = this.actions$
+    .ofType(notificationActions.READ_ALL_NOTIFICATIONS)
+    .pipe(switchMap(() => this.notificationService.readAllNotifications()));
+
+  @Effect()
+  clearNotifications$ = this.actions$
+    .ofType(notificationActions.READ_ALL_NOTIFICATIONS)
+    .pipe(
+      debounceTime(10000),
+      map(() => new notificationActions.ClearReadNotifications())
     );
 
   // @Effect()
