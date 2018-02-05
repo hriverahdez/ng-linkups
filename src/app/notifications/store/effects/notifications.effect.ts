@@ -108,6 +108,7 @@ export class NotificationsEffect {
       fromCategories.DELETE_CATEGORY_SUCCESS,
 
       fromSubnets.ADD_SUBNET_SUCCESS,
+      fromSubnets.ADD_SUBNET_FROM_MODAL_SUCCESS,
       fromSubnets.ADD_SUBNET_RANGE_SUCCESS,
       fromSubnets.UPDATE_SUBNET_SUCCESS,
       fromSubnets.DELETE_SUBNET_SUCCESS

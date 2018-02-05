@@ -12,6 +12,7 @@ export const TEMPLATES = {
   [fromCategories.DELETE_CATEGORY_SUCCESS]: "Eliminada Categoría",
 
   [fromSubnets.ADD_SUBNET_SUCCESS]: "Agregada Subred",
+  [fromSubnets.ADD_SUBNET_FROM_MODAL_SUCCESS]: "Agregada Subred",
   [fromSubnets.UPDATE_SUBNET_SUCCESS]: "Actualizada Subred",
   [fromSubnets.DELETE_SUBNET_SUCCESS]: "Eliminada Subred",
   [fromSubnets.ADD_SUBNET_RANGE_SUCCESS]: "Agregado rango de"

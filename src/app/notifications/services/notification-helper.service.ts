@@ -71,6 +71,7 @@ export class NotificationHelperService {
 
       case fromSubnets.DELETE_SUBNET_SUCCESS:
       case fromSubnets.UPDATE_SUBNET_SUCCESS:
+      case fromSubnets.ADD_SUBNET_FROM_MODAL_SUCCESS:
       case fromSubnets.ADD_SUBNET_SUCCESS: {
         return `${TEMPLATES[action.type]} ${action.payload.ip}/${
           action.payload.mask
