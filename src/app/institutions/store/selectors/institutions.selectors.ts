@@ -20,6 +20,16 @@ export const getAllInstitutions = createSelector(
   toArray
 );
 
+export const getInstitutionCategories = createSelector(
+  getAllInstitutions,
+  institutions =>
+    institutions.map(i => i.category).reduce((acc, cat, idx, arr) => {
+      if (!acc.find(c => c.name === cat.name)) {
+        return [...acc, cat];
+      } else return acc;
+    }, [])
+);
+
 export const getInstitutionsLoaded = createSelector(
   getState,
   fromInstitutions.getInstitutionsLoaded

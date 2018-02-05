@@ -25,7 +25,8 @@ const ROUTES: Routes = [
     component: fromContainers.InstitutionItemComponent,
     canActivate: [
       fromGuards.InstitutionExistsGuard,
-      categoriesGuards.CategoriesGuard
+      categoriesGuards.CategoriesGuard,
+      subnetsGuards.SubnetsGuard
     ]
   }
 ];

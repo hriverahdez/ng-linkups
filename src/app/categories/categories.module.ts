@@ -36,6 +36,7 @@ import * as fromGuards from "./guards";
     EffectsModule.forFeature(effects)
   ],
   declarations: [...fromContainers.containers, ...fromComponents.components],
-  providers: [...fromServices.services, ...fromGuards.guards, AppInterceptor]
+  providers: [...fromServices.services, ...fromGuards.guards, AppInterceptor],
+  exports: [fromComponents.CategoryLegendComponent]
 })
 export class CategoriesModule {}

@@ -1,0 +1,8 @@
+<div>
+  <label for="">Leyenda</label>
+  <mat-chip-list>
+    <mat-chip *ngFor="let category of categories" class="wan-chip" color="basic" selected="true">
+      <mat-icon>{{ category.icon }}</mat-icon>: {{ category.name }}
+    </mat-chip>
+  </mat-chip-list>
+</div>
