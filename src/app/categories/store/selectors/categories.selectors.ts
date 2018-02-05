@@ -15,6 +15,8 @@ export const getCategoriesEntities = createSelector(
   fromCategories.getCategoriesEntities
 );
 
+export const getAllCategories = createSelector(getCategoriesEntities, toArray);
+
 export const getSelectedCategory = createSelector(
   getCategoriesEntities,
   fromRoot.getRouterState,
@@ -28,4 +30,12 @@ export const getCategoriesLoaded = createSelector(
   fromCategories.getCategoriesLoaded
 );
 
-export const getAllCategories = createSelector(getCategoriesEntities, toArray);
+export const getCategoriesLoading = createSelector(
+  getState,
+  fromCategories.getCategoriesLoading
+);
+
+export const getCategoriesError = createSelector(
+  getState,
+  fromCategories.getCategoriesError
+);

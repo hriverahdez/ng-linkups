@@ -7,10 +7,12 @@ import * as fromRoot from "../../../@core/store";
 import * as fromLayout from "../../../@layout/store";
 
 import { of } from "rxjs/observable/of";
-import { catchError, switchMap, map } from "rxjs/operators";
+import { catchError, switchMap, map, tap } from "rxjs/operators";
 
 import * as fromServices from "../../services/";
-
+import * as fromSharedServices from "../../../@shared/services";
+import * as fromFeature from "../reducers";
+import * as fromSelectors from "../selectors";
 import * as categoryActions from "../actions";
 
 @Injectable()
@@ -19,7 +21,9 @@ export class CategoriesEffects {
     private actions$: Actions,
     private rootStore: Store<fromRoot.AppState>,
     private layoutStore: Store<fromLayout.LayoutState>,
-    private categoriesService: fromServices.CategoriesService
+    private store: Store<fromFeature.CategoriesState>,
+    private categoriesService: fromServices.CategoriesService,
+    private snackbar: fromSharedServices.SnackBarService
   ) {}
 
   @Effect()
@@ -95,6 +99,23 @@ export class CategoriesEffects {
       categoryActions.UPDATE_CATEGORY_SUCCESS
     )
     .pipe(map(() => new fromRoot.Go({ path: ["/app/categories"] })));
+
+  @Effect({ dispatch: false })
+  handleCategoryFailure$ = this.actions$
+    .ofType(
+      categoryActions.ADD_CATEGORY_FAIL,
+      categoryActions.UPDATE_CATEGORY_FAIL,
+      categoryActions.DELETE_CATEGORY_FAIL
+    )
+    .pipe(
+      switchMap(() =>
+        this.store.select(fromSelectors.getCategoriesError).pipe(
+          tap(error => {
+            this.snackbar.openSimpleSnackBar(error.message);
+          })
+        )
+      )
+    );
 
   @Effect()
   appLoadingStart$ = this.actions$
