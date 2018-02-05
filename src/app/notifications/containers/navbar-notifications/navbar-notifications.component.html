@@ -1,0 +1,18 @@
+<!-- <ul class="nav navbar-nav navbar-right"> -->
+  <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" (click)="toggle()" (blur)="hide()">
+    <i class="material-icons">notifications</i>
+    <span class="notification">{{unreadCount$ | async}}</span>
+    <p class="hidden-lg hidden-md">Notifications</p>
+  </a>
+  <ul class="dropdown-menu">
+    <li class="dropdown-title text-muted text-center" *ngIf="title">
+      <h5>{{title}}</h5>
+    </li>
+    <li *ngFor="let notification of notifications$ | async">
+      <a (click)="itemClicked(item)">
+        <!-- <mat-icon>assistant_photo</mat-icon>  -->
+        {{notification.message}}
+      </a>
+    </li>
+  </ul>
+<!-- </ul> -->
