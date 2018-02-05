@@ -9,7 +9,7 @@
             <h5>{{title}}</h5>
         </li>
         <li *ngFor="let item of items">
-            <a (click)="itemClicked(item)">{{item.text}}</a>
+            <a (click)="itemClicked(item)"> <mat-icon>assistant_photo</mat-icon> {{item.text}}</a>
         </li>        
     </ul>
 <!-- </div> -->

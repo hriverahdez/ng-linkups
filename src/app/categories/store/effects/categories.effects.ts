@@ -5,7 +5,6 @@ import { Store } from "@ngrx/store";
 
 import * as fromRoot from "../../../@core/store";
 import * as fromLayout from "../../../@layout/store";
-import * as fromStore from "../../store";
 
 import { of } from "rxjs/observable/of";
 import { catchError, switchMap, map } from "rxjs/operators";
@@ -100,10 +99,10 @@ export class CategoriesEffects {
   @Effect()
   appLoadingStart$ = this.actions$
     .ofType(
-      fromStore.LOAD_CATEGORIES,
-      fromStore.ADD_CATEGORY,
-      fromStore.UPDATE_CATEGORY,
-      fromStore.DELETE_CATEGORY
+      categoryActions.LOAD_CATEGORIES,
+      categoryActions.ADD_CATEGORY,
+      categoryActions.UPDATE_CATEGORY,
+      categoryActions.DELETE_CATEGORY
     )
     .pipe(
       map(action => {
@@ -114,14 +113,14 @@ export class CategoriesEffects {
   @Effect()
   appLoadingDone$ = this.actions$
     .ofType(
-      fromStore.LOAD_CATEGORIES_FAIL,
-      fromStore.LOAD_CATEGORIES_SUCCESS,
-      fromStore.ADD_CATEGORY_FAIL,
-      fromStore.ADD_CATEGORY_SUCCESS,
-      fromStore.UPDATE_CATEGORY_FAIL,
-      fromStore.UPDATE_CATEGORY_SUCCESS,
-      fromStore.DELETE_CATEGORY_FAIL,
-      fromStore.DELETE_CATEGORY_SUCCESS
+      categoryActions.LOAD_CATEGORIES_FAIL,
+      categoryActions.LOAD_CATEGORIES_SUCCESS,
+      categoryActions.ADD_CATEGORY_FAIL,
+      categoryActions.ADD_CATEGORY_SUCCESS,
+      categoryActions.UPDATE_CATEGORY_FAIL,
+      categoryActions.UPDATE_CATEGORY_SUCCESS,
+      categoryActions.DELETE_CATEGORY_FAIL,
+      categoryActions.DELETE_CATEGORY_SUCCESS
     )
     .pipe(
       map(action => {

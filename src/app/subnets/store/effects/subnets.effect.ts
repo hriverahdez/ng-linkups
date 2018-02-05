@@ -8,8 +8,11 @@ import { Store } from "@ngrx/store";
 
 import * as fromRoot from "../../../@core/store";
 import * as fromLayout from "../../../@layout/store";
-import * as fromStore from "../../store";
+
+import * as fromFeature from "../reducers";
+import * as fromSelectors from "../selectors";
 import * as subnetActions from "../actions";
+
 import * as fromServices from "../../services";
 import * as fromSharedServices from "../../../@shared/services";
 
@@ -21,7 +24,7 @@ export class SubnetsEffects {
     private actions$: Actions,
     private rootStore: Store<fromRoot.AppState>,
     private layoutStore: Store<fromLayout.LayoutState>,
-    private store: Store<fromStore.SubnetsState>,
+    private store: Store<fromFeature.SubnetsState>,
     private subnetsService: fromServices.SubnetsService,
     private snackbar: fromSharedServices.SnackBarService
   ) {}
@@ -136,7 +139,7 @@ export class SubnetsEffects {
     .pipe(
       map(() =>
         this.store
-          .select(fromStore.getSubnetsError)
+          .select(fromSelectors.getSubnetsError)
           .pipe(map(error => this.snackbar.openSimpleSnackBar(error.message)))
       )
     );
@@ -144,10 +147,10 @@ export class SubnetsEffects {
   @Effect()
   appLoadingStart$ = this.actions$
     .ofType(
-      fromStore.LOAD_SUBNETS,
-      fromStore.ADD_SUBNET,
-      fromStore.UPDATE_SUBNET,
-      fromStore.DELETE_SUBNET
+      subnetActions.LOAD_SUBNETS,
+      subnetActions.ADD_SUBNET,
+      subnetActions.UPDATE_SUBNET,
+      subnetActions.DELETE_SUBNET
     )
     .pipe(
       map(action => {
@@ -158,14 +161,14 @@ export class SubnetsEffects {
   @Effect()
   appLoadingDone$ = this.actions$
     .ofType(
-      fromStore.LOAD_SUBNETS_FAIL,
-      fromStore.LOAD_SUBNETS_SUCCESS,
-      fromStore.ADD_SUBNET_FAIL,
-      fromStore.ADD_SUBNET_SUCCESS,
-      fromStore.UPDATE_SUBNET_FAIL,
-      fromStore.UPDATE_SUBNET_SUCCESS,
-      fromStore.DELETE_SUBNET_FAIL,
-      fromStore.DELETE_SUBNET_SUCCESS
+      subnetActions.LOAD_SUBNETS_FAIL,
+      subnetActions.LOAD_SUBNETS_SUCCESS,
+      subnetActions.ADD_SUBNET_FAIL,
+      subnetActions.ADD_SUBNET_SUCCESS,
+      subnetActions.UPDATE_SUBNET_FAIL,
+      subnetActions.UPDATE_SUBNET_SUCCESS,
+      subnetActions.DELETE_SUBNET_FAIL,
+      subnetActions.DELETE_SUBNET_SUCCESS
     )
     .pipe(
       map(action => {

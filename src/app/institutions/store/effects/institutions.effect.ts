@@ -8,8 +8,11 @@ import { Store } from "@ngrx/store";
 
 import * as fromRoot from "../../../@core/store";
 import * as fromLayout from "../../../@layout/store";
-import * as fromStore from "../../store";
+
+import * as fromFeature from "../reducers";
+import * as fromSelectors from "../selectors";
 import * as institutionActions from "../actions";
+
 import * as fromServices from "../../services";
 import * as fromSharedServices from "../../../@shared/services";
 
@@ -21,7 +24,7 @@ export class InstitutionEffects {
     private actions$: Actions,
     private rootStore: Store<fromRoot.AppState>,
     private layoutStore: Store<fromLayout.LayoutState>,
-    private store: Store<fromStore.InstitutionsState>,
+    private store: Store<fromFeature.InstitutionsState>,
     private institutionsService: fromServices.InstitutionsService,
     private snackbar: fromSharedServices.SnackBarService
   ) {}
@@ -116,7 +119,7 @@ export class InstitutionEffects {
     .pipe(
       map(() =>
         this.store
-          .select(fromStore.getInstitutionsError)
+          .select(fromSelectors.getInstitutionsError)
           .pipe(map(error => this.snackbar.openSimpleSnackBar(error.message)))
       )
     );
@@ -124,10 +127,10 @@ export class InstitutionEffects {
   @Effect()
   appLoadingStart$ = this.actions$
     .ofType(
-      fromStore.LOAD_INSTITUTIONS,
-      fromStore.ADD_INSTITUTION,
-      fromStore.UPDATE_INSTITUTION,
-      fromStore.DELETE_INSTITUTION
+      institutionActions.LOAD_INSTITUTIONS,
+      institutionActions.ADD_INSTITUTION,
+      institutionActions.UPDATE_INSTITUTION,
+      institutionActions.DELETE_INSTITUTION
     )
     .pipe(
       map(action => {
@@ -138,14 +141,14 @@ export class InstitutionEffects {
   @Effect()
   appLoadingDone$ = this.actions$
     .ofType(
-      fromStore.LOAD_INSTITUTIONS_FAIL,
-      fromStore.LOAD_INSTITUTIONS_SUCCESS,
-      fromStore.ADD_INSTITUTION_FAIL,
-      fromStore.ADD_INSTITUTION_SUCCESS,
-      fromStore.UPDATE_INSTITUTION_FAIL,
-      fromStore.UPDATE_INSTITUTION_SUCCESS,
-      fromStore.DELETE_INSTITUTION_FAIL,
-      fromStore.DELETE_INSTITUTION_SUCCESS
+      institutionActions.LOAD_INSTITUTIONS_FAIL,
+      institutionActions.LOAD_INSTITUTIONS_SUCCESS,
+      institutionActions.ADD_INSTITUTION_FAIL,
+      institutionActions.ADD_INSTITUTION_SUCCESS,
+      institutionActions.UPDATE_INSTITUTION_FAIL,
+      institutionActions.UPDATE_INSTITUTION_SUCCESS,
+      institutionActions.DELETE_INSTITUTION_FAIL,
+      institutionActions.DELETE_INSTITUTION_SUCCESS
     )
     .pipe(
       map(action => {
