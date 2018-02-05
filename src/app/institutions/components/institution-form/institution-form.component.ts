@@ -45,15 +45,19 @@ export class InstitutionFormComponent implements OnChanges {
 
   create(form: FormGroup) {
     const { valid, value } = form;
+    const wan = value.wan._id;
+    const lan = value.lan ? value.lan._id : null;
     if (valid) {
-      this.onCreate.emit(value);
+      this.onCreate.emit({ ...value, wan, lan });
     }
   }
 
   update(form: FormGroup) {
     const { valid, value } = form;
+    const wan = value.wan._id;
+    const lan = value.lan ? value.lan._id : null;
     if (valid) {
-      this.onUpdate.emit({ ...this.institution, ...value });
+      this.onUpdate.emit({ ...this.institution, ...value, wan, lan });
     }
   }
 

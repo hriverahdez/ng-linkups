@@ -19,8 +19,7 @@ const IP_SELECTOR_ACCESSOR = {
   styleUrls: ["./ip-selector.component.scss"]
 })
 export class IpSelectorComponent implements ControlValueAccessor {
-  value: string;
-  displayValue: Subnet;
+  value: Subnet;
 
   @Input() placeholder: string;
 
@@ -29,7 +28,7 @@ export class IpSelectorComponent implements ControlValueAccessor {
 
   constructor(private dialogService: fromSharedServices.DialogService) {}
 
-  writeValue(value: string): void {
+  writeValue(value: Subnet): void {
     this.value = value;
   }
   registerOnChange(fn: any): void {
@@ -55,16 +54,13 @@ export class IpSelectorComponent implements ControlValueAccessor {
 
   setSelectedSubnet(subnet: Subnet) {
     if (subnet) {
-      this.displayValue = subnet;
-      this.value = subnet._id;
+      this.value = subnet;
       this.onTouch();
       this.onModelChange(this.value);
     }
   }
 
   get formattedValue() {
-    return this.displayValue
-      ? `${this.displayValue.ip}/${this.displayValue.mask}`
-      : "";
+    return this.value ? `${this.value.ip}/${this.value.mask}` : "";
   }
 }

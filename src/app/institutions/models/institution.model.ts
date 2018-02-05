@@ -1,4 +1,5 @@
 import { Category } from "../../categories/models/category.model";
+import { Subnet } from "../../subnets/models/subnet.model";
 
 export interface Institution {
   _id?: string;
@@ -6,7 +7,7 @@ export interface Institution {
   type?: string;
   line_number?: string;
   location?: string;
-  wan?: string;
+  wan?: Subnet;
   bandwidth?: string;
   state?: string;
   last_report?: string;

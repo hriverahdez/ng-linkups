@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { of } from "rxjs/observable/of";
-import { catchError, switchMap, map } from "rxjs/operators";
+import { catchError, switchMap, map, tap } from "rxjs/operators";
 
 import { Effect, Actions } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
@@ -117,10 +117,12 @@ export class InstitutionEffects {
       institutionActions.DELETE_INSTITUTION_FAIL
     )
     .pipe(
-      map(() =>
-        this.store
-          .select(fromSelectors.getInstitutionsError)
-          .pipe(map(error => this.snackbar.openSimpleSnackBar(error.message)))
+      switchMap(() =>
+        this.store.select(fromSelectors.getInstitutionsError).pipe(
+          tap(error => {
+            this.snackbar.openSimpleSnackBar(error.message);
+          })
+        )
       )
     );
 
