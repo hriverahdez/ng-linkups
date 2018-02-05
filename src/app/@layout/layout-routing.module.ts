@@ -4,12 +4,16 @@ import { Routes, RouterModule } from "@angular/router";
 
 import * as fromContainers from "./containers";
 import * as fromSharedGuards from "../@shared/guards";
+import * as fromNotificationGuards from "../notifications/guards";
 
 const routes: Routes = [
   {
     path: "",
     component: fromContainers.LayoutComponent,
-    canActivate: [fromSharedGuards.AuthGuard],
+    canActivate: [
+      fromSharedGuards.AuthGuard,
+      fromNotificationGuards.NotificationsCountGuard
+    ],
     children: [
       {
         path: "dashboard",

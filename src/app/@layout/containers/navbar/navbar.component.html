@@ -11,10 +11,11 @@
                         <mat-icon>tune</mat-icon>
                         <p class="hidden-lg hidden-md">Configuración</p>
                     </a>
-                </li>                
-                <li lnk-nav-dropdown class="dropdown" 
+                </li>
+                <li lnk-navbar-notifications class="nav navbar-nav"></li>
+                <!-- <li lnk-nav-dropdown class="dropdown" 
                     [items]="notifItems" [icon]="'notifications'"
-                    [hasBadge]="true" [badgeCount]="6"></li>
+                    [hasBadge]="true" [badgeCount]="6"></li> -->
 
                 <li lnk-nav-dropdown class="dropdown" 
                     [title]="(currentUser$ | async).name"

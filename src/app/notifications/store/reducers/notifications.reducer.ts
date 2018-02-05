@@ -6,6 +6,8 @@ import { Notification } from "../../models/notification.model";
 
 export interface State {
   entities: { [_id: string]: Notification };
+  unreadCount: number;
+  unreadCountLoaded: boolean;
   loaded: boolean;
   loading: boolean;
   error: CustomError;
@@ -13,6 +15,8 @@ export interface State {
 
 export const initialState: State = {
   entities: {},
+  unreadCount: 0,
+  unreadCountLoaded: false,
   loaded: false,
   loading: false,
   error: {}
@@ -23,6 +27,11 @@ export function reducer(
   action: fromNotifications.NotificationActions
 ) {
   switch (action.type) {
+    case fromNotifications.SET_UNREAD_COUNT: {
+      const unreadCount = action.payload;
+      return { ...state, unreadCountLoaded: true, unreadCount };
+    }
+
     case fromNotifications.LOAD_NOTIFICATIONS: {
       return {
         ...state,
@@ -91,6 +100,9 @@ export function reducer(
 }
 
 export const getNotificationEntities = (state: State) => state.entities;
+export const getNotificationUnreadCount = (state: State) => state.unreadCount;
+export const getNotificationUnreadCountLoaded = (state: State) =>
+  state.unreadCountLoaded;
 export const getNotificationLoaded = (state: State) => state.loaded;
 export const getNotificationLoading = (state: State) => state.loading;
 export const getNotificationError = (state: State) => state.error;

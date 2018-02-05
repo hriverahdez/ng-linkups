@@ -1,6 +1,25 @@
 import { Action } from "@ngrx/store";
 import { Notification } from "../../models/notification.model";
 
+// UNREAD COUNT
+export const GET_UNREAD_COUNT = "[Notifications] Get Unread Count";
+export const GET_UNREAD_COUNT_FAIL = "[Notifications] Get Unread Count Fail";
+export const SET_UNREAD_COUNT = "[Notifications] Set Unread Count";
+
+export class GetUnreadCount implements Action {
+  readonly type = GET_UNREAD_COUNT;
+}
+
+export class GetUnreadCountFail implements Action {
+  readonly type = GET_UNREAD_COUNT_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class SetUnreadCount implements Action {
+  readonly type = SET_UNREAD_COUNT;
+  constructor(public payload: number) {}
+}
+
 // LOAD
 export const LOAD_NOTIFICATIONS = "[Notifications] Load Notifications";
 export const LOAD_NOTIFICATIONS_FAIL =
@@ -44,6 +63,9 @@ export class SendNotificationSuccess implements Action {
 }
 
 export type NotificationActions =
+  | GetUnreadCount
+  | GetUnreadCountFail
+  | SetUnreadCount
   | LoadNotifications
   | LoadNotificationsFail
   | LoadNotificationsSuccess

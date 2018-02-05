@@ -28,3 +28,13 @@ export const getNotificationsLoaded = createSelector(
   getState,
   fromNotifications.getNotificationLoaded
 );
+
+export const getUnreadNotificationsCount = createSelector(
+  getState,
+  fromNotifications.getNotificationUnreadCount
+);
+
+export const getUnreadNotificationsCountLoaded = createSelector(
+  getState,
+  fromNotifications.getNotificationUnreadCountLoaded
+);
