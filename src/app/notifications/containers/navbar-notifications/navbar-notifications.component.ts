@@ -40,6 +40,8 @@ export class NavbarNotificationsComponent implements OnInit {
     this.toggled ? this.hide() : this.show();
     if (!this.notificationsLoaded) {
       this.store.dispatch(new fromStore.LoadNotifications());
+    } else {
+      this.store.dispatch(new fromStore.ReadAllNotifications());
     }
   }
 

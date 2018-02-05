@@ -35,24 +35,18 @@ export function reducer(
       return { ...state, unreadCountLoaded: true, unreadCount };
     }
 
-    case fromNotifications.READ_ALL_NOTIFICATIONS: {
-      const unreadCount = 0;
-
-      return {
-        ...state,
-        unreadCount
-      };
-    }
-
     case fromNotifications.CLEAR_READ_NOTIFICATIONS: {
       const notificationsArr = toArray(state.entities).map(n => ({
         ...n,
         unread: false
       }));
 
+      const unreadCount = 0;
+
       const entities = toEntities(notificationsArr, {});
       return {
         ...state,
+        unreadCount,
         entities
       };
     }
@@ -114,7 +108,10 @@ export function reducer(
 
     case fromNotifications.SEND_NOTIFICATION_SUCCESS: {
       const notification = action.payload;
-      const entities = { ...state.entities, [notification._id]: notification };
+      const entities = {
+        ...state.entities,
+        [notification._id]: { ...notification, unread: true }
+      };
       const unreadCount = state.unreadCount + 1;
       return {
         ...state,

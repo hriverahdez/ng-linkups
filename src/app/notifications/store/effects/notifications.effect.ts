@@ -80,22 +80,21 @@ export class NotificationsEffect {
         (action: notificationActions.LoadNotificationsSuccess) => action.payload
       ),
       filter(notifications => notifications.filter(n => n.unread).length <= 10),
-      debounceTime(1000),
       map(() => new notificationActions.ReadAllNotifications())
+    );
+
+  @Effect()
+  clearNotifications$ = this.actions$
+    .ofType(notificationActions.READ_ALL_NOTIFICATIONS)
+    .pipe(
+      debounceTime(8000),
+      map(() => new notificationActions.ClearReadNotifications())
     );
 
   @Effect({ dispatch: false })
   readAllNotifications$ = this.actions$
     .ofType(notificationActions.READ_ALL_NOTIFICATIONS)
     .pipe(switchMap(() => this.notificationService.readAllNotifications()));
-
-  @Effect()
-  clearNotifications$ = this.actions$
-    .ofType(notificationActions.READ_ALL_NOTIFICATIONS)
-    .pipe(
-      debounceTime(10000),
-      map(() => new notificationActions.ClearReadNotifications())
-    );
 
   @Effect()
   sendNotification$ = this.actions$
