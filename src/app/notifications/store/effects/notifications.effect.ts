@@ -11,6 +11,10 @@ import {
 } from "rxjs/operators";
 
 import * as userActions from "../../../@core/store/actions";
+import * as fromInstitutions from "../../../institutions/store/actions";
+import * as fromSubnets from "../../../subnets/store/actions";
+import * as fromCategories from "../../../categories/store/actions";
+
 import * as notificationActions from "../actions";
 import * as fromServices from "../../services";
 
@@ -18,7 +22,8 @@ import * as fromServices from "../../services";
 export class NotificationsEffect {
   constructor(
     private actions$: Actions,
-    private notificationService: fromServices.NotificationsService
+    private notificationService: fromServices.NotificationsService,
+    private notificationHelper: fromServices.NotificationHelperService
   ) {}
 
   @Effect()
@@ -75,6 +80,7 @@ export class NotificationsEffect {
         (action: notificationActions.LoadNotificationsSuccess) => action.payload
       ),
       filter(notifications => notifications.filter(n => n.unread).length <= 10),
+      debounceTime(1000),
       map(() => new notificationActions.ReadAllNotifications())
     );
 
@@ -91,23 +97,45 @@ export class NotificationsEffect {
       map(() => new notificationActions.ClearReadNotifications())
     );
 
-  // @Effect()
-  // sendNotification$ = this.actions$
-  //   .ofType(notificationActions.SEND_NOTIFICATION)
-  //   .pipe(
-  //     map((action: notificationActions.SendNotification) => action.payload),
-  //     switchMap(notification => {
-  //       return this.notificationService
-  //         .add(notification)
-  //         .pipe(
-  //           map(
-  //             category =>
-  //               new notificationActions.SendNotificationSuccess(notification)
-  //           ),
-  //           catchError(error =>
-  //             of(new notificationActions.SendNotificationFail(error))
-  //           )
-  //         );
-  //     })
-  //   );
+  @Effect()
+  sendNotification$ = this.actions$
+    .ofType(
+      fromInstitutions.ADD_INSTITUTION_SUCCESS,
+      fromInstitutions.UPDATE_INSTITUTION_SUCCESS,
+      fromInstitutions.DELETE_INSTITUTION_SUCCESS,
+
+      fromCategories.ADD_CATEGORY_SUCCESS,
+      fromCategories.UPDATE_CATEGORY_SUCCESS,
+      fromCategories.DELETE_CATEGORY_SUCCESS,
+
+      fromSubnets.ADD_SUBNET_SUCCESS,
+      fromSubnets.ADD_SUBNET_RANGE_SUCCESS,
+      fromSubnets.UPDATE_SUBNET_SUCCESS,
+      fromSubnets.DELETE_SUBNET_SUCCESS
+    )
+    .pipe(
+      map(
+        (
+          action:
+            | fromInstitutions.InstitutionActions
+            | fromCategories.CategoryActions
+            | fromSubnets.SubnetActions
+        ) => action
+      ),
+      switchMap(action => {
+        return this.notificationService
+          .sendNotification(
+            this.notificationHelper.getNotificationForAction(action)
+          )
+          .pipe(
+            map(
+              notification =>
+                new notificationActions.SendNotificationSuccess(notification)
+            ),
+            catchError(error =>
+              of(new notificationActions.SendNotificationFail(error))
+            )
+          );
+      })
+    );
 }

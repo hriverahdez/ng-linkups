@@ -115,9 +115,11 @@ export function reducer(
     case fromNotifications.SEND_NOTIFICATION_SUCCESS: {
       const notification = action.payload;
       const entities = { ...state.entities, [notification._id]: notification };
+      const unreadCount = state.unreadCount + 1;
       return {
         ...state,
         entities,
+        unreadCount,
         loading: false
       };
     }

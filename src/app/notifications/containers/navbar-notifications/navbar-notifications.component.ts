@@ -38,7 +38,6 @@ export class NavbarNotificationsComponent implements OnInit {
 
   toggle() {
     this.toggled ? this.hide() : this.show();
-    console.log(this.notificationsLoaded);
     if (!this.notificationsLoaded) {
       this.store.dispatch(new fromStore.LoadNotifications());
     }
@@ -46,7 +45,6 @@ export class NavbarNotificationsComponent implements OnInit {
 
   ngOnInit() {
     this.store.select(fromStore.getNotificationsLoaded).subscribe(loaded => {
-      console.log("LOADED_SUBS:::", loaded);
       this.notificationsLoaded = loaded;
     });
 
