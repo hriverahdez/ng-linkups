@@ -13,11 +13,11 @@
                     </div>
 
                     <div class="card-content">
-                        <div class="row">
+                        <div class="lnk__expansion-panels-container">
                             <lnk-category *ngFor="let category of categories$ | async" 
+                                class="lnk__expansion-panel-item"
                                 [category]="category"
-                                (onDeleteRequest)="delete($event)"
-                                class="col-lg-2 col-md-3 col-sm-6"></lnk-category>
+                                (onDeleteRequest)="delete($event)"></lnk-category>
                         </div>
                     </div>
                 </div>

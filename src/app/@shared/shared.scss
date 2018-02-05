@@ -1,0 +1,29 @@
+.lnk__expansion-panels-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .lnk__expansion-panel-item {
+    margin-right: 15px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 620px) {
+  .lnk__expansion-panel-item {
+    width: 47% !important;
+  }
+}
+
+@media screen and (min-width: 790px) {
+  .lnk__expansion-panel-item {
+    width: 31% !important;
+  }
+}
+
+@media screen and (min-width: 1244px) {
+  .lnk__expansion-panel-item {
+    width: 23% !important;
+  }
+}
