@@ -17,7 +17,8 @@
                       <lnk-subnet-form 
                         [subnet]="subnet$ | async"
                         (onCreate)="createSubnet($event)"
-                        (onUpdate)="updateSubnet($event)"></lnk-subnet-form>
+                        (onUpdate)="updateSubnet($event)"
+                        (onCancel)="cancel()"></lnk-subnet-form>
                   </div>
                 </mat-tab>
                 <mat-tab label="Agregar Rango">

@@ -52,7 +52,8 @@
 
 			<div class="tab-pane" [class.active]="currentTab === 'subnet-add-one'">
 				<!-- TWO -->
-				<lnk-subnet-form (onCreate)="createSubnet($event)"></lnk-subnet-form>
+				<lnk-subnet-form (onCreate)="createSubnet($event)"
+												 (onCancel)="cancel()"></lnk-subnet-form>
 			</div>
 
 			<div class="tab-pane" [class.active]="currentTab === 'subnet-add-range'">

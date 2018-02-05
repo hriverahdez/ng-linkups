@@ -31,6 +31,7 @@ export class SubnetFormComponent implements OnChanges {
 
   @Output() onCreate = new EventEmitter<Subnet>();
   @Output() onUpdate = new EventEmitter<Subnet>();
+  @Output() onCancel = new EventEmitter();
 
   constructor(private fb: FormBuilder) {}
 
@@ -61,6 +62,10 @@ export class SubnetFormComponent implements OnChanges {
     if (valid) {
       this.onUpdate.emit({ ...this.subnet, ...value });
     }
+  }
+
+  cancel() {
+    this.onCancel.emit();
   }
 
   get ipControl() {

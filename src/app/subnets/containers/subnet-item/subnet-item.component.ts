@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 
+import * as fromRoot from "../../../@core/store";
 import * as fromStore from "../../store";
 import { Subnet } from "../../models/subnet.model";
 import { Observable } from "rxjs/Observable";
@@ -13,7 +14,10 @@ import { Observable } from "rxjs/Observable";
 })
 export class SubnetItemComponent implements OnInit {
   subnet$: Observable<Subnet>;
-  constructor(private store: Store<fromStore.SubnetsState>) {}
+  constructor(
+    private store: Store<fromStore.SubnetsState>,
+    private rootStore: Store<fromRoot.AppState>
+  ) {}
 
   ngOnInit() {
     this.subnet$ = this.store.select(fromStore.getSelectedSubnet);
@@ -29,5 +33,9 @@ export class SubnetItemComponent implements OnInit {
 
   updateSubnet(subnet: Subnet) {
     this.store.dispatch(new fromStore.UpdateSubnet(subnet));
+  }
+
+  cancel() {
+    this.rootStore.dispatch(new fromRoot.Go({ path: ["/app/subnets"] }));
   }
 }

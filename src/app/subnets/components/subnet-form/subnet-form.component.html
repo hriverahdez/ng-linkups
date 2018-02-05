@@ -36,7 +36,7 @@
               *ngIf="exists" [disabled]="!subnetForm.valid" 
               (click)="update(subnetForm)">Actualizar</button>
   
-      <a routerLink="/app/subnets" mat-raised-button color="basic">Cancelar</a>
+      <button (click)="cancel()" mat-raised-button color="basic">Cancelar</button>
     </div>
     
     <div class="clearfix"></div>
