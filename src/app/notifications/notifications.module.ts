@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 
 import { AppInterceptor } from "../@shared/utils/interceptor/token.interceptor";
+import { SharedModule } from "../@shared/shared.module";
 
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
@@ -21,6 +22,7 @@ import * as fromGuards from "./guards";
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     HttpClientModule,
     StoreModule.forFeature("notifications", reducers),
     EffectsModule.forFeature(effects)

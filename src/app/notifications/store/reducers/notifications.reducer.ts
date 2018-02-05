@@ -55,10 +55,16 @@ export function reducer(
     }
 
     case fromNotifications.LOAD_NOTIFICATIONS_SUCCESS: {
-      const entities = toEntities(action.payload, { ...state.entities });
+      const notifications = action.payload;
+      let unreadCount;
+      notifications.length > 10
+        ? (unreadCount = state.unreadCount)
+        : (unreadCount = 0);
+      const entities = toEntities(notifications, { ...state.entities });
       return {
         ...state,
         entities,
+        unreadCount,
         loaded: true,
         loading: false
       };
