@@ -15,17 +15,24 @@ import * as fromInstitutions from "../../../institutions/store/actions";
 import * as fromSubnets from "../../../subnets/store/actions";
 import * as fromCategories from "../../../categories/store/actions";
 
+import * as fromFeature from "../reducers";
+import * as fromSelectors from "../selectors";
 import * as notificationActions from "../actions";
 import * as fromServices from "../../services";
+import { Store } from "@ngrx/store";
 
 @Injectable()
 export class NotificationsEffect {
   constructor(
     private actions$: Actions,
+    private store: Store<fromFeature.NotificationsState>,
     private notificationService: fromServices.NotificationsService,
     private notificationHelper: fromServices.NotificationHelperService
   ) {}
 
+  /**
+   * Sets initial unread notification count that is sent on the login request as part of the user info
+   */
   @Effect()
   setUnreadCountOnLogin = this.actions$
     .ofType(userActions.LOGIN_SUCCESS)
@@ -37,6 +44,9 @@ export class NotificationsEffect {
       )
     );
 
+  /**
+   * Sets unread notification count for subsequent requests or page refreshes after login
+   */
   @Effect()
   setUnreadCount$ = this.actions$
     .ofType(notificationActions.GET_UNREAD_COUNT)
@@ -53,6 +63,9 @@ export class NotificationsEffect {
       )
     );
 
+  /**
+   * Loads all the current user's notifications
+   */
   @Effect()
   notifications$ = this.actions$
     .ofType(notificationActions.LOAD_NOTIFICATIONS)
@@ -72,15 +85,29 @@ export class NotificationsEffect {
       )
     );
 
-  @Effect()
-  readAllNotificationsWhenFew$ = this.actions$
-    .ofType(notificationActions.LOAD_NOTIFICATIONS_SUCCESS)
+  // @Effect()
+  // readAllNotificationsWhenFew$ = this.actions$
+  //   .ofType(notificationActions.LOAD_NOTIFICATIONS_SUCCESS)
+  //   .pipe(
+  //     map(
+  //       (action: notificationActions.LoadNotificationsSuccess) => action.payload
+  //     ),
+  //     filter(notifications => notifications.filter(n => n.unread).length <= 10),
+  //     map(() => new notificationActions.ReadAllNotifications())
+  //   );
+
+  @Effect({ dispatch: false })
+  readAllNotifications$ = this.actions$
+    .ofType(notificationActions.READ_ALL_NOTIFICATIONS)
     .pipe(
-      map(
-        (action: notificationActions.LoadNotificationsSuccess) => action.payload
-      ),
-      filter(notifications => notifications.filter(n => n.unread).length <= 10),
-      map(() => new notificationActions.ReadAllNotifications())
+      switchMap(() =>
+        this.store
+          .select(fromSelectors.allNotificationsRead)
+          .pipe(
+            filter(allRead => !allRead),
+            switchMap(() => this.notificationService.readAllNotifications())
+          )
+      )
     );
 
   @Effect()
@@ -90,11 +117,6 @@ export class NotificationsEffect {
       debounceTime(8000),
       map(() => new notificationActions.ClearReadNotifications())
     );
-
-  @Effect({ dispatch: false })
-  readAllNotifications$ = this.actions$
-    .ofType(notificationActions.READ_ALL_NOTIFICATIONS)
-    .pipe(switchMap(() => this.notificationService.readAllNotifications()));
 
   @Effect()
   sendNotification$ = this.actions$

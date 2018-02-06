@@ -1,12 +1,12 @@
-<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" (click)="toggle()"  >
+<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" (click)="toggle()" (blur)="hide()" >
   <i class="material-icons">notifications</i>
   <span class="notification" *ngIf="(unreadCount$ | async) > 0" >{{ unreadCount$ | async }}</span>
   <p class="hidden-lg hidden-md">Notifications</p>
 </a>  
 <ul class="dropdown-menu">   
-  <!-- <li *ngIf="isLoading">
-    <mat-spinner></mat-spinner>
-  </li>  -->
+  <li *ngIf="isLoading$ | async" class="loading-spinner">
+    <mat-spinner [diameter]="35"></mat-spinner>
+  </li> 
   <li *ngIf="!((notifications$ | async)?.length)" class="notifications-empty text-muted">
     <i>No tiene notificaciones nuevas</i>
   </li>

@@ -43,3 +43,8 @@ export const getUnreadNotificationsCountLoaded = createSelector(
   getState,
   fromNotifications.getNotificationUnreadCountLoaded
 );
+
+export const allNotificationsRead = createSelector(
+  getUnreadNotificationsCount,
+  count => !!(count === 0)
+);

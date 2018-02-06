@@ -15,7 +15,7 @@ import * as fromStore from "../../store";
 export class NavbarNotificationsComponent implements OnInit {
   toggled: boolean = false;
 
-  isLoading: boolean = true;
+  isLoading$: Observable<boolean>;
   notificationsLoaded: boolean;
   notifications$: Observable<Notification[]>;
   unreadCount$: Observable<number>;
@@ -40,15 +40,18 @@ export class NavbarNotificationsComponent implements OnInit {
     this.toggled ? this.hide() : this.show();
     if (!this.notificationsLoaded) {
       this.store.dispatch(new fromStore.LoadNotifications());
-    } else {
-      this.store.dispatch(new fromStore.ReadAllNotifications());
     }
+    //else {
+    this.store.dispatch(new fromStore.ReadAllNotifications());
+    // }
   }
 
   ngOnInit() {
     this.store.select(fromStore.getNotificationsLoaded).subscribe(loaded => {
       this.notificationsLoaded = loaded;
     });
+
+    this.isLoading$ = this.store.select(fromStore.getNotificationsLoading);
 
     this.notifications$ = this.store
       .select(fromStore.getUnreadNotifications)

@@ -4,13 +4,16 @@ import { Action } from "@ngrx/store";
 import * as fromInstitutions from "../../institutions/store/actions";
 import * as fromSubnets from "../../subnets/store/actions";
 import * as fromCategories from "../../categories/store/actions";
+import * as fromSharedServices from "../../@shared/services";
 
 import { TEMPLATES } from "./message-templates";
 import { Notification } from "../models/notification.model";
 
 @Injectable()
 export class NotificationHelperService {
-  constructor() {}
+  constructor(
+    private authenticationService: fromSharedServices.AuthenticationService
+  ) {}
 
   getNotificationForAction(
     action:
@@ -26,6 +29,7 @@ export class NotificationHelperService {
       case fromSubnets.ADD_SUBNET_FROM_MODAL_SUCCESS: {
         return {
           icon: "add_box",
+          user: this.authenticationService.getCurrentUser().name,
           message: this.getMessage(action)
         };
       }
@@ -35,6 +39,7 @@ export class NotificationHelperService {
       case fromSubnets.UPDATE_SUBNET_SUCCESS: {
         return {
           icon: "edit",
+          user: this.authenticationService.getCurrentUser().name,
           message: this.getMessage(action)
         };
       }
@@ -44,6 +49,7 @@ export class NotificationHelperService {
       case fromSubnets.DELETE_SUBNET_SUCCESS: {
         return {
           icon: "delete",
+          user: this.authenticationService.getCurrentUser().name,
           message: this.getMessage(action)
         };
       }
