@@ -45,7 +45,7 @@
 
   <div class="pull-right">
     <button mat-raised-button color="primary" 
-            [disabled]="!subnetRangeForm.valid" 
+            [disabled]="!subnetRangeForm.valid || !rangeIsValid(subnetRangeForm)" 
             (click)="createRange(subnetRangeForm)">Agregar</button>
     <a routerLink="/app/subnets" mat-raised-button color="basic">Cancelar</a>
   </div>

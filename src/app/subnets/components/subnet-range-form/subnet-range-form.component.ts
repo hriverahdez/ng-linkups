@@ -37,10 +37,15 @@ export class SubnetRangeFormComponent implements OnInit {
     });
   }
 
+  rangeIsValid(form: FormGroup) {
+    const { startIp, endIp, mask } = form.value;
+    return this.ipHelper.rangeIsValid(startIp, endIp, mask);
+  }
+
   previewRange(form: FormGroup) {
     if (!this.startIpControlInvalid && !this.endIpControlInvalid) {
       const { startIp, endIp, mask } = form.value;
-      if (this.ipHelper.rangeIsValid(startIp, endIp, mask)) {
+      if (this.rangeIsValid(form)) {
         this.range = this.ipHelper.getSubnetsInRange(startIp, endIp, mask);
       } else {
         this.range = null;
