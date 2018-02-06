@@ -1,0 +1,21 @@
+import { Component, OnInit } from "@angular/core";
+
+import { Store } from "@ngrx/store";
+import * as fromStore from "../../store";
+import { Observable } from "rxjs/Observable";
+import { Notification } from "../../models/notification.model";
+
+@Component({
+  selector: "lnk-notifications",
+  templateUrl: "./notifications.component.html",
+  styleUrls: ["./notifications.component.scss"]
+})
+export class NotificationsComponent implements OnInit {
+  notifications$: Observable<Notification[]>;
+  constructor(private store: Store<fromStore.NotificationsState>) {}
+
+  ngOnInit() {
+    this.notifications$ = this.store.select(fromStore.getAllNotifications);
+    this.store.dispatch(new fromStore.LoadNotifications());
+  }
+}

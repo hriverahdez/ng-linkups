@@ -31,6 +31,11 @@ const routes: Routes = [
         path: "subnets",
         loadChildren: "../subnets/subnets.module#SubnetsModule"
       },
+      {
+        path: "notifications",
+        loadChildren:
+          "../notifications/notifications.module#NotificationsModule"
+      },
       { path: "", redirectTo: "/app/dashboard", pathMatch: "full" }
     ]
   }
