@@ -15,6 +15,14 @@ export class NotificationHelperService {
     private authenticationService: fromSharedServices.AuthenticationService
   ) {}
 
+  private get baseNotification(): Notification {
+    return {
+      user: this.authenticationService.getCurrentUser().name,
+      unread: true,
+      time: Date.now()
+    };
+  }
+
   getNotificationForAction(
     action:
       | fromInstitutions.InstitutionActions
@@ -28,9 +36,9 @@ export class NotificationHelperService {
       case fromSubnets.ADD_SUBNET_RANGE_SUCCESS:
       case fromSubnets.ADD_SUBNET_FROM_MODAL_SUCCESS: {
         return {
+          ...this.baseNotification,
           icon: "add_box",
-          user: this.authenticationService.getCurrentUser().name,
-          message: this.getMessage(action)
+          message: this.createMessageFromAction(action)
         };
       }
 
@@ -38,9 +46,9 @@ export class NotificationHelperService {
       case fromCategories.UPDATE_CATEGORY_SUCCESS:
       case fromSubnets.UPDATE_SUBNET_SUCCESS: {
         return {
+          ...this.baseNotification,
           icon: "edit",
-          user: this.authenticationService.getCurrentUser().name,
-          message: this.getMessage(action)
+          message: this.createMessageFromAction(action)
         };
       }
 
@@ -48,15 +56,15 @@ export class NotificationHelperService {
       case fromCategories.DELETE_CATEGORY_SUCCESS:
       case fromSubnets.DELETE_SUBNET_SUCCESS: {
         return {
+          ...this.baseNotification,
           icon: "delete",
-          user: this.authenticationService.getCurrentUser().name,
-          message: this.getMessage(action)
+          message: this.createMessageFromAction(action)
         };
       }
     }
   }
 
-  private getMessage(
+  private createMessageFromAction(
     action:
       | fromInstitutions.InstitutionActions
       | fromCategories.CategoryActions

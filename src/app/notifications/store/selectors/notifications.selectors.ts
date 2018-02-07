@@ -48,3 +48,8 @@ export const allNotificationsRead = createSelector(
   getUnreadNotificationsCount,
   count => !!(count === 0)
 );
+
+export const getNotificationsNavbarOpened = createSelector(
+  getState,
+  fromNotifications.getNotificationsNavbarOpened
+);

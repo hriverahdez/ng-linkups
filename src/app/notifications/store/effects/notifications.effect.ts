@@ -3,11 +3,13 @@ import { Actions, Effect } from "@ngrx/effects";
 
 import { of } from "rxjs/observable/of";
 import {
+  catchError,
   debounceTime,
   filter,
+  map,
   switchMap,
-  catchError,
-  map
+  take,
+  tap
 } from "rxjs/operators";
 
 import * as userActions from "../../../@core/store/actions";
@@ -26,6 +28,7 @@ export class NotificationsEffect {
   constructor(
     private actions$: Actions,
     private store: Store<fromFeature.NotificationsState>,
+    private notificationSocketHandler: fromServices.NotificationSenderService,
     private notificationService: fromServices.NotificationsService,
     private notificationHelper: fromServices.NotificationHelperService
   ) {}
@@ -63,6 +66,24 @@ export class NotificationsEffect {
       )
     );
 
+  @Effect()
+  loadNotificationsOnStart$ = this.actions$
+    .ofType(notificationActions.OPEN_NOTIFICATIONS_NAVBAR)
+    .pipe(
+      map(() => new notificationActions.LoadNotifications())
+      // switchMap(() =>
+      //   this.store.select(fromSelectors.getNotificationsLoaded).pipe(
+      //     tap(loaded => {
+      //       if (!loaded) {
+      //         new notificationActions.LoadNotifications();
+      //       }
+      //     }),
+      //     filter(loaded => loaded),
+      //     take(1)
+      //   )
+      // ),
+    );
+
   /**
    * Loads all the current user's notifications
    */
@@ -85,40 +106,31 @@ export class NotificationsEffect {
       )
     );
 
-  // @Effect()
-  // readAllNotificationsWhenFew$ = this.actions$
-  //   .ofType(notificationActions.LOAD_NOTIFICATIONS_SUCCESS)
-  //   .pipe(
-  //     map(
-  //       (action: notificationActions.LoadNotificationsSuccess) => action.payload
-  //     ),
-  //     filter(notifications => notifications.filter(n => n.unread).length <= 10),
-  //     map(() => new notificationActions.ReadAllNotifications())
-  //   );
-
+  /**
+   * Sets all notifications as 'read' on the server
+   */
   @Effect({ dispatch: false })
   readAllNotifications$ = this.actions$
-    .ofType(notificationActions.READ_ALL_NOTIFICATIONS)
+    .ofType(notificationActions.CLOSE_NOTIFICATIONS_NAVBAR)
     .pipe(
+      debounceTime(100),
       switchMap(() =>
         this.store
           .select(fromSelectors.allNotificationsRead)
           .pipe(
-            filter(allRead => !allRead),
-            switchMap(() => this.notificationService.readAllNotifications())
+            filter(allRead => allRead),
+            switchMap(() => this.notificationService.readAllNotifications()),
+            take(1)
           )
       )
     );
 
   @Effect()
   clearNotifications$ = this.actions$
-    .ofType(notificationActions.READ_ALL_NOTIFICATIONS)
-    .pipe(
-      debounceTime(8000),
-      map(() => new notificationActions.ClearReadNotifications())
-    );
+    .ofType(notificationActions.CLOSE_NOTIFICATIONS_NAVBAR)
+    .pipe(map(() => new notificationActions.ClearReadNotifications()));
 
-  @Effect()
+  @Effect({ dispatch: false })
   sendNotification$ = this.actions$
     .ofType(
       fromInstitutions.ADD_INSTITUTION_SUCCESS,
@@ -144,20 +156,19 @@ export class NotificationsEffect {
             | fromSubnets.SubnetActions
         ) => action
       ),
-      switchMap(action => {
-        return this.notificationService
-          .sendNotification(
-            this.notificationHelper.getNotificationForAction(action)
-          )
-          .pipe(
-            map(
-              notification =>
-                new notificationActions.SendNotificationSuccess(notification)
-            ),
-            catchError(error =>
-              of(new notificationActions.SendNotificationFail(error))
-            )
-          );
+      map(action => {
+        const notification = this.notificationHelper.getNotificationForAction(
+          action
+        );
+        return this.notificationSocketHandler.sendNotification(notification);
       })
     );
+
+  @Effect()
+  onNotification$ = this.notificationSocketHandler.notifications$.pipe(
+    map(
+      (notification: Notification) =>
+        new notificationActions.SendNotificationSuccess(notification)
+    )
+  );
 }

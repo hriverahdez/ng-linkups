@@ -13,6 +13,7 @@ export interface State {
   unreadCountLoaded: boolean;
   loaded: boolean;
   loading: boolean;
+  navbarOpened: boolean;
   error: CustomError;
 }
 
@@ -22,6 +23,7 @@ export const initialState: State = {
   unreadCountLoaded: false,
   loaded: false,
   loading: false,
+  navbarOpened: false,
   error: {}
 };
 
@@ -48,6 +50,20 @@ export function reducer(
         ...state,
         unreadCount,
         entities
+      };
+    }
+
+    case fromNotifications.OPEN_NOTIFICATIONS_NAVBAR: {
+      return {
+        ...state,
+        navbarOpened: true
+      };
+    }
+
+    case fromNotifications.CLOSE_NOTIFICATIONS_NAVBAR: {
+      return {
+        ...state,
+        navbarOpened: false
       };
     }
 
@@ -82,13 +98,6 @@ export function reducer(
         entities,
         loaded: true,
         loading: false
-      };
-    }
-
-    case fromNotifications.SEND_NOTIFICATION: {
-      return {
-        ...state,
-        loading: true
       };
     }
 
@@ -131,4 +140,6 @@ export const getNotificationUnreadCountLoaded = (state: State) =>
   state.unreadCountLoaded;
 export const getNotificationLoaded = (state: State) => state.loaded;
 export const getNotificationLoading = (state: State) => state.loading;
+export const getNotificationsNavbarOpened = (state: State) =>
+  state.navbarOpened;
 export const getNotificationError = (state: State) => state.error;

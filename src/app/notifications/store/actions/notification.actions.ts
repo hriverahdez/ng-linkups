@@ -35,6 +35,20 @@ export class ClearReadNotifications implements Action {
   readonly type = CLEAR_READ_NOTIFICATIONS;
 }
 
+// NAVBAR NOTIFICATIONS
+export const OPEN_NOTIFICATIONS_NAVBAR =
+  "[Notifications] Open Notifications Navbar";
+export const CLOSE_NOTIFICATIONS_NAVBAR =
+  "[Notifications] Close Notifications Navbar";
+
+export class OpenNotificationsNavbar implements Action {
+  readonly type = OPEN_NOTIFICATIONS_NAVBAR;
+}
+
+export class CloseNotificationsNavbar implements Action {
+  readonly type = CLOSE_NOTIFICATIONS_NAVBAR;
+}
+
 // LOAD
 export const LOAD_NOTIFICATIONS = "[Notifications] Load Notifications";
 export const LOAD_NOTIFICATIONS_FAIL =
@@ -83,6 +97,8 @@ export type NotificationActions =
   | SetUnreadCount
   | ReadAllNotifications
   | ClearReadNotifications
+  | OpenNotificationsNavbar
+  | CloseNotificationsNavbar
   | LoadNotifications
   | LoadNotificationsFail
   | LoadNotificationsSuccess

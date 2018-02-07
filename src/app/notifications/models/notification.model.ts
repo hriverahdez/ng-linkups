@@ -5,6 +5,6 @@ export interface Notification {
   icon?: string;
   user?: string;
   message?: string;
-  time?: Date;
+  time?: number;
   unread?: boolean;
 }
