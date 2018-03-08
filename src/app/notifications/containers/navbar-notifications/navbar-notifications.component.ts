@@ -29,14 +29,12 @@ export class NavbarNotificationsComponent implements OnInit {
   show() {
     this.renderer.addClass(this.hostElement.nativeElement, "open");
     this.toggled = true;
-    // this.store.dispatch(new fromStore.ReadAllNotifications());
     this.store.dispatch(new fromStore.OpenNotificationsNavbar());
   }
 
   hide() {
     this.renderer.removeClass(this.hostElement.nativeElement, "open");
     this.toggled = false;
-    console.log("NOW!");
     this.store.dispatch(new fromStore.CloseNotificationsNavbar());
   }
 

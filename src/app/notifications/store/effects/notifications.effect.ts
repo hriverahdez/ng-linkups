@@ -28,7 +28,7 @@ export class NotificationsEffect {
   constructor(
     private actions$: Actions,
     private store: Store<fromFeature.NotificationsState>,
-    private notificationSocketHandler: fromServices.NotificationSenderService,
+    private notificationSocketHandler: fromServices.NotificationSocketHandlerService,
     private notificationService: fromServices.NotificationsService,
     private notificationHelper: fromServices.NotificationHelperService
   ) {}
@@ -70,18 +70,18 @@ export class NotificationsEffect {
   loadNotificationsOnStart$ = this.actions$
     .ofType(notificationActions.OPEN_NOTIFICATIONS_NAVBAR)
     .pipe(
-      map(() => new notificationActions.LoadNotifications())
-      // switchMap(() =>
-      //   this.store.select(fromSelectors.getNotificationsLoaded).pipe(
-      //     tap(loaded => {
-      //       if (!loaded) {
-      //         new notificationActions.LoadNotifications();
-      //       }
-      //     }),
-      //     filter(loaded => loaded),
-      //     take(1)
-      //   )
-      // ),
+      // map(() => new notificationActions.LoadNotifications())
+      switchMap(() =>
+        this.store.select(fromSelectors.getNotificationsLoaded).pipe(
+          tap(loaded => {
+            if (!loaded) {
+              new notificationActions.LoadNotifications();
+            }
+          }),
+          filter(loaded => loaded),
+          take(1)
+        )
+      ),
     );
 
   /**

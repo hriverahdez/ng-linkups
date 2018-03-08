@@ -17,7 +17,7 @@ export class NotificationHelperService {
 
   private get baseNotification(): Notification {
     return {
-      user: this.authenticationService.getCurrentUser().name,
+      user: this.authenticationService.getCurrentUser().email,
       unread: true,
       time: Date.now()
     };

@@ -6,7 +6,7 @@ import * as fromSharedServices from "../../@shared/services";
 import { Notification } from "../models/notification.model";
 
 @Injectable()
-export class NotificationSenderService {
+export class NotificationSocketHandlerService {
   _notifications: Subject<Notification>;
 
   // Our constructor calls our wsService connect method
