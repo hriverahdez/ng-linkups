@@ -1,6 +1,6 @@
 import { createFeatureSelector, ActionReducerMap } from "@ngrx/store";
 
-import * as fromAppSettings from "./settings.reducer";
+import * as fromAppSettings from "./app-settings.reducer";
 
 export interface SettingsState {
   appSettings: fromAppSettings.State;

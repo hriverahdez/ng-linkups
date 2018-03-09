@@ -4,6 +4,7 @@ import { CommonModule } from "@angular/common";
 import { LayoutRoutingModule } from "./layout-routing.module";
 import { SharedModule } from "../@shared/shared.module";
 import { NotificationsModule } from "../notifications/notifications.module";
+import { SettingsModule } from "../settings/settings.module";
 
 import { StoreModule } from "@ngrx/store";
 
@@ -21,6 +22,7 @@ import * as fromComponents from "./components/";
     CommonModule,
     SharedModule,
     StoreModule.forFeature("layout", reducers),
+    SettingsModule,
     NotificationsModule
   ],
   declarations: [...fromContainers.containers, ...fromComponents.components]
