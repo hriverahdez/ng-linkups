@@ -17,9 +17,9 @@ import * as fromComponents from "./components/";
 
 @NgModule({
   imports: [
+    LayoutRoutingModule,
     CommonModule,
     SharedModule,
-    LayoutRoutingModule,
     StoreModule.forFeature("layout", reducers),
     NotificationsModule
   ],

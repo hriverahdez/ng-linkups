@@ -38,8 +38,14 @@ export function reducer(
     }
 
     case fromInstitutions.LOAD_INSTITUTIONS_FAIL: {
+      const { status } = action.payload;
+      const error: CustomError = {
+        code: status,
+        message: httpErrorMessages[status]
+      };
       return {
         ...state,
+        error,
         loaded: false,
         loading: false
       };

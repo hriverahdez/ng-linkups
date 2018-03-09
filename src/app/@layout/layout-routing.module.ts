@@ -36,6 +36,10 @@ const routes: Routes = [
         loadChildren:
           "../notifications/notifications.module#NotificationsModule"
       },
+      {
+        path: "settings",
+        loadChildren: "../settings/settings.module#SettingsModule"
+      },
       { path: "", redirectTo: "/app/dashboard", pathMatch: "full" }
     ]
   }

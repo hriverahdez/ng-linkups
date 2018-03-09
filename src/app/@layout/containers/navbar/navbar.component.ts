@@ -14,24 +14,6 @@ import { DropdownItem } from "../../utils/dropdown";
   styleUrls: ["./navbar.component.scss"]
 })
 export class NavbarComponent implements OnInit {
-  private notifItems = [
-    {
-      text: "Mike John responded to your email"
-    },
-    {
-      text: "You have 5 new tasks"
-    },
-    {
-      text: "You're now friend with Andrew"
-    },
-    {
-      text: "Another Notification"
-    },
-    {
-      text: "Another One"
-    }
-  ];
-
   private profileItems = [
     {
       id: "PROFILE",
@@ -55,5 +37,9 @@ export class NavbarComponent implements OnInit {
     if (item.id === "LOGOUT") {
       this.store.dispatch(new fromRoot.Logout());
     }
+  }
+
+  goToSettings() {
+    this.store.dispatch(new fromRoot.Go({ path: ["/settings"] }));
   }
 }
