@@ -1,0 +1,31 @@
+<form [formGroup]="settingsForm">
+
+    <label>Configuración Global</label>
+    <hr class="form-section-divider">
+    <br>
+    <div class="row">
+      <div class="col-sm-6">        
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Nombre de la Provincia" 
+            name="provinceName" formControlName="provinceName">            
+        </mat-form-field>       
+        
+      </div>    
+      <div class="col-sm-6 text-center">
+          <mat-slide-toggle
+            labelPosition="before"            
+            formControlName="enableRegistration"
+            color="primary">
+            Habilitar Registro
+          </mat-slide-toggle>
+      </div>
+    </div>
+
+    <div>
+      <button mat-raised-button color="primary"               
+              (click)="save(settingsForm)">Guardar</button>
+  
+    </div>
+
+</form>

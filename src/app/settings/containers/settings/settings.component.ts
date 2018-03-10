@@ -19,4 +19,8 @@ export class SettingsComponent implements OnInit {
     this.appSettings$ = this.store.select(fromStore.getAppSettings);
     this.store.dispatch(new fromStore.LoadAppSettings());
   }
+
+  saveSettings(settings: AppSettings) {
+    this.store.dispatch(new fromStore.SaveAppSettings(settings));
+  }
 }

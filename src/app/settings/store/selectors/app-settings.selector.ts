@@ -12,3 +12,8 @@ export const getAppSettings = createSelector(
   getAppSettingsState,
   fromAppSettings.getAppSettings
 );
+
+export const getAppSettingsError = createSelector(
+  getAppSettingsState,
+  fromAppSettings.getAppSettingsError
+);

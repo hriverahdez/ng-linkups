@@ -30,6 +30,7 @@ export function reducer(
       };
     }
 
+    case fromAppSettings.SAVE_APP_SETTINGS_FAIL:
     case fromAppSettings.LOAD_APP_SETTINGS_FAIL: {
       const { status } = action.payload;
       const error: CustomError = {
@@ -49,6 +50,22 @@ export function reducer(
         ...state,
         settings,
         loaded: true,
+        loading: false
+      };
+    }
+
+    case fromAppSettings.SAVE_APP_SETTINGS: {
+      return {
+        ...state,
+        loading: true
+      };
+    }
+
+    case fromAppSettings.SAVE_APP_SETTINGS_SUCCESS: {
+      const settings = action.payload;
+      return {
+        ...state,
+        settings,
         loading: false
       };
     }
