@@ -20,7 +20,7 @@ export const initialState: State = {
 
 export function reducer(
   state = initialState,
-  action: fromAppSettings.AppSettingsActions
+  action: fromAppSettings.SettingsActions
 ) {
   switch (action.type) {
     case fromAppSettings.LOAD_APP_SETTINGS: {

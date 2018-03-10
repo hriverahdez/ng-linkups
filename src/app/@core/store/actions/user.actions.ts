@@ -1,5 +1,6 @@
 import { Action } from "@ngrx/store";
 import { User } from "../../models/user.model";
+import { UserSettings } from "../../models/user-settings.model";
 
 export const LOGIN = "[Core] Log in";
 export const LOGIN_FAIL = "[Core] Log in Fail";

@@ -35,12 +35,6 @@ export class NavTogglerComponent implements OnInit {
   }
 
   sidebarToggle() {
-    const toggleButton = this.toggleButton;
-    const body = document.getElementsByTagName("body")[0];
-    if (this.sidebarVisible === false) {
-      this.sidebarOpen();
-    } else {
-      this.sidebarClose();
-    }
+    this.sidebarVisible === false ? this.sidebarOpen() : this.sidebarClose();
   }
 }

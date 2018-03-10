@@ -2,6 +2,7 @@ import { createSelector } from "@ngrx/store";
 
 import * as fromUser from "../reducers/user.reducer";
 import * as fromRoot from "../reducers";
+import { User } from "../../models/user.model";
 
 export const getIsLoggedIn = createSelector(
   fromRoot.getUserState,
@@ -21,4 +22,9 @@ export const getLoginLoading = createSelector(
 export const getLoginError = createSelector(
   fromRoot.getUserState,
   fromUser.getError
+);
+
+export const getUserSettings = createSelector(
+  getCurrentUser,
+  (user: User) => user.settings
 );

@@ -22,6 +22,10 @@ export class AuthenticationService {
     return JSON.parse(localStorage.getItem("currentUser"));
   }
 
+  updateCurrentUserInfo(user) {
+    localStorage.setItem("currentUser", JSON.stringify(user));
+  }
+
   isAuthenticated() {
     const token = this.getToken();
     return tokenNotExpired(null, token);

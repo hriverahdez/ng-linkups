@@ -5,7 +5,7 @@ import { Actions, Effect } from "@ngrx/effects";
 import { of } from "rxjs/observable/of";
 import { switchMap, map, catchError, tap } from "rxjs/operators";
 
-import * as appSettingsActions from "../actions";
+import * as settingsActions from "../actions";
 import * as fromFeature from "../reducers";
 import * as fromSelectors from "../selectors";
 import * as fromRoot from "../../../@core/store";
@@ -26,31 +26,49 @@ export class AppSettingsEffects {
 
   @Effect()
   appSettings$ = this.actions$
-    .ofType(appSettingsActions.LOAD_APP_SETTINGS)
+    .ofType(settingsActions.LOAD_APP_SETTINGS)
     .pipe(
       switchMap(() => this.settingsService.getOne("")),
       map(
-        appSettings =>
-          new appSettingsActions.LoadAppSettingsSuccess(appSettings)
+        appSettings => new settingsActions.LoadAppSettingsSuccess(appSettings)
       ),
-      catchError(error => of(new appSettingsActions.LoadAppSettingsFail(error)))
+      catchError(error => of(new settingsActions.LoadAppSettingsFail(error)))
     );
 
   @Effect()
   saveAppSettings$ = this.actions$
-    .ofType(appSettingsActions.SAVE_APP_SETTINGS)
+    .ofType(settingsActions.SAVE_APP_SETTINGS)
     .pipe(
-      map((action: appSettingsActions.SaveAppSettings) => action.payload),
+      map((action: settingsActions.SaveAppSettings) => action.payload),
       switchMap(appSettings =>
         this.settingsService
           .add(appSettings)
           .pipe(
             map(
               appSettings =>
-                new appSettingsActions.SaveAppSettingsSuccess(appSettings)
+                new settingsActions.SaveAppSettingsSuccess(appSettings)
             ),
             catchError(error =>
-              of(new appSettingsActions.SaveAppSettingsFail(error))
+              of(new settingsActions.SaveAppSettingsFail(error))
+            )
+          )
+      )
+    );
+
+  @Effect()
+  saveUserSettings$ = this.actions$
+    .ofType(settingsActions.SAVE_USER_SETTINGS)
+    .pipe(
+      map((action: settingsActions.SaveUserSettings) => action.payload),
+      switchMap(userSettings =>
+        this.settingsService
+          .saveUserSettings(userSettings)
+          .pipe(
+            map(
+              settings => new settingsActions.SaveUserSettingsSuccess(settings)
+            ),
+            catchError(error =>
+              of(new settingsActions.SaveUserSettingsFail(error))
             )
           )
       )
@@ -58,7 +76,7 @@ export class AppSettingsEffects {
 
   @Effect({ dispatch: false })
   handleInstitutionFailure$ = this.actions$
-    .ofType(appSettingsActions.SAVE_APP_SETTINGS_FAIL)
+    .ofType(settingsActions.SAVE_APP_SETTINGS_FAIL)
     .pipe(
       switchMap(() =>
         this.store.select(fromSelectors.getAppSettingsError).pipe(
@@ -72,10 +90,10 @@ export class AppSettingsEffects {
   // @Effect()
   // appLoadingStart$ = this.actions$
   //   .ofType(
-  //     appSettingsActions.LOAD_INSTITUTIONS,
-  //     appSettingsActions.ADD_INSTITUTION,
-  //     appSettingsActions.UPDATE_INSTITUTION,
-  //     appSettingsActions.DELETE_INSTITUTION
+  //     settingsActions.LOAD_INSTITUTIONS,
+  //     settingsActions.ADD_INSTITUTION,
+  //     settingsActions.UPDATE_INSTITUTION,
+  //     settingsActions.DELETE_INSTITUTION
   //   )
   //   .pipe(
   //     map(action => {
@@ -86,14 +104,14 @@ export class AppSettingsEffects {
   // @Effect()
   // appLoadingDone$ = this.actions$
   //   .ofType(
-  //     appSettingsActions.LOAD_INSTITUTIONS_FAIL,
-  //     appSettingsActions.LOAD_INSTITUTIONS_SUCCESS,
-  //     appSettingsActions.ADD_INSTITUTION_FAIL,
-  //     appSettingsActions.ADD_INSTITUTION_SUCCESS,
-  //     appSettingsActions.UPDATE_INSTITUTION_FAIL,
-  //     appSettingsActions.UPDATE_INSTITUTION_SUCCESS,
-  //     appSettingsActions.DELETE_INSTITUTION_FAIL,
-  //     appSettingsActions.DELETE_INSTITUTION_SUCCESS
+  //     settingsActions.LOAD_INSTITUTIONS_FAIL,
+  //     settingsActions.LOAD_INSTITUTIONS_SUCCESS,
+  //     settingsActions.ADD_INSTITUTION_FAIL,
+  //     settingsActions.ADD_INSTITUTION_SUCCESS,
+  //     settingsActions.UPDATE_INSTITUTION_FAIL,
+  //     settingsActions.UPDATE_INSTITUTION_SUCCESS,
+  //     settingsActions.DELETE_INSTITUTION_FAIL,
+  //     settingsActions.DELETE_INSTITUTION_SUCCESS
   //   )
   //   .pipe(
   //     map(action => {

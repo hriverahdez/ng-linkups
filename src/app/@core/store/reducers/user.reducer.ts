@@ -1,11 +1,13 @@
+import { User } from "../../models/user.model";
 import * as fromUser from "../actions";
+import * as fromSettings from "../../../settings/store/actions";
 
 import { CustomError } from "../../../@shared/utils/custom-error";
 import { httpErrorMessages } from "../../../@shared/utils/http-error-messages";
 
 export interface UserState {
   isLoggedIn: boolean;
-  currentUser: any;
+  currentUser: User;
   loading: boolean;
   error: CustomError;
 }
@@ -17,8 +19,12 @@ export const initialState: UserState = {
   error: {}
 };
 
-export function reducer(state = initialState, action: fromUser.UserActions) {
+export function reducer(
+  state = initialState,
+  action: fromUser.UserActions | fromSettings.SettingsActions
+) {
   switch (action.type) {
+    case fromSettings.SAVE_USER_SETTINGS:
     case fromUser.LOGIN: {
       return {
         ...state,
@@ -68,6 +74,16 @@ export function reducer(state = initialState, action: fromUser.UserActions) {
         ...state,
         isLoggedIn: false,
         currentUser: {}
+      };
+    }
+
+    case fromSettings.SAVE_USER_SETTINGS_SUCCESS: {
+      const settings = action.payload;
+      const currentUser = { ...state.currentUser, settings };
+      return {
+        ...state,
+        currentUser,
+        loading: false
       };
     }
   }

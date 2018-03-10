@@ -15,6 +15,7 @@ import {
 } from "@angular/forms";
 
 import { AppSettings } from "../../models/app-settings.model";
+import { UserSettings } from "../../../@core/models/user-settings.model";
 
 @Component({
   selector: "lnk-settings-form",
@@ -24,18 +25,20 @@ import { AppSettings } from "../../models/app-settings.model";
 export class SettingsFormComponent implements OnChanges {
   settingsForm: FormGroup = this.toFormGroup();
   @Input() appSettings: AppSettings;
+  @Input() userSettings: UserSettings;
   @Output() onSaveSettings = new EventEmitter<AppSettings>();
 
   constructor(private fb: FormBuilder) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.settingsForm.patchValue(this.appSettings);
+    this.settingsForm.patchValue({ ...this.appSettings, ...this.userSettings });
   }
 
   toFormGroup(): FormGroup {
     return this.fb.group({
       provinceName: [""],
-      enableRegistration: [false]
+      enableRegistration: [false],
+      showLineNumber: [false]
     });
   }
 

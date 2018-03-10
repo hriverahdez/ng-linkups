@@ -21,8 +21,27 @@
           </mat-slide-toggle>
       </div>
     </div>
+    <br>
+    <label>Configuración de Usuario</label>
+    <hr class="form-section-divider">
+    <br>
 
+    <div class="row">
+      <div class="col-sm-6">        
+          <mat-slide-toggle
+          labelPosition="before"            
+          formControlName="showLineNumber"
+          color="primary">
+          Mostrar Número de Línea
+        </mat-slide-toggle>
+      </div>    
+      <div class="col-sm-6 text-center">
+          
+      </div>
+    </div>
+    <br>
     <div>
+      
       <button mat-raised-button color="primary"               
               (click)="save(settingsForm)">Guardar</button>
   
