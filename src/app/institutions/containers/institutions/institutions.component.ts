@@ -12,6 +12,7 @@ import { DialogService } from "../../../@shared/services/index";
 
 import * as fromComponents from "../../components";
 import { Category } from "../../../categories/models/category.model";
+import { UserSettings } from "../../../@core/models/user-settings.model";
 
 @Component({
   selector: "lnk-institutions",
@@ -22,6 +23,8 @@ export class InstitutionsComponent implements OnInit {
   institutions$: Observable<Institution[]>;
   categoriesInUse$: Observable<Category[]>;
 
+  userSettings$: Observable<UserSettings>;
+
   constructor(
     private rootStore: Store<fromRoot.AppState>,
     private store: Store<fromStore.InstitutionsState>,
@@ -29,6 +32,7 @@ export class InstitutionsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.userSettings$ = this.rootStore.select(fromRoot.getUserSettings);
     this.institutions$ = this.store.select(fromStore.getAllInstitutions);
     this.categoriesInUse$ = this.store.select(
       fromStore.getInstitutionCategories

@@ -87,35 +87,12 @@ export class AppSettingsEffects {
       )
     );
 
-  // @Effect()
-  // appLoadingStart$ = this.actions$
-  //   .ofType(
-  //     settingsActions.LOAD_INSTITUTIONS,
-  //     settingsActions.ADD_INSTITUTION,
-  //     settingsActions.UPDATE_INSTITUTION,
-  //     settingsActions.DELETE_INSTITUTION
-  //   )
-  //   .pipe(
-  //     map(action => {
-  //       return new fromLayout.ShowLoader();
-  //     })
-  //   );
-
-  // @Effect()
-  // appLoadingDone$ = this.actions$
-  //   .ofType(
-  //     settingsActions.LOAD_INSTITUTIONS_FAIL,
-  //     settingsActions.LOAD_INSTITUTIONS_SUCCESS,
-  //     settingsActions.ADD_INSTITUTION_FAIL,
-  //     settingsActions.ADD_INSTITUTION_SUCCESS,
-  //     settingsActions.UPDATE_INSTITUTION_FAIL,
-  //     settingsActions.UPDATE_INSTITUTION_SUCCESS,
-  //     settingsActions.DELETE_INSTITUTION_FAIL,
-  //     settingsActions.DELETE_INSTITUTION_SUCCESS
-  //   )
-  //   .pipe(
-  //     map(action => {
-  //       return new fromLayout.HideLoader();
-  //     })
-  //   );
+  @Effect({ dispatch: false })
+  saveSettingsSuccess$ = this.actions$
+    .ofType(settingsActions.SAVE_APP_SETTINGS)
+    .pipe(
+      tap(() => {
+        this.snackbar.openSimpleSnackBar("Configuración guardada exitosamente");
+      })
+    );
 }
