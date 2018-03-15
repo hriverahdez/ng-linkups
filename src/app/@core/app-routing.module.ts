@@ -14,6 +14,10 @@ const routes: Routes = [
     component: fromContainers.LoginComponent
   },
   {
+    path: "register",
+    component: fromContainers.RegisterComponent
+  },
+  {
     path: "app",
     loadChildren: "../@layout/layout.module#LayoutModule",
     canActivate: [fromGuards.UserSessionNotExpiredGuard]

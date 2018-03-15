@@ -10,11 +10,11 @@
             <div class="row text-center">
               <!-- <app-loader [display]="true"></app-loader> -->
               <div class="col-xs-12">
-                <h4>Iniciar Sesión</h4>
+                <h4>Crear Cuenta</h4>
+                <lnk-register-form></lnk-register-form>
               </div>
-              <lnk-login-form (onLogin)="login($event)"></lnk-login-form>
             </div>
-            <div style="padding-top: 20px;">¿No tiene una cuenta? <a routerLink="/register">Registrarse</a></div>
+            <div style="padding-top: 20px;">¿Ya tiene una cuenta? <a routerLink="/login">Inicie sesión</a></div>
           </div>
         </div>
       </div>
