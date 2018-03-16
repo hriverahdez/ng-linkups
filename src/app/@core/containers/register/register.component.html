@@ -8,10 +8,10 @@
           </div>
           <div class="card-content">
             <div class="row text-center">
-              <!-- <app-loader [display]="true"></app-loader> -->
+              <mat-spinner *ngIf="isLoading$ | async" [diameter]="'30'" style="margin: 10px auto"></mat-spinner>
               <div class="col-xs-12">
                 <h4>Crear Cuenta</h4>
-                <lnk-register-form></lnk-register-form>
+                <lnk-register-form (onRegister)="register($event)"></lnk-register-form>
               </div>
             </div>
             <div style="padding-top: 20px;">¿Ya tiene una cuenta? <a routerLink="/login">Inicie sesión</a></div>

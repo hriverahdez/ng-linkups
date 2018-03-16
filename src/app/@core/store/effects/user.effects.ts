@@ -37,14 +37,33 @@ export class UserEffects {
   );
 
   @Effect()
-  loginSuccess$ = this.actions$.ofType(userActions.LOGIN_SUCCESS).pipe(
-    map(
-      () =>
-        new fromRouter.Go({
-          path: ["/app/dashboard"]
-        })
-    )
-  );
+  register$ = this.actions$
+    .ofType(userActions.REGISTER)
+    .pipe(
+      map((action: userActions.Register) => action.payload),
+      switchMap(user =>
+        this.authService
+          .register(user)
+          .pipe(
+            map(
+              registeredUser => new userActions.RegisterSuccess(registeredUser)
+            ),
+            catchError(error => of(new userActions.RegisterFail(error)))
+          )
+      )
+    );
+
+  @Effect()
+  loginSuccess$ = this.actions$
+    .ofType(userActions.LOGIN_SUCCESS, userActions.REGISTER_SUCCESS)
+    .pipe(
+      map(
+        () =>
+          new fromRouter.Go({
+            path: ["/app/dashboard"]
+          })
+      )
+    );
 
   @Effect({ dispatch: false })
   loginFail$ = this.actions$.ofType(userActions.LOGIN_FAIL).pipe(

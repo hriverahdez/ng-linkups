@@ -27,7 +27,7 @@
 											</td>
 											<td>
 												<a (click)="showDetail(institution)">{{institution.name}}</a>
-												<span *ngIf="(userSettings$ | async).showLineNumber" class="text-muted">[{{institution.line_number}}]</span>
+												<span *ngIf="(userSettings$ | async)?.showLineNumber" class="text-muted">[{{institution.line_number}}]</span>
 											</td>
 											<td> {{ institution.wan ? institution.wan.ip + '/' + institution.wan?.mask : 'No DISPONIBLE'}} </td>
 											<td> {{ institution.lan ? institution.lan.ip + '/' + institution.lan?.mask : 'No DISPONIBLE'}} </td>

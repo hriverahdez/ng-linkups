@@ -31,8 +31,8 @@ export class AuthenticationService {
     return tokenNotExpired(null, token);
   }
 
-  login(credentials): Observable<User> {
-    let authEncoded = btoa(credentials.email + ":" + credentials.password);
+  login(user: User): Observable<User> {
+    let authEncoded = btoa(user.email + ":" + user.password);
     let headers: HttpHeaders = new HttpHeaders({
       Authorization: "Basic " + authEncoded
     });
@@ -46,6 +46,25 @@ export class AuthenticationService {
         map((loginResponse: any) => {
           this.storeUserInfo(loginResponse.token, loginResponse.user);
           return loginResponse.user;
+        })
+      );
+  }
+
+  register(user: User): Observable<User> {
+    let authEncoded = btoa(user.email + ":" + user.password);
+    let headers: HttpHeaders = new HttpHeaders({
+      Authorization: "Basic " + authEncoded
+    });
+    return this.http
+      .post<User>(
+        `${environment.apiURL}/users`,
+        { access_token: environment.masterKey, ...user },
+        { headers: headers, reportProgress: true }
+      )
+      .pipe(
+        map((registerResponse: any) => {
+          this.storeUserInfo(registerResponse.token, registerResponse.user);
+          return registerResponse.user;
         })
       );
   }

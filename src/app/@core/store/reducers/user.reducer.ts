@@ -24,6 +24,7 @@ export function reducer(
   action: fromUser.UserActions | fromSettings.SettingsActions
 ) {
   switch (action.type) {
+    case fromUser.REGISTER:
     case fromSettings.SAVE_USER_SETTINGS:
     case fromUser.LOGIN: {
       return {
@@ -50,6 +51,7 @@ export function reducer(
       };
     }
 
+    case fromUser.REGISTER_SUCCESS:
     case fromUser.LOGIN_SUCCESS: {
       const currentUser = action.payload;
       return {
