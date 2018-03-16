@@ -40,7 +40,7 @@ import * as fromGuards from "./guards";
     SubnetsModule
   ],
   entryComponents: [fromComponents.InstitutionDetailComponent],
-  declarations: [...fromContainers.containers, ...fromComponents.conmponents],
+  declarations: [...fromContainers.containers, ...fromComponents.components],
   providers: [...fromServices.services, ...fromGuards.guards, AppInterceptor]
 })
 export class InstitutionsModule {}

@@ -18,34 +18,11 @@
 
 					<div class="card-content">
 						<div class="tab-content">
-							<div class="tab-pane active">
-								<table class="table institutions-table">
-									<tbody>
-										<tr *ngFor="let institution of institutions$ | async">
-											<td>
-												<mat-icon>{{ institution.category?.icon || 'more_horiz' }}</mat-icon>
-											</td>
-											<td>
-												<a (click)="showDetail(institution)">{{institution.name}}</a>
-												<span *ngIf="(userSettings$ | async)?.showLineNumber" class="text-muted">[{{institution.line_number}}]</span>
-											</td>
-											<td> {{ institution.wan ? institution.wan.ip + '/' + institution.wan?.mask : 'No DISPONIBLE'}} </td>
-											<td> {{ institution.lan ? institution.lan.ip + '/' + institution.lan?.mask : 'No DISPONIBLE'}} </td>
-											<td class="td-actions text-right">
-												<a [routerLink]="['/app/institutions', institution._id]" rel="tooltip" 
-													title="Edit Task" mat-icon-button class="btn btn-primary btn-simple">
-													<mat-icon>edit</mat-icon>
-												</a>
-												<button type="button" rel="tooltip" title="Remove" 
-													mat-icon-button class="btn btn-danger btn-simple btn-xs"
-													(click)="delete(institution)">
-													<mat-icon>delete</mat-icon>
-												</button>
-											</td>
-										</tr>
-
-									</tbody>
-								</table>
+							<div class="tab-pane active">								
+								<lnk-institution-list 
+									[institutions]="institutions$ | async" 
+									[showLineNumber]="(userSettings$ | async)?.showLineNumber"
+									(onDelete)="delete($event)"></lnk-institution-list>
 							</div>
 						</div>
 

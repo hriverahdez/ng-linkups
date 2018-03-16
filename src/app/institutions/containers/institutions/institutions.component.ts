@@ -5,8 +5,6 @@ import { Store } from "@ngrx/store";
 import * as fromRoot from "../../../@core/store";
 import * as fromStore from "../../store";
 
-import { DATA } from "./mock.data";
-
 import { Institution } from "../../models/institution.model";
 import { DialogService } from "../../../@shared/services/index";
 
@@ -39,16 +37,6 @@ export class InstitutionsComponent implements OnInit {
     );
   }
 
-  showDetail(institution: Institution) {
-    this.dialogService.customDialogComponent(
-      fromComponents.InstitutionDetailComponent,
-      {
-        width: "80%",
-        data: institution
-      }
-    );
-  }
-
   addInstitution() {
     this.rootStore.dispatch(
       new fromRoot.Go({ path: ["/app/institutions/add"] })
@@ -56,13 +44,6 @@ export class InstitutionsComponent implements OnInit {
   }
 
   delete(institution: Institution) {
-    this.dialogService
-      .confirm("¿Desea eliminar esta institución?")
-      .subscribe(
-        dialogResult =>
-          dialogResult
-            ? this.store.dispatch(new fromStore.DeleteInstitution(institution))
-            : false
-      );
+    this.store.dispatch(new fromStore.DeleteInstitution(institution));
   }
 }

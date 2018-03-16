@@ -1,0 +1,69 @@
+<div class="inst-table-container">
+  <div class="inst-table-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Category Column -->
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef> Categoría. </mat-header-cell>
+      <mat-cell *matCellDef="let institution"> 
+        <mat-icon>{{ institution.category?.icon || 'more_horiz' }}</mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let institution">
+          <a (click)="showDetail(institution)">{{institution.name}}</a>
+         <span *ngIf="showLineNumber" class="text-muted">[{{ institution.line_number }}]</span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- WAN Column -->
+    <ng-container matColumnDef="wan">
+      <mat-header-cell *matHeaderCellDef> WAN </mat-header-cell>
+      <mat-cell *matCellDef="let institution">
+        {{ institution.wan ? institution.wan.ip + '/' + institution.wan?.mask : 'NO DISPONIBLE'}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- LAN Column -->
+    <ng-container matColumnDef="lan">
+      <mat-header-cell *matHeaderCellDef> LAN </mat-header-cell>
+      <mat-cell *matCellDef="let institution">
+        {{ institution.lan ? institution.lan.ip + '/' + institution.lan?.mask : 'NO DISPONIBLE'}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+      <mat-cell *matCellDef="let institution">
+        
+        <a [routerLink]="['/app/institutions', institution._id]" rel="tooltip" 
+          title="Edit Task" mat-icon-button class="btn btn-primary btn-simple">
+          <mat-icon>edit</mat-icon>
+        </a>
+        <button type="button" rel="tooltip" title="Remove" 
+          mat-icon-button class="btn btn-danger btn-simple btn-xs"
+          (click)="delete(institution)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator #paginator
+                 [pageSize]="paginatorConfig.pageSize"
+                 [pageSizeOptions]="paginatorConfig.pageSizeOptions"
+                 [showFirstLastButtons]="paginatorConfig.showFirstLastButtons">
+  </mat-paginator>
+</div>
