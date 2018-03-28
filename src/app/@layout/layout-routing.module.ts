@@ -5,6 +5,7 @@ import { Routes, RouterModule } from "@angular/router";
 import * as fromContainers from "./containers";
 import * as fromSharedGuards from "../@shared/guards";
 import * as fromNotificationGuards from "../notifications/guards";
+import { DevelopmentInfoComponent } from "./components";
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: "settings",
         loadChildren: "../settings/settings.module#SettingsModule"
+      },
+      {
+        path: "development",
+        component: DevelopmentInfoComponent
       },
       { path: "", redirectTo: "/app/dashboard", pathMatch: "full" }
     ]
