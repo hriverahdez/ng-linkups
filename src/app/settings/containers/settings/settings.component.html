@@ -1,34 +1,16 @@
-<div class="main-content">
-  <div class="container-fluid">
-    
-      <div class="row">
-          <div class="col-md-12">
-            <div class="card card-nav-tabs">
-              <div class="card-header" data-background-color="purple">
-                <div class="nav-tabs-navigation">
-                  <div class="nav-tabs-wrapper">
-                    <h4 class="title">Configuraci&oacute;n</h4>
-                    <p class="category">Haga clic sobre una para ver más detalles</p>
-                  </div>
-                </div>
-              </div>
-    
-              <div class="card-content">
-                <div class="tab-content">
-                  <div class="tab-pane active">
-                    
-                    <lnk-settings-form 
-                      [appSettings]="appSettings$ | async"
-                      [userSettings]="userSettings$ | async"
-                      (onSaveSettings)="saveSettings($event)"></lnk-settings-form>
-
-                  </div>
-                </div>
-    
-              </div>
-            </div>
-          </div>
-        </div>
-
+<div class="settings-container">
+  <div class="settings-header">
+    <h4>Ajustes</h4>
+    <button mat-button style="height: 0; position: absolute;"> <!-- 'absorbs' the auto-focus behavior -->
+    </button>
+    <button type="button" rel="tooltip" title="Cerrar"       
+      mat-icon-button color="basic"
+      (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
+  <lnk-settings-form 
+    [appSettings]="appSettings$ | async"
+    [userSettings]="userSettings$ | async"
+    (onSaveSettings)="saveSettings($event)"></lnk-settings-form>
 </div>

@@ -22,13 +22,14 @@ import * as fromServices from "./services";
 @NgModule({
   imports: [
     CommonModule,
-    SettingsRoutingModule,
+    // SettingsRoutingModule,
     ReactiveFormsModule,
     SharedModule,
     StoreModule.forFeature("settings", reducers),
     EffectsModule.forFeature(effects)
   ],
   declarations: [...fromContainers.containers, ...fromComponents.components],
-  providers: [...fromServices.services, AppInterceptor]
+  providers: [...fromServices.services, AppInterceptor],
+  exports: [fromContainers.SettingsComponent]
 })
 export class SettingsModule {}

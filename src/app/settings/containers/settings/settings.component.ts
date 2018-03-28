@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import * as fromStore from "../../store";
 import * as fromRoot from "../../../@core/store";
+import * as fromLayout from "../../../@layout/store";
 import { Observable } from "rxjs/Observable";
 import { AppSettings } from "../../models/app-settings.model";
 import { Store } from "@ngrx/store";
@@ -18,7 +19,8 @@ export class SettingsComponent implements OnInit {
 
   constructor(
     private store: Store<fromStore.SettingsState>,
-    private rootStore: Store<fromRoot.AppState>
+    private rootStore: Store<fromRoot.AppState>,
+    private layoutStore: Store<fromLayout.LayoutState>
   ) {}
 
   ngOnInit() {
@@ -30,5 +32,10 @@ export class SettingsComponent implements OnInit {
   saveSettings(settings) {
     this.store.dispatch(new fromStore.SaveUserSettings(settings));
     this.store.dispatch(new fromStore.SaveAppSettings(settings));
+    this.layoutStore.dispatch(new fromLayout.HideSecondarySidebar());
+  }
+
+  close() {
+    this.layoutStore.dispatch(new fromLayout.HideSecondarySidebar());
   }
 }

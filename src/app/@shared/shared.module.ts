@@ -23,7 +23,8 @@ import {
   MatSnackBarModule,
   MatSlideToggleModule,
   MatInputModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatSidenavModule
 } from "@angular/material";
 
 const NG_MAT_MODULES = [
@@ -48,7 +49,8 @@ const NG_MAT_MODULES = [
   MatCheckboxModule,
   MatRadioModule,
   MatSnackBarModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatSidenavModule
 ];
 
 // components

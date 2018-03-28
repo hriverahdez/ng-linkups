@@ -1,50 +1,54 @@
 <form [formGroup]="settingsForm">
 
+  <div>
     <label>Configuración Global</label>
     <hr class="form-section-divider">
     <br>
-    <div class="row">
-      <div class="col-sm-6">        
+  </div>
+  <div class="row">
+    <div class="col-sm-12">        
 
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Nombre de la Provincia" 
-            name="provinceName" formControlName="provinceName">            
-        </mat-form-field>       
-        
-      </div>    
-      <div class="col-sm-6 text-center">
-          <mat-slide-toggle
-            labelPosition="before"            
-            formControlName="enableRegistration"
-            color="primary">
-            Habilitar Registro
-          </mat-slide-toggle>
-      </div>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Nombre de la Provincia" 
+          name="provinceName" formControlName="provinceName">            
+      </mat-form-field>       
+      
+    </div>    
+    <div class="col-sm-12 text-center">
+        <mat-slide-toggle
+          class="settings-toggle"
+          labelPosition="before"            
+          formControlName="enableRegistration"
+          color="primary">
+          Habilitar Registro
+        </mat-slide-toggle>
     </div>
-    <br>
+  </div>
+  
+  <div style="margin-top: 50px">
     <label>Configuración de Usuario</label>
     <hr class="form-section-divider">
     <br>
+  </div>
 
-    <div class="row">
-      <div class="col-sm-6">        
-          <mat-slide-toggle
-          labelPosition="before"            
-          formControlName="showLineNumber"
-          color="primary">
-          Mostrar Número de Línea
-        </mat-slide-toggle>
-      </div>    
-      <div class="col-sm-6 text-center">
-          
-      </div>
-    </div>
-    <br>
-    <div>
-      
-      <button mat-raised-button color="primary"               
-              (click)="save(settingsForm)">Guardar</button>
-  
-    </div>
+  <div class="row">
+    <div class="col-sm-12">        
+      <mat-slide-toggle
+        class="settings-toggle"
+        labelPosition="before"            
+        formControlName="showLineNumber"
+        color="primary">
+        Mostrar Número de Línea
+      </mat-slide-toggle>
+    </div>    
+    
+  </div>
+  <br>
+  <div>
+    
+    <button mat-raised-button color="primary"               
+            (click)="save(settingsForm)">Guardar</button>
+
+  </div>
 
 </form>
