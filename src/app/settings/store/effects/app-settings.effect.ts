@@ -92,7 +92,10 @@ export class AppSettingsEffects {
     .ofType(settingsActions.SAVE_APP_SETTINGS)
     .pipe(
       tap(() => {
-        this.snackbar.openSimpleSnackBar("Configuración guardada exitosamente");
+        this.snackbar.openSimpleSnackBar(
+          "Configuración guardada exitosamente",
+          "Cerrar"
+        );
       })
     );
 }

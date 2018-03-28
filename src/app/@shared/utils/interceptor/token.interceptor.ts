@@ -17,11 +17,14 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${this.token}`
-      }
-    });
+    if (!request.headers.has("authorization")) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${this.token}`
+        }
+      });
+      return next.handle(request);
+    }
     return next.handle(request);
   }
 
