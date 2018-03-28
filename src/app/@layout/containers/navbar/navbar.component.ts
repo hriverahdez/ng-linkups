@@ -17,7 +17,7 @@ import { AppSettings } from "../../../settings/models/app-settings.model";
   styleUrls: ["./navbar.component.scss"]
 })
 export class NavbarComponent implements OnInit {
-  private profileItems = [
+  profileItems = [
     {
       id: "PROFILE",
       text: "My Profile"

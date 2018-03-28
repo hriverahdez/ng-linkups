@@ -5,7 +5,7 @@
         <input matInput placeholder="Dirección de subred inicial" 
             (change)="previewRange(subnetRangeForm)"
             name="ip" formControlName="startIp" required>
-        <mat-error *ngIf="startIpInvalid">
+        <mat-error *ngIf="startIpControlInvalid">
           Entre una dirección IP válida
         </mat-error>
       </mat-form-field>
@@ -17,7 +17,7 @@
         <input matInput placeholder="Dirección de subred final" 
             (change)="previewRange(subnetRangeForm)"
             name="ip" formControlName="endIp" required>
-        <mat-error *ngIf="endIpInvalid">
+        <mat-error *ngIf="endIpControlInvalid">
           Entre una dirección IP válida
         </mat-error>
       </mat-form-field>

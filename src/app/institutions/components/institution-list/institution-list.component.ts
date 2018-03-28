@@ -35,7 +35,7 @@ export class InstitutionListComponent implements OnInit, AfterViewInit {
   paginatorConfig = {
     pageSize: 10,
     pageSizeOptions: [5, 10, 20],
-    showFirstLasButtons: true
+    showFirstLastButtons: true
   };
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
