@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Observable";
 
 import { Store } from "@ngrx/store";
 import * as fromStore from "../../store";
+import * as fromSettings from "../../../settings/store";
 
 @Component({
   selector: "lnk-login",
@@ -11,11 +12,19 @@ import * as fromStore from "../../store";
   styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-  constructor(private store: Store<fromStore.AppState>) {}
-
+  canRegister$: Observable<boolean>;
   isLoading$: Observable<boolean>;
 
+  constructor(
+    private store: Store<fromStore.AppState>,
+    private settingsStore: Store<fromSettings.SettingsState>
+  ) {}
+
   ngOnInit() {
+    this.settingsStore.dispatch(new fromSettings.LoadAppSettings());
+    this.canRegister$ = this.settingsStore.select(
+      fromSettings.selectRegistrationEnabled
+    );
     this.isLoading$ = this.store.select(fromStore.getLoginLoading);
   }
 

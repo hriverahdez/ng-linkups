@@ -8,13 +8,16 @@
           </div>
           <div class="card-content">
             <div class="row text-center">
-              <!-- <app-loader [display]="true"></app-loader> -->
+              <mat-spinner *ngIf="isLoading$ | async" [diameter]="'30'" style="margin: 10px auto"></mat-spinner>
               <div class="col-xs-12">
                 <h4>Iniciar Sesión</h4>
               </div>
               <lnk-login-form (onLogin)="login($event)"></lnk-login-form>
             </div>
-            <div style="padding-top: 20px;">¿No tiene una cuenta? <a routerLink="/register">Registrarse</a></div>
+            <div style="padding-top: 20px;" *ngIf="canRegister$ | async">
+              ¿No tiene una cuenta? 
+              <a routerLink="/register">Registrarse</a>
+            </div>
           </div>
         </div>
       </div>

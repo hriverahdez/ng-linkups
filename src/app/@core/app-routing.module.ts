@@ -10,12 +10,13 @@ import * as fromGuards from "./guards";
 
 const routes: Routes = [
   {
-    path: "login",
-    component: fromContainers.LoginComponent
+    path: "register",
+    component: fromContainers.RegisterComponent,
+    canActivate: [fromGuards.RegistrationGuard]
   },
   {
-    path: "register",
-    component: fromContainers.RegisterComponent
+    path: "login",
+    component: fromContainers.LoginComponent
   },
   {
     path: "app",

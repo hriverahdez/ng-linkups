@@ -34,6 +34,7 @@ import * as fromComponents from "./components";
 
 // guards
 import * as fromGuards from "./guards";
+import { SettingsModule } from "../settings/settings.module";
 
 @NgModule({
   declarations: [...fromContainers.containers, ...fromComponents.components],
@@ -47,7 +48,8 @@ import * as fromGuards from "./guards";
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule,
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    SettingsModule
   ],
   providers: [
     { provide: RouterStateSerializer, useClass: CustomSerializer },
