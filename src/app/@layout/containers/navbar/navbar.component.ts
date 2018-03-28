@@ -5,6 +5,7 @@ import { Observable } from "rxjs/Observable";
 import { Store } from "@ngrx/store";
 
 import * as fromRoot from "../../../@core/store";
+import * as fromLayout from "../../../@layout/store";
 import * as fromSettings from "../../../settings/store";
 import { User } from "../../../@core/models/user.model";
 import { DropdownItem } from "../../utils/dropdown";
@@ -33,6 +34,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private store: Store<fromRoot.AppState>,
+    private layoutStore: Store<fromLayout.LayoutState>,
     private settingsStore: Store<fromSettings.SettingsState>
   ) {}
 
@@ -48,7 +50,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  goToSettings() {
-    this.store.dispatch(new fromRoot.Go({ path: ["/settings"] }));
+  openSettingsSidebar() {
+    this.layoutStore.dispatch(new fromLayout.ShowSecondarySidebar());
   }
 }

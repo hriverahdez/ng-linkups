@@ -9,3 +9,8 @@ export const getState = createSelector(
 );
 
 export const getAppLoading = createSelector(getState, fromLayout.getAppLoading);
+
+export const getSecondarySidebarOpened = createSelector(
+  getState,
+  fromLayout.getSecondarySidebar
+);

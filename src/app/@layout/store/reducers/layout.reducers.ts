@@ -2,10 +2,12 @@ import * as fromLayout from "../actions";
 
 export interface State {
   appLoading: boolean;
+  secondarySidebarOpened: boolean;
 }
 
 export const initialState: State = {
-  appLoading: false
+  appLoading: false,
+  secondarySidebarOpened: false
 };
 
 export function reducer(
@@ -26,8 +28,27 @@ export function reducer(
         appLoading: false
       };
     }
+
+    case fromLayout.SHOW_SECONDARY_SIDEBAR: {
+      return {
+        ...state,
+        secondarySidebarOpened: true
+      };
+    }
+
+    case fromLayout.HIDE_SECONDARY_SIDEBAR: {
+      return {
+        ...state,
+        secondarySidebarOpened: false
+      };
+    }
+
+    default: {
+      return state;
+    }
   }
-  return state;
 }
 
 export const getAppLoading = (state: State) => state.appLoading;
+export const getSecondarySidebar = (state: State) =>
+  state.secondarySidebarOpened;
