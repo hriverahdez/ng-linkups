@@ -19,14 +19,15 @@ export class RegistrationGuard implements CanActivate {
     return this.settingsStore
       .select(fromSettings.selectRegistrationEnabled)
       .pipe(
-        filter(canRegister => !canRegister),
-        map(() => {
-          this.store.dispatch(
-            new fromRoot.Go({
-              path: ["/login"]
-            })
-          );
-          return false;
+        map(canRegister => {
+          if (!canRegister) {
+            this.store.dispatch(
+              new fromRoot.Go({
+                path: ["/login"]
+              })
+            );
+            return false;
+          } else return true;
         })
       );
   }
