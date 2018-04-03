@@ -1,7 +1,7 @@
 import { RouterEffects } from "./router.effects";
-import { UserEffects } from "./user.effects";
+import { CurrentUserEffects } from "./current-user.effects";
 
-export const effects: any[] = [RouterEffects, UserEffects];
+export const effects: any[] = [RouterEffects, CurrentUserEffects];
 
 export * from "./router.effects";
-export * from "./user.effects";
+export * from "./current-user.effects";

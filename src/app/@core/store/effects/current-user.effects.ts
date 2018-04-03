@@ -15,7 +15,7 @@ import * as userActions from "../actions";
 import { CustomError } from "../../../@shared/utils/custom-error";
 
 @Injectable()
-export class UserEffects {
+export class CurrentUserEffects {
   constructor(
     private actions$: Actions,
     private store: Store<fromFeature.AppState>,

@@ -7,14 +7,14 @@ import { httpErrorMessages } from "../../../@shared/utils/http-error-messages";
 
 export interface UserState {
   isLoggedIn: boolean;
-  currentUser: User;
+  userInfo: User;
   loading: boolean;
   error: CustomError;
 }
 
 export const initialState: UserState = {
   isLoggedIn: false,
-  currentUser: {},
+  userInfo: {},
   loading: false,
   error: {}
 };
@@ -53,21 +53,21 @@ export function reducer(
 
     case fromUser.REGISTER_SUCCESS:
     case fromUser.LOGIN_SUCCESS: {
-      const currentUser = action.payload;
+      const userInfo = action.payload;
       return {
         ...state,
         loading: false,
         isLoggedIn: true,
-        currentUser
+        userInfo
       };
     }
 
     case fromUser.SET_USER: {
-      const currentUser = action.payload;
+      const userInfo = action.payload;
       return {
         ...state,
         isLoggedIn: true,
-        currentUser
+        userInfo
       };
     }
 
@@ -75,16 +75,16 @@ export function reducer(
       return {
         ...state,
         isLoggedIn: false,
-        currentUser: {}
+        userInfo: {}
       };
     }
 
     case fromSettings.SAVE_USER_SETTINGS_SUCCESS: {
       const settings = action.payload;
-      const currentUser = { ...state.currentUser, settings };
+      const userInfo = { ...state.userInfo, settings };
       return {
         ...state,
-        currentUser,
+        userInfo,
         loading: false
       };
     }
@@ -94,6 +94,6 @@ export function reducer(
 }
 
 export const isLoggedIn = (state: UserState) => state.isLoggedIn;
-export const getCurrentUser = (state: UserState) => state.currentUser;
+export const getCurrentUser = (state: UserState) => state.userInfo;
 export const getLoading = (state: UserState) => state.loading;
 export const getError = (state: UserState) => state.error;
