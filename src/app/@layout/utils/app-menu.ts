@@ -14,19 +14,19 @@ export const APP_MENU: MenuItem[] = [
     class: ""
   },
   { path: "categories", title: "Categorías", icon: "view_module", class: "" },
-  { path: "subnets", title: "Subredes", icon: "router", class: "" },
-  { path: "icons", title: "Icons", icon: "bubble_chart", class: "" },
-  { path: "maps", title: "Maps", icon: "location_on", class: "" },
+  { path: "subnets", title: "Subredes", icon: "router", class: "" }
+  // { path: "icons", title: "Icons", icon: "bubble_chart", class: "" },
+  // { path: "maps", title: "Maps", icon: "location_on", class: "" },
   // {
   //   path: "notifications",
   //   title: "Notifications",
   //   icon: "notifications",
   //   class: ""
   // },
-  {
-    path: "upgrade",
-    title: "Upgrade to PRO",
-    icon: "unarchive",
-    class: "active-pro"
-  }
+  // {
+  //   path: "upgrade",
+  //   title: "Upgrade to PRO",
+  //   icon: "unarchive",
+  //   class: "active-pro"
+  // }
 ];
