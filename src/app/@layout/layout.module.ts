@@ -7,8 +7,9 @@ import { NotificationsModule } from "../notifications/notifications.module";
 import { SettingsModule } from "../settings/settings.module";
 
 import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
 
-import { reducers } from "./store";
+import { reducers, effects } from "./store";
 
 // containers
 import * as fromContainers from "./containers";
@@ -22,6 +23,7 @@ import * as fromComponents from "./components/";
     CommonModule,
     SharedModule,
     StoreModule.forFeature("layout", reducers),
+    EffectsModule.forFeature(effects),
     SettingsModule,
     NotificationsModule
   ],
