@@ -47,13 +47,13 @@ export class AuthUserEffects {
   );
 
   @Effect()
-  loginSuccess$ = this.actions$
+  authSuccess$ = this.actions$
     .ofType(userActions.LOGIN_SUCCESS, userActions.REGISTER_SUCCESS)
     .pipe(
       map(
         () =>
           new fromRouter.Go({
-            path: ["/app/dashboard"]
+            path: ["/dashboard"]
           })
       )
     );
@@ -79,5 +79,16 @@ export class AuthUserEffects {
         path: ["/login"]
       });
     })
+  );
+
+  @Effect()
+  saveUserSettings$ = this.actions$.ofType(userActions.SAVE_USER_SETTINGS).pipe(
+    map((action: userActions.SaveUserSettings) => action.payload),
+    switchMap(userSettings =>
+      this.authService.saveUserSettings(userSettings).pipe(
+        map(settings => new userActions.SaveUserSettingsSuccess(settings)),
+        catchError(error => of(new userActions.SaveUserSettingsFail(error)))
+      )
+    )
   );
 }

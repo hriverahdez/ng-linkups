@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
 
 import { SharedModule } from "../@shared/shared.module";
+import { AuthGuard } from "../@shared/guards";
 
 // containers
 import * as fromContainers from "./containers";
@@ -10,18 +11,17 @@ import * as fromContainers from "./containers";
 // components
 import * as fromComponents from "./components";
 
-import * as fromSharedGuards from "../@shared/guards";
-
 const ROUTES: Routes = [
   {
-    path: "",
-    component: fromContainers.DashboardComponent
+    path: "dashboard",
+    component: fromContainers.DashboardComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
 @NgModule({
   imports: [CommonModule, SharedModule, RouterModule.forChild(ROUTES)],
   declarations: [...fromContainers.containers, ...fromComponents.components],
-  exports: []
+  exports: [RouterModule]
 })
 export class DashboardModule {}

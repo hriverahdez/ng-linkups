@@ -7,23 +7,14 @@ import { Routes, RouterModule } from "@angular/router";
 
 const routes: Routes = [
   //   {
-  //     path: "register",
-  //     component: fromContainers.RegisterComponent,
-  //     canActivate: [fromGuards.RegistrationGuard]
-  //   },
-  //   {
-  //     path: "login",
-  //     component: fromContainers.LoginComponent
-  //   },
-  //   {
   //     path: "app",
   //     loadChildren: "../@layout/layout.module#LayoutModule",
   //     canActivate: [fromGuards.UserSessionNotExpiredGuard]
   //   },
   //   { path: "", redirectTo: "/app/dashboard", pathMatch: "full" },
   //   { path: "**", redirectTo: "app" }
-  { path: "", redirectTo: "/login", pathMatch: "full" },
-  { path: "**", redirectTo: "login" }
+  { path: "", redirectTo: "/dashboard", pathMatch: "full" }
+  //   { path: "**", redirectTo: "register" }
 ];
 
 @NgModule({

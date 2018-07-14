@@ -1,5 +1,4 @@
 import * as fromUser from "../actions";
-import * as fromRoot from "../../../@core/root-store/actions/settings.action";
 
 import { httpErrorMessages } from "../../../@shared/utils/http-error-messages";
 import { User } from "../../../@shared/models";
@@ -19,13 +18,10 @@ export const initialState: UserState = {
   error: {}
 };
 
-export function reducer(
-  state = initialState,
-  action: fromUser.UserActions | fromRoot.SettingsActions
-) {
+export function reducer(state = initialState, action: fromUser.UserActions) {
   switch (action.type) {
     case fromUser.REGISTER:
-    case fromRoot.SAVE_USER_SETTINGS:
+    case fromUser.SAVE_USER_SETTINGS:
     case fromUser.LOGIN: {
       return {
         ...state,
@@ -79,7 +75,7 @@ export function reducer(
       };
     }
 
-    case fromRoot.SAVE_USER_SETTINGS_SUCCESS: {
+    case fromUser.SAVE_USER_SETTINGS_SUCCESS: {
       const settings = action.payload;
       const userInfo = { ...state.userInfo, settings };
       return {

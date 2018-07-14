@@ -1,33 +1,27 @@
-// import { Injectable } from "@angular/core";
-// import { CanActivate } from "@angular/router";
-// import { Observable } from "rxjs";
+import { Injectable } from "@angular/core";
+import { CanActivate } from "@angular/router";
+import { Observable } from "rxjs";
 
-// import { Store } from "@ngrx/store";
-// import * as fromRoot from "../../@core/store";
-// import * as fromSettings from "../../settings/store";
-// import { filter, map } from "rxjs/operators";
+import { Store } from "@ngrx/store";
+import * as fromRoot from "../../@core/root-store";
+import { filter, map } from "rxjs/operators";
 
-// @Injectable()
-// export class RegistrationGuard implements CanActivate {
-//   constructor(
-//     private store: Store<fromRoot.AppState>,
-//     private settingsStore: Store<fromSettings.SettingsState>
-//   ) {}
+@Injectable()
+export class RegistrationGuard implements CanActivate {
+  constructor(private rootStore: Store<fromRoot.AppState>) {}
 
-//   canActivate(): Observable<boolean> {
-//     return this.settingsStore
-//       .select(fromSettings.selectRegistrationEnabled)
-//       .pipe(
-//         map(canRegister => {
-//           if (!canRegister) {
-//             this.store.dispatch(
-//               new fromRoot.Go({
-//                 path: ["/login"]
-//               })
-//             );
-//             return false;
-//           } else return true;
-//         })
-//       );
-//   }
-// }
+  canActivate(): Observable<boolean> {
+    return this.rootStore.select(fromRoot.selectRegistrationEnabled).pipe(
+      map(canRegister => {
+        if (!canRegister) {
+          this.rootStore.dispatch(
+            new fromRoot.Go({
+              path: ["/login"]
+            })
+          );
+          return false;
+        } else return true;
+      })
+    );
+  }
+}

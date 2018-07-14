@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { LayoutSandbox } from "./layout.sandbox";
 import { Observable } from "rxjs";
-import { User, AppSettings } from "../../models";
+import { User, AppSettings, UserSettings } from "../../models";
 
 @Component({
   selector: "lnk-layout",
@@ -24,11 +24,22 @@ export class LayoutComponent implements OnInit {
     this.appSettings$ = this.sb.appSettings$;
   }
 
+  onSettingsSaved(settings: {
+    appSettings: AppSettings;
+    userSettings: UserSettings;
+  }) {
+    this.sb.saveSettings(settings.appSettings, settings.userSettings);
+  }
+
   toggle() {
     this.sb.toggleSidebar();
   }
 
   close() {
     this.sb.closeSidebar();
+  }
+
+  logOut() {
+    this.sb.logOut();
   }
 }

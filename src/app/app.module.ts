@@ -6,15 +6,16 @@ import { HttpClientModule } from "@angular/common/http";
 import { environment } from "../environments/environment";
 
 import { AppRoutingModule } from "./app-routing.module";
-import { AuthModule } from "./auth/auth.module";
+import { CoreModule } from "./@core/core.module";
 import { UtilityModule } from "./@shared/utility";
+import { AuthModule } from "./auth/auth.module";
+import { DashboardModule } from "./dashboard/dashboard.module";
 
 // guards
 import * as sharedGuards from "./@shared/guards";
 
 // Root Component
 import { AppComponent } from "./app.component";
-import { CoreModule } from "./@core/core.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +30,8 @@ import { CoreModule } from "./@core/core.module";
     CoreModule.forRoot(),
     UtilityModule.forRoot(),
 
-    AuthModule
+    AuthModule,
+    DashboardModule
   ],
   providers: [...sharedGuards.guards],
   bootstrap: [AppComponent]

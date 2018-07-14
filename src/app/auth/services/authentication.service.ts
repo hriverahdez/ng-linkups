@@ -3,10 +3,10 @@ import { Injectable } from "@angular/core";
 import { RequestOptions } from "@angular/http";
 import { environment } from "../../../environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 
-import { map } from "rxjs/operators";
-import { User } from "../../@shared/models";
+import { map, tap, catchError } from "rxjs/operators";
+import { User, UserSettings } from "../../@shared/models";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
@@ -76,5 +76,15 @@ export class AuthenticationService {
   logOut() {
     localStorage.removeItem("token");
     localStorage.removeItem("currentUser");
+  }
+
+  saveUserSettings(settings: UserSettings): Observable<UserSettings> {
+    return this.http
+      .post<User>(`${environment.apiURL}/users/saveSettings`, settings)
+      .pipe(
+        tap((user: User) => this.updateCurrentUserInfo(user)),
+        map((user: User) => user.settings),
+        catchError(error => throwError(error))
+      );
   }
 }

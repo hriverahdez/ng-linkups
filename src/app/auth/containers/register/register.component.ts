@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
-import * as fromStore from "../../store";
-import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { User } from "../../../@shared/models";
+import { AuthSandbox } from "../../auth.sandbox";
 
 @Component({
   selector: "lnk-register",
@@ -12,13 +11,13 @@ import { User } from "../../../@shared/models";
 })
 export class RegisterComponent implements OnInit {
   isLoading$: Observable<boolean>;
-  constructor(private store: Store<fromStore.AuthState>) {}
+  constructor(private sb: AuthSandbox) {}
 
   ngOnInit() {
-    this.isLoading$ = this.store.select(fromStore.selectAuthLoading);
+    this.isLoading$ = this.sb.authLoading$;
   }
 
   register(user: User) {
-    this.store.dispatch(new fromStore.Register(user));
+    this.sb.register(user);
   }
 }

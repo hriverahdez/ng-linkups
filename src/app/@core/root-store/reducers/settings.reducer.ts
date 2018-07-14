@@ -4,14 +4,14 @@ import { CustomError } from "../../../@shared/models/custom-error.model";
 import { httpErrorMessages } from "../../../@shared/utils/http-error-messages";
 
 export interface SettingsState {
-  settings: AppSettings;
+  appSettings: AppSettings;
   loaded: boolean;
   loading: boolean;
   error: CustomError;
 }
 
 export const initialState: SettingsState = {
-  settings: {},
+  appSettings: {},
   loaded: false,
   loading: false,
   error: {}
@@ -44,10 +44,10 @@ export function reducer(
     }
 
     case fromAppSettings.LOAD_APP_SETTINGS_SUCCESS: {
-      const settings = action.payload;
+      const appSettings = action.payload;
       return {
         ...state,
-        settings,
+        appSettings,
         loaded: true,
         loading: false
       };
@@ -73,7 +73,7 @@ export function reducer(
   return state;
 }
 
-export const selectAppSettings = (state: SettingsState) => state.settings;
+export const selectAppSettings = (state: SettingsState) => state.appSettings;
 export const selectAppSettingsLoaded = (state: SettingsState) => state.loaded;
 export const selectAppSettingsLoading = (state: SettingsState) => state.loading;
 export const selectAppSettingsError = (state: SettingsState) => state.error;

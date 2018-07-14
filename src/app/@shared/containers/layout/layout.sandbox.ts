@@ -21,7 +21,9 @@ export class LayoutSandbox {
     fromRoot.selectAppSettings
   );
 
-  //   userSettings$: Observable<UserSettings> = this.rootStore.select(fromRoot)
+  userSettings$: Observable<UserSettings> = this.authStore.select(
+    fromAuth.selectUserSettings
+  );
 
   currentUser$: Observable<User> = this.authStore.select(
     fromAuth.selectCurrentUser
@@ -34,11 +36,21 @@ export class LayoutSandbox {
     this.rootStore.dispatch(new fromRoot.LoadAppSettings());
   }
 
+  saveSettings(appSettings: AppSettings, userSettings: UserSettings) {
+    this.authStore.dispatch(new fromAuth.SaveUserSettings(userSettings));
+    this.rootStore.dispatch(new fromRoot.SaveAppSettings(appSettings));
+    this.rootStore.dispatch(new fromRoot.HideSecondarySidebar());
+  }
+
   toggleSidebar() {
     this.rootStore.dispatch(new fromRoot.ShowSecondarySidebar());
   }
 
   closeSidebar() {
     this.rootStore.dispatch(new fromRoot.HideSecondarySidebar());
+  }
+
+  logOut() {
+    this.authStore.dispatch(new fromAuth.Logout());
   }
 }

@@ -11,22 +11,23 @@ import * as fromSelectors from "../selectors";
 
 import { Store } from "@ngrx/store";
 import { SnackBarService } from "../../../@shared/utility/snack-bar.service";
+import { SettingsService } from "../../services/settings.service";
 
 @Injectable()
 export class SettingsEffects {
   constructor(
     private actions$: Actions,
     private store: Store<fromFeature.AppState>,
-    // private settingsService: SettingsService,
+    private settingsService: SettingsService,
     private snackbar: SnackBarService
   ) {}
 
-  //   @Effect()
-  //   appSettings$ = this.actions$.ofType(settingsActions.LOAD_APP_SETTINGS).pipe(
-  //     switchMap(() => this.settingsService.getOne("")),
-  //     map(appSettings => new settingsActions.LoadAppSettingsSuccess(appSettings)),
-  //     catchError(error => of(new settingsActions.LoadAppSettingsFail(error)))
-  //   );
+  @Effect()
+  appSettings$ = this.actions$.ofType(settingsActions.LOAD_APP_SETTINGS).pipe(
+    switchMap(() => this.settingsService.getOne("")),
+    map(appSettings => new settingsActions.LoadAppSettingsSuccess(appSettings)),
+    catchError(error => of(new settingsActions.LoadAppSettingsFail(error)))
+  );
 
   //   @Effect()
   //   saveAppSettings$ = this.actions$

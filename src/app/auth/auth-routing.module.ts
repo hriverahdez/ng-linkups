@@ -8,12 +8,12 @@ import * as fromContainers from "./containers";
 import * as fromComponents from "./components";
 
 // guards
-// import * as fromGuards from "./guards";
+import * as fromGuards from "./guards";
 
 const ROUTES: Routes = [
   {
-    path: "register"
-    // component: fromContainers.RegisterComponent,
+    path: "register",
+    component: fromContainers.RegisterComponent
     // canActivate: [fromGuards.RegistrationGuard]
   },
   {

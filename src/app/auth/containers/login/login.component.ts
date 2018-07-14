@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
 import * as fromRoot from "../../../@core/root-store";
 import * as fromStore from "../../store";
+import { AuthSandbox } from "../../auth.sandbox";
 
 @Component({
   selector: "lnk-login",
@@ -15,20 +16,15 @@ export class LoginComponent implements OnInit {
   canRegister$: Observable<boolean>;
   isLoading$: Observable<boolean>;
 
-  constructor(
-    private rootStore: Store<fromRoot.AppState>,
-    private store: Store<fromStore.AuthState>
-  ) {}
+  constructor(private sb: AuthSandbox) {}
 
   ngOnInit() {
     // this.settingsStore.dispatch(new fromRoot.LoadAppSettings());
-    // this.canRegister$ = this.settingsStore.select(
-    //   fromRoot.selectRegistrationEnabled
-    // );
-    this.isLoading$ = this.store.select(fromStore.selectAuthLoading);
+    this.canRegister$ = this.sb.canRegister$;
+    this.isLoading$ = this.sb.authLoading$;
   }
 
   login(credentials) {
-    this.store.dispatch(new fromStore.Login(credentials));
+    this.sb.login(credentials);
   }
 }

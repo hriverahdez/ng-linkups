@@ -40,32 +40,10 @@ export class SaveAppSettingsSuccess implements Action {
   constructor(public payload: AppSettings) {}
 }
 
-export const SAVE_USER_SETTINGS = "[Core] Save User Settings";
-export const SAVE_USER_SETTINGS_FAIL = "[Core] Save User Settings Fail";
-export const SAVE_USER_SETTINGS_SUCCESS = "[Core] Save User Settings Success";
-
-export class SaveUserSettings implements Action {
-  readonly type = SAVE_USER_SETTINGS;
-  constructor(public payload: UserSettings) {}
-}
-
-export class SaveUserSettingsFail implements Action {
-  readonly type = SAVE_USER_SETTINGS_FAIL;
-  constructor(public payload: any) {}
-}
-
-export class SaveUserSettingsSuccess implements Action {
-  readonly type = SAVE_USER_SETTINGS_SUCCESS;
-  constructor(public payload: UserSettings) {}
-}
-
 export type SettingsActions =
   | LoadAppSettings
   | LoadAppSettingsFail
   | LoadAppSettingsSuccess
   | SaveAppSettings
   | SaveAppSettingsFail
-  | SaveAppSettingsSuccess
-  | SaveUserSettings
-  | SaveUserSettingsFail
-  | SaveUserSettingsSuccess;
+  | SaveAppSettingsSuccess;

@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { User } from "../../../@shared/models";
+import { User, UserSettings } from "../../../@shared/models";
 
 // Login
 export const LOGIN = "[Auth] Log in";
@@ -56,6 +56,26 @@ export class SetUser implements Action {
   constructor(public payload: User) {}
 }
 
+// Save Auth User settings
+export const SAVE_USER_SETTINGS = "[Core] Save User Settings";
+export const SAVE_USER_SETTINGS_FAIL = "[Core] Save User Settings Fail";
+export const SAVE_USER_SETTINGS_SUCCESS = "[Core] Save User Settings Success";
+
+export class SaveUserSettings implements Action {
+  readonly type = SAVE_USER_SETTINGS;
+  constructor(public payload: UserSettings) {}
+}
+
+export class SaveUserSettingsFail implements Action {
+  readonly type = SAVE_USER_SETTINGS_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class SaveUserSettingsSuccess implements Action {
+  readonly type = SAVE_USER_SETTINGS_SUCCESS;
+  constructor(public payload: UserSettings) {}
+}
+
 export type UserActions =
   | Login
   | LoginFail
@@ -64,4 +84,7 @@ export type UserActions =
   | RegisterFail
   | RegisterSuccess
   | Logout
-  | SetUser;
+  | SetUser
+  | SaveUserSettings
+  | SaveUserSettingsFail
+  | SaveUserSettingsSuccess;

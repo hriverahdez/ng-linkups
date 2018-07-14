@@ -1,5 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
 
 import {
   MatCardModule,
@@ -63,7 +65,7 @@ import * as fromComponents from "./components";
 import * as fromGuards from "./guards";
 
 @NgModule({
-  imports: [...NG_MAT_MODULES, CommonModule],
+  imports: [...NG_MAT_MODULES, CommonModule, RouterModule, ReactiveFormsModule],
   entryComponents: [fromComponents.ConfirmDialogComponent],
   declarations: [...fromContainers.containers, ...fromComponents.components],
   exports: [
