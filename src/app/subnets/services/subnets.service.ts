@@ -3,7 +3,7 @@ import { AbstractDataService } from "../../@shared/utils/abstract-data-service";
 import { HttpClient } from "@angular/common/http";
 import { Subnet } from "../models/subnet.model";
 import { environment } from "../../../environments/environment";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 
 @Injectable()

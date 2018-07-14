@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
 
-import { tokenNotExpired } from "angular2-jwt";
 import { RequestOptions } from "@angular/http";
 import { environment } from "../../../environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 import { User } from "../../@core/models/user.model";
 
@@ -28,7 +27,8 @@ export class AuthenticationService {
 
   isAuthenticated() {
     const token = this.getToken();
-    return tokenNotExpired(null, token);
+    return this.getCurrentUser();
+    // return tokenNotExpired(null, token);
   }
 
   login(user: User): Observable<User> {

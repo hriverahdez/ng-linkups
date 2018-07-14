@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 
 import { AbstractDataService } from "../../@shared/utils/abstract-data-service";

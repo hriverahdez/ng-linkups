@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect } from "@ngrx/effects";
 
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import {
   catchError,
   debounceTime,
@@ -55,14 +55,12 @@ export class NotificationsEffect {
     .ofType(notificationActions.GET_UNREAD_COUNT)
     .pipe(
       switchMap(() =>
-        this.notificationService
-          .getUnreadNotificationsCountFromServer()
-          .pipe(
-            map(data => new notificationActions.SetUnreadCount(data.count)),
-            catchError(error =>
-              of(new notificationActions.GetUnreadCountFail(error))
-            )
+        this.notificationService.getUnreadNotificationsCountFromServer().pipe(
+          map(data => new notificationActions.SetUnreadCount(data.count)),
+          catchError(error =>
+            of(new notificationActions.GetUnreadCountFail(error))
           )
+        )
       )
     );
 
@@ -81,7 +79,7 @@ export class NotificationsEffect {
           filter(loaded => loaded),
           take(1)
         )
-      ),
+      )
     );
 
   /**
@@ -92,17 +90,15 @@ export class NotificationsEffect {
     .ofType(notificationActions.LOAD_NOTIFICATIONS)
     .pipe(
       switchMap(() =>
-        this.notificationService
-          .getNotifications()
-          .pipe(
-            map(
-              notifications =>
-                new notificationActions.LoadNotificationsSuccess(notifications)
-            ),
-            catchError(error =>
-              of(new notificationActions.LoadNotificationsFail(error))
-            )
+        this.notificationService.getNotifications().pipe(
+          map(
+            notifications =>
+              new notificationActions.LoadNotificationsSuccess(notifications)
+          ),
+          catchError(error =>
+            of(new notificationActions.LoadNotificationsFail(error))
           )
+        )
       )
     );
 
@@ -115,13 +111,11 @@ export class NotificationsEffect {
     .pipe(
       debounceTime(100),
       switchMap(() =>
-        this.store
-          .select(fromSelectors.allNotificationsRead)
-          .pipe(
-            filter(allRead => allRead),
-            switchMap(() => this.notificationService.readAllNotifications()),
-            take(1)
-          )
+        this.store.select(fromSelectors.allNotificationsRead).pipe(
+          filter(allRead => allRead),
+          switchMap(() => this.notificationService.readAllNotifications()),
+          take(1)
+        )
       )
     );
 

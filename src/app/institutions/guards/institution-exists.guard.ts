@@ -4,8 +4,7 @@ import { CanActivate, ActivatedRouteSnapshot } from "@angular/router";
 import { Store } from "@ngrx/store";
 import * as fromStore from "../store";
 
-import { Observable } from "rxjs/Observable";
-import { of } from "rxjs/observable/of";
+import { Observable, of } from "rxjs";
 import { tap, map, switchMap, filter, take, catchError } from "rxjs/operators";
 
 @Injectable()
@@ -19,9 +18,10 @@ export class InstitutionExistsGuard implements CanActivate {
   }
 
   hasInstitution(id: string): Observable<boolean> {
-    return this.store
-      .select(fromStore.getInstitutionsEntities)
-      .pipe(map(entities => !!entities[id]), take(1));
+    return this.store.select(fromStore.getInstitutionsEntities).pipe(
+      map(entities => !!entities[id]),
+      take(1)
+    );
   }
 
   checkStore(): Observable<boolean> {

@@ -2,8 +2,7 @@ import { Injectable } from "@angular/core";
 import { CanActivate, ActivatedRouteSnapshot } from "@angular/router";
 
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs/Observable";
-import { of } from "rxjs/observable/of";
+import { Observable, of } from "rxjs";
 import { map, take, filter, switchMap, tap } from "rxjs/operators";
 
 import * as fromStore from "../store";
@@ -19,9 +18,10 @@ export class CategoryExistsGuard implements CanActivate {
   }
 
   hasCategory(id: string): Observable<boolean> {
-    return this.store
-      .select(fromStore.getCategoriesEntities)
-      .pipe(map(entities => !!entities[id]), take(1));
+    return this.store.select(fromStore.getCategoriesEntities).pipe(
+      map(entities => !!entities[id]),
+      take(1)
+    );
   }
 
   checkStore(): Observable<boolean> {

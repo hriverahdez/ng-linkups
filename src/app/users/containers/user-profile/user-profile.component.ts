@@ -3,7 +3,7 @@ import { Store } from "@ngrx/store";
 
 import * as fromRoot from "../../../@core/store";
 import { User } from "../../../@core/models/user.model";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "lnk-user-profile",

@@ -3,8 +3,7 @@ import { Injectable } from "@angular/core";
 import { CanActivate } from "@angular/router";
 
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs/Observable";
-import { of } from "rxjs/observable/of";
+import { Observable } from "rxjs";
 
 import * as fromRoot from "../../@core/store";
 import * as fromServices from "../services";

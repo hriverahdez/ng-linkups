@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import * as fromLayout from "../../../@layout/store";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "lnk-layout",

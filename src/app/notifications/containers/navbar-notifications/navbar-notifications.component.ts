@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer2, ElementRef } from "@angular/core";
 
 import { Notification } from "../../models/notification.model";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { map, tap } from "rxjs/operators";
 
 import { Store } from "@ngrx/store";

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect } from "@ngrx/effects";
 
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { catchError, switchMap, map } from "rxjs/operators";
 
 import { Store } from "@ngrx/store";
@@ -30,28 +30,22 @@ export class SubnetsEffects {
   ) {}
 
   @Effect()
-  subnets$ = this.actions$
-    .ofType(subnetActions.LOAD_SUBNETS)
-    .pipe(
-      switchMap(() => this.subnetsService.getAll()),
-      map(subnets => new subnetActions.LoadSubnetsSuccess(subnets)),
-      catchError(error => of(new subnetActions.LoadSubnetsFail(error)))
-    );
+  subnets$ = this.actions$.ofType(subnetActions.LOAD_SUBNETS).pipe(
+    switchMap(() => this.subnetsService.getAll()),
+    map(subnets => new subnetActions.LoadSubnetsSuccess(subnets)),
+    catchError(error => of(new subnetActions.LoadSubnetsFail(error)))
+  );
 
   @Effect()
-  createSubnet$ = this.actions$
-    .ofType(subnetActions.ADD_SUBNET)
-    .pipe(
-      map((action: subnetActions.AddSubnet) => action.payload),
-      switchMap(subnet =>
-        this.subnetsService
-          .add(subnet)
-          .pipe(
-            map(newSubnet => new subnetActions.AddSubnetSuccess(newSubnet)),
-            catchError(error => of(new subnetActions.AddSubnetFail(error)))
-          )
+  createSubnet$ = this.actions$.ofType(subnetActions.ADD_SUBNET).pipe(
+    map((action: subnetActions.AddSubnet) => action.payload),
+    switchMap(subnet =>
+      this.subnetsService.add(subnet).pipe(
+        map(newSubnet => new subnetActions.AddSubnetSuccess(newSubnet)),
+        catchError(error => of(new subnetActions.AddSubnetFail(error)))
       )
-    );
+    )
+  );
 
   @Effect()
   createSubnetFromModal$ = this.actions$
@@ -59,17 +53,14 @@ export class SubnetsEffects {
     .pipe(
       map((action: subnetActions.AddSubnetFromModal) => action.payload),
       switchMap(subnet =>
-        this.subnetsService
-          .add(subnet)
-          .pipe(
-            map(
-              newSubnet =>
-                new subnetActions.AddSubnetFromModalSuccess(newSubnet)
-            ),
-            catchError(error =>
-              of(new subnetActions.AddSubnetFromModalFail(error))
-            )
+        this.subnetsService.add(subnet).pipe(
+          map(
+            newSubnet => new subnetActions.AddSubnetFromModalSuccess(newSubnet)
+          ),
+          catchError(error =>
+            of(new subnetActions.AddSubnetFromModalFail(error))
           )
+        )
       )
     );
 
@@ -79,44 +70,34 @@ export class SubnetsEffects {
     .pipe(
       map((action: subnetActions.AddSubnetRange) => action.payload),
       switchMap(data =>
-        this.subnetsService
-          .addSubnetRange(data)
-          .pipe(
-            map(subnets => new subnetActions.AddSubnetRangeSuccess(subnets)),
-            catchError(error => of(new subnetActions.AddSubnetRangeFail(error)))
-          )
+        this.subnetsService.addSubnetRange(data).pipe(
+          map(subnets => new subnetActions.AddSubnetRangeSuccess(subnets)),
+          catchError(error => of(new subnetActions.AddSubnetRangeFail(error)))
+        )
       )
     );
 
   @Effect()
-  updateSubnet$ = this.actions$
-    .ofType(subnetActions.UPDATE_SUBNET)
-    .pipe(
-      map((action: subnetActions.UpdateSubnet) => action.payload),
-      switchMap((subnet: Subnet) =>
-        this.subnetsService
-          .update(subnet)
-          .pipe(
-            map(subnet => new subnetActions.UpdateSubnetSuccess(subnet)),
-            catchError(error => of(new subnetActions.UpdateSubnetFail(error)))
-          )
+  updateSubnet$ = this.actions$.ofType(subnetActions.UPDATE_SUBNET).pipe(
+    map((action: subnetActions.UpdateSubnet) => action.payload),
+    switchMap((subnet: Subnet) =>
+      this.subnetsService.update(subnet).pipe(
+        map(subnet => new subnetActions.UpdateSubnetSuccess(subnet)),
+        catchError(error => of(new subnetActions.UpdateSubnetFail(error)))
       )
-    );
+    )
+  );
 
   @Effect()
-  deleteSubnet$ = this.actions$
-    .ofType(subnetActions.DELETE_SUBNET)
-    .pipe(
-      map((action: subnetActions.DeleteSubnet) => action.payload),
-      switchMap(subnet =>
-        this.subnetsService
-          .delete(subnet)
-          .pipe(
-            map(() => new subnetActions.DeleteSubnetSuccess(subnet)),
-            catchError(error => of(new subnetActions.DeleteSubnetFail(error)))
-          )
+  deleteSubnet$ = this.actions$.ofType(subnetActions.DELETE_SUBNET).pipe(
+    map((action: subnetActions.DeleteSubnet) => action.payload),
+    switchMap(subnet =>
+      this.subnetsService.delete(subnet).pipe(
+        map(() => new subnetActions.DeleteSubnetSuccess(subnet)),
+        catchError(error => of(new subnetActions.DeleteSubnetFail(error)))
       )
-    );
+    )
+  );
 
   @Effect()
   handleSubnetSuccess$ = this.actions$

@@ -11,7 +11,7 @@ import {
 import * as fromStore from "../reducers/layout.reducers";
 import * as fromLayout from "../actions/layout.actions";
 import { map, switchMap, concatMap } from "rxjs/operators";
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { Store } from "@ngrx/store";
 
 @Injectable()

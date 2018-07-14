@@ -1,4 +1,4 @@
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { ConfirmDialogComponent } from "./dialogs/confirm-dialog/confirm-dialog.component";
 import { Injectable } from "@angular/core";
 import {

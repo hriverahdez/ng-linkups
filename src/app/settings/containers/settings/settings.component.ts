@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import * as fromStore from "../../store";
 import * as fromRoot from "../../../@core/store";
 import * as fromLayout from "../../../@layout/store";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { AppSettings } from "../../models/app-settings.model";
 import { Store } from "@ngrx/store";
 import { UserSettings } from "../../../@core/models/user-settings.model";

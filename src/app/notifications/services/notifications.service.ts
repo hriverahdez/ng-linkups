@@ -4,8 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Notification } from "../models/notification.model";
 import { environment } from "../../../environments/environment";
 
-import { Observable } from "rxjs/Observable";
-import { of } from "rxjs/observable/of";
+import { Observable, of } from "rxjs";
 import { catchError } from "rxjs/operators";
 
 @Injectable()

@@ -6,7 +6,7 @@ import { Store } from "@ngrx/store";
 import * as fromRoot from "../../../@core/store";
 import * as fromLayout from "../../../@layout/store";
 
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { catchError, switchMap, map, tap } from "rxjs/operators";
 
 import * as fromServices from "../../services/";
@@ -27,70 +27,49 @@ export class CategoriesEffects {
   ) {}
 
   @Effect()
-  categories$ = this.actions$
-    .ofType(categoryActions.LOAD_CATEGORIES)
-    .pipe(
-      switchMap(() =>
-        this.categoriesService
-          .getAll()
-          .pipe(
-            map(
-              categories =>
-                new categoryActions.LoadCategoriesSuccess(categories)
-            ),
-            catchError(error =>
-              of(new categoryActions.LoadCategoriesFail(error))
-            )
-          )
+  categories$ = this.actions$.ofType(categoryActions.LOAD_CATEGORIES).pipe(
+    switchMap(() =>
+      this.categoriesService.getAll().pipe(
+        map(
+          categories => new categoryActions.LoadCategoriesSuccess(categories)
+        ),
+        catchError(error => of(new categoryActions.LoadCategoriesFail(error)))
       )
-    );
+    )
+  );
 
   @Effect()
   createCategory$ = this.actions$.ofType(categoryActions.ADD_CATEGORY).pipe(
     map((action: categoryActions.AddCategory) => action.payload),
     switchMap(category => {
-      return this.categoriesService
-        .add(category)
-        .pipe(
-          map(category => new categoryActions.AddCategorySuccess(category)),
-          catchError(error => of(new categoryActions.AddCategoryFail(error)))
-        );
+      return this.categoriesService.add(category).pipe(
+        map(category => new categoryActions.AddCategorySuccess(category)),
+        catchError(error => of(new categoryActions.AddCategoryFail(error)))
+      );
     })
   );
 
   @Effect()
-  updateCategory$ = this.actions$
-    .ofType(categoryActions.UPDATE_CATEGORY)
-    .pipe(
-      map((action: categoryActions.UpdateCategory) => action.payload),
-      switchMap(category =>
-        this.categoriesService
-          .update(category)
-          .pipe(
-            map(() => new categoryActions.UpdateCategorySuccess(category)),
-            catchError(error =>
-              of(new categoryActions.UpdateCategoryFail(error))
-            )
-          )
+  updateCategory$ = this.actions$.ofType(categoryActions.UPDATE_CATEGORY).pipe(
+    map((action: categoryActions.UpdateCategory) => action.payload),
+    switchMap(category =>
+      this.categoriesService.update(category).pipe(
+        map(() => new categoryActions.UpdateCategorySuccess(category)),
+        catchError(error => of(new categoryActions.UpdateCategoryFail(error)))
       )
-    );
+    )
+  );
 
   @Effect()
-  deleteCategory$ = this.actions$
-    .ofType(categoryActions.DELETE_CATEGORY)
-    .pipe(
-      map((action: categoryActions.DeleteCategory) => action.payload),
-      switchMap(category =>
-        this.categoriesService
-          .delete(category)
-          .pipe(
-            map(() => new categoryActions.DeleteCategorySuccess(category)),
-            catchError(error =>
-              of(new categoryActions.DeleteCategoryFail(error))
-            )
-          )
+  deleteCategory$ = this.actions$.ofType(categoryActions.DELETE_CATEGORY).pipe(
+    map((action: categoryActions.DeleteCategory) => action.payload),
+    switchMap(category =>
+      this.categoriesService.delete(category).pipe(
+        map(() => new categoryActions.DeleteCategorySuccess(category)),
+        catchError(error => of(new categoryActions.DeleteCategoryFail(error)))
       )
-    );
+    )
+  );
 
   @Effect()
   handleCategorySuccess$ = this.actions$

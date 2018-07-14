@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
 import { CanActivate } from "@angular/router";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 import { Store } from "@ngrx/store";
 import * as fromRoot from "../../@core/store";
 import * as fromSettings from "../../settings/store";
 import { filter, map } from "rxjs/operators";
-import { of } from "rxjs/observable/of";
 
 @Injectable()
 export class RegistrationGuard implements CanActivate {

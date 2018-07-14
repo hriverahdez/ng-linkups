@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { tap, map } from "rxjs/operators";
 
 import { Institution } from "../../models/institution.model";

@@ -14,9 +14,11 @@ export class NotificationSocketHandlerService {
     private wsService: fromSharedServices.WebsocketService<Notification>
   ) {
     this._notifications = <Subject<Notification>>wsService.connect().pipe(
-      map((response): Notification => {
-        return response.data;
-      })
+      map(
+        (response: any): Notification => {
+          return response.data;
+        }
+      )
     );
   }
 

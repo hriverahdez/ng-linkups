@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { Actions, Effect } from "@ngrx/effects";
 
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { switchMap, map, catchError, tap } from "rxjs/operators";
 
 import * as settingsActions from "../actions";
@@ -25,15 +25,11 @@ export class AppSettingsEffects {
   ) {}
 
   @Effect()
-  appSettings$ = this.actions$
-    .ofType(settingsActions.LOAD_APP_SETTINGS)
-    .pipe(
-      switchMap(() => this.settingsService.getOne("")),
-      map(
-        appSettings => new settingsActions.LoadAppSettingsSuccess(appSettings)
-      ),
-      catchError(error => of(new settingsActions.LoadAppSettingsFail(error)))
-    );
+  appSettings$ = this.actions$.ofType(settingsActions.LOAD_APP_SETTINGS).pipe(
+    switchMap(() => this.settingsService.getOne("")),
+    map(appSettings => new settingsActions.LoadAppSettingsSuccess(appSettings)),
+    catchError(error => of(new settingsActions.LoadAppSettingsFail(error)))
+  );
 
   @Effect()
   saveAppSettings$ = this.actions$
@@ -41,17 +37,15 @@ export class AppSettingsEffects {
     .pipe(
       map((action: settingsActions.SaveAppSettings) => action.payload),
       switchMap(appSettings =>
-        this.settingsService
-          .add(appSettings)
-          .pipe(
-            map(
-              appSettings =>
-                new settingsActions.SaveAppSettingsSuccess(appSettings)
-            ),
-            catchError(error =>
-              of(new settingsActions.SaveAppSettingsFail(error))
-            )
+        this.settingsService.add(appSettings).pipe(
+          map(
+            appSettings =>
+              new settingsActions.SaveAppSettingsSuccess(appSettings)
+          ),
+          catchError(error =>
+            of(new settingsActions.SaveAppSettingsFail(error))
           )
+        )
       )
     );
 
@@ -61,16 +55,14 @@ export class AppSettingsEffects {
     .pipe(
       map((action: settingsActions.SaveUserSettings) => action.payload),
       switchMap(userSettings =>
-        this.settingsService
-          .saveUserSettings(userSettings)
-          .pipe(
-            map(
-              settings => new settingsActions.SaveUserSettingsSuccess(settings)
-            ),
-            catchError(error =>
-              of(new settingsActions.SaveUserSettingsFail(error))
-            )
+        this.settingsService.saveUserSettings(userSettings).pipe(
+          map(
+            settings => new settingsActions.SaveUserSettingsSuccess(settings)
+          ),
+          catchError(error =>
+            of(new settingsActions.SaveUserSettingsFail(error))
           )
+        )
       )
     );
 

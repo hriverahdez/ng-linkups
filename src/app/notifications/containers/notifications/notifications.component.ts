@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 import * as fromStore from "../../store";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { Notification } from "../../models/notification.model";
 
 import * as fromServices from "../../services";

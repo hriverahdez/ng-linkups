@@ -4,9 +4,8 @@ import { AppSettings } from "../models/app-settings.model";
 import { HttpClient } from "@angular/common/http";
 import { UserSettings } from "../../@core/models/user-settings.model";
 import { User } from "../../@core/models/user.model";
-import { Observable } from "rxjs/Observable";
+import { Observable, throwError } from "rxjs";
 import { map, catchError, tap } from "rxjs/operators";
-import "rxjs/add/observable/throw";
 import { environment } from "../../../environments/environment";
 import { AuthenticationService } from "../../@shared/services";
 
@@ -27,7 +26,7 @@ export class SettingsService extends AbstractDataService<AppSettings> {
           this.authenticationService.updateCurrentUserInfo(user)
         ),
         map((user: User) => user.settings),
-        catchError(error => Observable.throw(error))
+        catchError(error => throwError(error))
       );
   }
 }

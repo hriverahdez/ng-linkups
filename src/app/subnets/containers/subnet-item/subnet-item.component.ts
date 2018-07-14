@@ -5,7 +5,7 @@ import { Store } from "@ngrx/store";
 import * as fromRoot from "../../../@core/store";
 import * as fromStore from "../../store";
 import { Subnet } from "../../models/subnet.model";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "lnk-subnet-item",
