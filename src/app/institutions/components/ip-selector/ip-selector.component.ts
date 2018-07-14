@@ -1,10 +1,10 @@
 import { Component, forwardRef, Input } from "@angular/core";
 
 import * as fromSubnetContainers from "../../../subnets/containers";
-import * as fromSharedServices from "../../../@shared/services";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { Subnet } from "../../../subnets/models/subnet.model";
 import { DialogPosition } from "@angular/material";
+import { Subnet } from "../../../@shared/models";
+import { DialogService } from "../../../@shared/utility/dialog.service";
 
 const IP_SELECTOR_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -26,7 +26,7 @@ export class IpSelectorComponent implements ControlValueAccessor {
   onTouch: Function;
   onModelChange: Function;
 
-  constructor(private dialogService: fromSharedServices.DialogService) {}
+  constructor(private dialogService: DialogService) {}
 
   writeValue(value: Subnet): void {
     this.value = value;

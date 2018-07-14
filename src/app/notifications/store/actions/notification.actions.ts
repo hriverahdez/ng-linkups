@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { Notification } from "../../models/notification.model";
+import { Notification } from "../../../@shared/models/notification.model";
 
 // UNREAD COUNT
 export const GET_UNREAD_COUNT = "[Notifications] Get Unread Count";

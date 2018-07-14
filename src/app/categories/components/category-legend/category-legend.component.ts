@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-
-import { Category } from "../../models/category.model";
+import { Category } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-category-legend",

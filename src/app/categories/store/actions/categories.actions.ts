@@ -1,6 +1,5 @@
 import { Action } from "@ngrx/store";
-
-import { Category } from "../../models/category.model";
+import { Category } from "../../../@shared/models";
 
 // LOAD
 export const LOAD_CATEGORIES = "[Categories] Load Categories";

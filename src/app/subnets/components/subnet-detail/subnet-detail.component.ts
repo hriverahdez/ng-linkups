@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { Subnet } from "../../models/subnet.model";
-import { IpHelperService } from "../../services/index";
+import { Subnet } from "../../../@shared/models";
+import { IpHelperService } from "../../../@shared/utility/ip-helper.service";
 
 @Component({
   selector: "lnk-subnet-detail",

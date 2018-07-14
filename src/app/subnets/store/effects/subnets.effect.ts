@@ -6,27 +6,24 @@ import { catchError, switchMap, map } from "rxjs/operators";
 
 import { Store } from "@ngrx/store";
 
-import * as fromRoot from "../../../@core/store";
-import * as fromLayout from "../../../@layout/store";
+import * as fromRoot from "../../../@core/root-store";
 
 import * as fromFeature from "../reducers";
 import * as fromSelectors from "../selectors";
 import * as subnetActions from "../actions";
 
 import * as fromServices from "../../services";
-import * as fromSharedServices from "../../../@shared/services";
-
-import { Subnet } from "../../models/subnet.model";
+import { SnackBarService } from "../../../@shared/utility/snack-bar.service";
+import { Subnet } from "../../../@shared/models";
 
 @Injectable()
 export class SubnetsEffects {
   constructor(
     private actions$: Actions,
     private rootStore: Store<fromRoot.AppState>,
-    private layoutStore: Store<fromLayout.LayoutState>,
     private store: Store<fromFeature.SubnetsState>,
     private subnetsService: fromServices.SubnetsService,
-    private snackbar: fromSharedServices.SnackBarService
+    private snackbar: SnackBarService
   ) {}
 
   @Effect()
@@ -135,7 +132,7 @@ export class SubnetsEffects {
     )
     .pipe(
       map(action => {
-        return new fromLayout.ShowLoader();
+        return new fromRoot.ShowLoader();
       })
     );
 
@@ -153,7 +150,7 @@ export class SubnetsEffects {
     )
     .pipe(
       map(action => {
-        return new fromLayout.HideLoader();
+        return new fromRoot.HideLoader();
       })
     );
 }

@@ -1,13 +1,11 @@
 import { Injectable } from "@angular/core";
-import { AbstractDataService } from "../../@shared/utils/abstract-data-service";
-import { AppSettings } from "../models/app-settings.model";
 import { HttpClient } from "@angular/common/http";
-import { UserSettings } from "../../@core/models/user-settings.model";
-import { User } from "../../@core/models/user.model";
 import { Observable, throwError } from "rxjs";
 import { map, catchError, tap } from "rxjs/operators";
 import { environment } from "../../../environments/environment";
-import { AuthenticationService } from "../../@shared/services";
+import { AbstractDataService } from "../../@shared/asyncServices/http/abstract-data-service";
+import { AppSettings, UserSettings, User } from "../../@shared/models";
+import { AuthenticationService } from "../../auth/services";
 
 @Injectable()
 export class SettingsService extends AbstractDataService<AppSettings> {

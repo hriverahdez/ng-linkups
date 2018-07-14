@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 
-import * as fromRoot from "../../../@core/store";
+import * as fromRoot from "../../../@core/root-store";
 import * as fromStore from "../../store";
-import { Subnet } from "../../models/subnet.model";
 import { Observable } from "rxjs";
+import { Subnet } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-subnet-item",

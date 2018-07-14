@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { Subnet } from "../../models/subnet.model";
+import { Subnet } from "../../../@shared/models";
 
 // LOAD
 export const LOAD_SUBNETS = "[Subnets] Load Subnets";

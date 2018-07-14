@@ -1,6 +1,5 @@
 import { Action } from "@ngrx/store";
-
-import { Institution } from "../../models/institution.model";
+import { Institution } from "../../../@shared/models";
 
 // LOAD
 export const LOAD_INSTITUTIONS = "[Institutions] Load Institutions";

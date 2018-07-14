@@ -13,8 +13,7 @@ import {
   FormBuilder,
   Validators
 } from "@angular/forms";
-
-import { Category } from "../../models/category.model";
+import { Category } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-category-form",

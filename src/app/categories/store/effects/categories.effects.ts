@@ -3,27 +3,25 @@ import { Injectable } from "@angular/core";
 import { Effect, Actions } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 
-import * as fromRoot from "../../../@core/store";
-import * as fromLayout from "../../../@layout/store";
+import * as fromRoot from "../../../@core/root-store";
 
 import { of } from "rxjs";
 import { catchError, switchMap, map, tap } from "rxjs/operators";
 
 import * as fromServices from "../../services/";
-import * as fromSharedServices from "../../../@shared/services";
 import * as fromFeature from "../reducers";
 import * as fromSelectors from "../selectors";
 import * as categoryActions from "../actions";
+import { SnackBarService } from "../../../@shared/utility/snack-bar.service";
 
 @Injectable()
 export class CategoriesEffects {
   constructor(
     private actions$: Actions,
     private rootStore: Store<fromRoot.AppState>,
-    private layoutStore: Store<fromLayout.LayoutState>,
     private store: Store<fromFeature.CategoriesState>,
     private categoriesService: fromServices.CategoriesService,
-    private snackbar: fromSharedServices.SnackBarService
+    private snackbar: SnackBarService
   ) {}
 
   @Effect()
@@ -106,7 +104,7 @@ export class CategoriesEffects {
     )
     .pipe(
       map(action => {
-        return new fromLayout.ShowLoader();
+        return new fromRoot.ShowLoader();
       })
     );
 
@@ -124,7 +122,7 @@ export class CategoriesEffects {
     )
     .pipe(
       map(action => {
-        return new fromLayout.HideLoader();
+        return new fromRoot.HideLoader();
       })
     );
 }

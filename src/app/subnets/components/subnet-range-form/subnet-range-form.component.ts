@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 
-import * as fromServices from "../../services";
 import {
   FormGroup,
   FormBuilder,
@@ -8,6 +7,7 @@ import {
   Validators
 } from "@angular/forms";
 import { IP_REGEXP } from "../../../@shared/utils/ip-regex";
+import { IpHelperService } from "../../../@shared/utility/ip-helper.service";
 
 @Component({
   selector: "lnk-subnet-range-form",
@@ -20,10 +20,7 @@ export class SubnetRangeFormComponent implements OnInit {
 
   @Output() onCreate = new EventEmitter<{ range: string[]; mask: number }>();
 
-  constructor(
-    private ipHelper: fromServices.IpHelperService,
-    private fb: FormBuilder
-  ) {}
+  constructor(private ipHelper: IpHelperService, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.subnetRangeForm = this.toFormGroup();

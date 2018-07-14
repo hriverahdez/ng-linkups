@@ -1,5 +1,5 @@
-import { NotificationsEffect } from "./notifications.effect";
+// import { NotificationsEffect } from "./notifications.effect";
 
-export const effects: any[] = [NotificationsEffect];
+// export const effects: any[] = [NotificationsEffect];
 
-export * from "./notifications.effect";
+// export * from "./notifications.effect";

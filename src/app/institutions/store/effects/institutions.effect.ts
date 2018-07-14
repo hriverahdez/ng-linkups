@@ -6,27 +6,24 @@ import { catchError, switchMap, map, tap } from "rxjs/operators";
 import { Effect, Actions } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 
-import * as fromRoot from "../../../@core/store";
-import * as fromLayout from "../../../@layout/store";
+import * as fromRoot from "../../../@core/root-store";
 
 import * as fromFeature from "../reducers";
 import * as fromSelectors from "../selectors";
 import * as institutionActions from "../actions";
 
 import * as fromServices from "../../services";
-import * as fromSharedServices from "../../../@shared/services";
-
-import { Institution } from "../../models/institution.model";
+import { SnackBarService } from "../../../@shared/utility/snack-bar.service";
+import { Institution } from "../../../@shared/models";
 
 @Injectable()
 export class InstitutionEffects {
   constructor(
     private actions$: Actions,
     private rootStore: Store<fromRoot.AppState>,
-    private layoutStore: Store<fromLayout.LayoutState>,
     private store: Store<fromFeature.InstitutionsState>,
     private institutionsService: fromServices.InstitutionsService,
-    private snackbar: fromSharedServices.SnackBarService
+    private snackbar: SnackBarService
   ) {}
 
   @Effect()
@@ -128,7 +125,7 @@ export class InstitutionEffects {
     )
     .pipe(
       map(action => {
-        return new fromLayout.ShowLoader();
+        return new fromRoot.ShowLoader();
       })
     );
 
@@ -146,7 +143,7 @@ export class InstitutionEffects {
     )
     .pipe(
       map(action => {
-        return new fromLayout.HideLoader();
+        return new fromRoot.HideLoader();
       })
     );
 }

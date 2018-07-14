@@ -1,61 +1,61 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { Routes, RouterModule } from "@angular/router";
+// import { NgModule } from "@angular/core";
+// import { CommonModule } from "@angular/common";
+// import { Routes, RouterModule } from "@angular/router";
 
-import * as fromContainers from "./containers";
-import * as fromSharedGuards from "../@shared/guards";
-import * as fromNotificationGuards from "../notifications/guards";
-import { DevelopmentInfoComponent } from "./components";
+// import * as fromContainers from "./containers";
+// import * as fromSharedGuards from "../@shared/guards";
+// import * as fromNotificationGuards from "../notifications/guards";
+// import { DevelopmentInfoComponent } from "./components";
 
-const routes: Routes = [
-  {
-    path: "",
-    component: fromContainers.LayoutComponent,
-    canActivate: [
-      fromSharedGuards.AuthGuard,
-      fromNotificationGuards.NotificationsCountGuard
-    ],
-    children: [
-      {
-        path: "dashboard",
-        loadChildren: "../dashboard/dashboard.module#DashboardModule"
-      },
-      {
-        path: "institutions",
-        loadChildren: "../institutions/institutions.module#InstitutionsModule"
-      },
-      {
-        path: "categories",
-        loadChildren: "../categories/categories.module#CategoriesModule"
-      },
-      {
-        path: "subnets",
-        loadChildren: "../subnets/subnets.module#SubnetsModule"
-      },
-      {
-        path: "notifications",
-        loadChildren:
-          "../notifications/notifications.module#NotificationsModule"
-      },
-      {
-        path: "users",
-        loadChildren: "../users/users.module#UsersModule"
-      },
-      {
-        path: "settings",
-        loadChildren: "../settings/settings.module#SettingsModule"
-      },
-      {
-        path: "development",
-        component: DevelopmentInfoComponent
-      },
-      { path: "", redirectTo: "/app/dashboard", pathMatch: "full" }
-    ]
-  }
-];
+// const routes: Routes = [
+//   {
+//     path: "",
+//     component: fromContainers.LayoutComponent,
+//     canActivate: [
+//       fromSharedGuards.AuthGuard,
+//       fromNotificationGuards.NotificationsCountGuard
+//     ],
+//     children: [
+//       {
+//         path: "dashboard",
+//         loadChildren: "../dashboard/dashboard.module#DashboardModule"
+//       },
+//       {
+//         path: "institutions",
+//         loadChildren: "../institutions/institutions.module#InstitutionsModule"
+//       },
+//       {
+//         path: "categories",
+//         loadChildren: "../categories/categories.module#CategoriesModule"
+//       },
+//       {
+//         path: "subnets",
+//         loadChildren: "../subnets/subnets.module#SubnetsModule"
+//       },
+//       {
+//         path: "notifications",
+//         loadChildren:
+//           "../notifications/notifications.module#NotificationsModule"
+//       },
+//       {
+//         path: "users",
+//         loadChildren: "../users/users.module#UsersModule"
+//       },
+//       {
+//         path: "settings",
+//         loadChildren: "../settings/settings.module#SettingsModule"
+//       },
+//       {
+//         path: "development",
+//         component: DevelopmentInfoComponent
+//       },
+//       { path: "", redirectTo: "/app/dashboard", pathMatch: "full" }
+//     ]
+//   }
+// ];
 
-@NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class LayoutRoutingModule {}
+// @NgModule({
+//   imports: [CommonModule, RouterModule.forChild(routes)],
+//   exports: [RouterModule]
+// })
+// export class LayoutRoutingModule {}

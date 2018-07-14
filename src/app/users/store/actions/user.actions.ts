@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { User } from "../../../@core/models/user.model";
+import { User } from "../../../@shared/models";
 
 export const SAVE_USER_PROFILE = "[Users] Save User Profile";
 

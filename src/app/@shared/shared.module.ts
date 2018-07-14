@@ -53,11 +53,11 @@ const NG_MAT_MODULES = [
   MatSidenavModule
 ];
 
+// containers
+import * as fromContainers from "./containers";
+
 // components
 import * as fromComponents from "./components";
-
-// services
-import * as fromServices from "./services";
 
 // guards
 import * as fromGuards from "./guards";
@@ -65,8 +65,11 @@ import * as fromGuards from "./guards";
 @NgModule({
   imports: [...NG_MAT_MODULES, CommonModule],
   entryComponents: [fromComponents.ConfirmDialogComponent],
-  declarations: [...fromComponents.components],
-  providers: [...fromServices.services, ...fromGuards.guards],
-  exports: [...NG_MAT_MODULES, ...fromComponents.components]
+  declarations: [...fromContainers.containers, ...fromComponents.components],
+  exports: [
+    ...NG_MAT_MODULES,
+    ...fromContainers.containers,
+    ...fromComponents.components
+  ]
 })
 export class SharedModule {}

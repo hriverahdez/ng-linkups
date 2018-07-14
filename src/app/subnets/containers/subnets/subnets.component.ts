@@ -3,10 +3,10 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 
-import * as fromRoot from "../../../@core/store";
+import * as fromRoot from "../../../@core/root-store";
 import * as fromStore from "../../store";
-import * as fromSharedServices from "../../../@shared/services";
-import { Subnet } from "../../models/subnet.model";
+import { DialogService } from "../../../@shared/utility/dialog.service";
+import { Subnet } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-subnets",
@@ -18,7 +18,7 @@ export class SubnetsComponent implements OnInit {
   constructor(
     private rootStore: Store<fromRoot.AppState>,
     private store: Store<fromStore.SubnetsState>,
-    private dialogService: fromSharedServices.DialogService
+    private dialogService: DialogService
   ) {}
 
   ngOnInit() {

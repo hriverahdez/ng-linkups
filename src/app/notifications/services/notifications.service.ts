@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import { AbstractDataService } from "../../@shared/utils/abstract-data-service";
 import { HttpClient } from "@angular/common/http";
-import { Notification } from "../models/notification.model";
+import { Notification } from "../../@shared/models/notification.model";
 import { environment } from "../../../environments/environment";
 
 import { Observable, of } from "rxjs";

@@ -14,9 +14,9 @@ import {
   Validators
 } from "@angular/forms";
 
-import { Subnet } from "../../models/subnet.model";
 import { IP_REGEXP } from "../../../@shared/utils/ip-regex";
 import { CustomErrorStateMatcher } from "../../../@shared/utils/error-state-matcher";
+import { Subnet } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-subnet-form",

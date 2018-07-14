@@ -14,8 +14,8 @@ import {
   Validators
 } from "@angular/forms";
 
-import { User } from "../../../@core/models/user.model";
 import { CustomValidator } from "../../../@shared/utils/custom-validation";
+import { User } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-user-profile-form",

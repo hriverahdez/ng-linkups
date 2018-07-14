@@ -1,9 +1,8 @@
-import { Category } from "../../models/category.model";
-import { CustomError } from "../../../@shared/utils/custom-error";
-
 import * as categoryActions from "../actions";
 import { httpErrorMessages } from "../../../@shared/utils/http-error-messages";
 import { toEntities } from "../../../@shared/utils/entities-array-helper";
+import { Category } from "../../../@shared/models";
+import { CustomError } from "../../../@shared/models/custom-error.model";
 
 export interface State {
   entities: { [_id: string]: Category };

@@ -2,15 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 
 import { Store } from "@ngrx/store";
-import * as fromRoot from "../../../@core/store";
+import * as fromRoot from "../../../@core/root-store";
 import * as fromStore from "../../store";
 
-import { Institution } from "../../models/institution.model";
-import { DialogService } from "../../../@shared/services/index";
-
 import * as fromComponents from "../../components";
-import { Category } from "../../../categories/models/category.model";
-import { UserSettings } from "../../../@core/models/user-settings.model";
+import { Institution, Category, UserSettings } from "../../../@shared/models";
+import { DialogService } from "../../../@shared/utility/dialog.service";
 
 @Component({
   selector: "lnk-institutions",
@@ -30,7 +27,7 @@ export class InstitutionsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userSettings$ = this.rootStore.select(fromRoot.getUserSettings);
+    // this.userSettings$ = this.rootStore.select(fromRoot.sele);
     this.institutions$ = this.store.select(fromStore.getAllInstitutions);
     this.categoriesInUse$ = this.store.select(
       fromStore.getInstitutionCategories

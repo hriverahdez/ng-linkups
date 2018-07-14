@@ -13,9 +13,8 @@ import {
   FormControl
 } from "@angular/forms";
 
-import { Institution } from "../../models/institution.model";
-import { Category } from "../../../categories/models/category.model";
 import { IP_MASK_REGEXP } from "../../../@shared/utils/ip-regex";
+import { Institution, Category } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-institution-form",

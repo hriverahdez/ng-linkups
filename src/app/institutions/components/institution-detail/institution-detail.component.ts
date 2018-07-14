@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { Institution } from "../../models/institution.model";
+import { Institution } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-institution-detail",

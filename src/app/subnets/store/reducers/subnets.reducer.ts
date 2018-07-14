@@ -1,9 +1,9 @@
-import { Subnet } from "../../models/subnet.model";
 import * as fromSubnets from "../actions";
 
-import { CustomError } from "../../../@shared/utils/custom-error";
 import { toEntities } from "../../../@shared/utils/entities-array-helper";
 import { httpErrorMessages } from "../../../@shared/utils/http-error-messages";
+import { Subnet } from "../../../@shared/models";
+import { CustomError } from "../../../@shared/models/custom-error.model";
 
 export interface State {
   entities: { [_id: string]: Subnet };

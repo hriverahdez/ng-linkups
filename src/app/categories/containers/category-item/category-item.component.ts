@@ -5,8 +5,7 @@ import { Store } from "@ngrx/store";
 import * as fromStore from "../../store";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
-
-import { Category } from "../../models/category.model";
+import { Category } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-category-item",

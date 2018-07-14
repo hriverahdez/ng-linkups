@@ -5,11 +5,9 @@ import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { tap, map } from "rxjs/operators";
 
-import { Institution } from "../../models/institution.model";
-import { Category } from "../../../categories/models/category.model";
-
 import * as fromStore from "../../store";
 import * as fromCategoriesFeature from "../../../categories/store";
+import { Institution, Category } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-institution-item",

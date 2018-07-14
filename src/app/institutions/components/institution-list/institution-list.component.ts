@@ -12,11 +12,11 @@ import {
   MatPaginator,
   MatPaginatorIntl
 } from "@angular/material";
-import { Institution } from "../../models/institution.model";
-import { DialogService } from "../../../@shared/services";
 import { CustomPaginator } from "../../utils/custom-paginator";
 
 import { InstitutionDetailComponent } from "../institution-detail/institution-detail.component";
+import { Institution } from "../../../@shared/models";
+import { DialogService } from "../../../@shared/utility/dialog.service";
 
 @Component({
   selector: "lnk-institution-list",

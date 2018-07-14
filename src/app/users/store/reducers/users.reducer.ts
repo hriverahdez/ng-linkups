@@ -1,4 +1,4 @@
-import { User } from "../../../@core/models/user.model";
+import { User } from "../../../@shared/models";
 
 export interface State {
   entities: { [_id: string]: User };

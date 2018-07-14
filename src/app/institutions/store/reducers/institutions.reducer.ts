@@ -3,13 +3,12 @@ import {
   toArray
 } from "../../../@shared/utils/entities-array-helper";
 
-import { Institution } from "../../models/institution.model";
-
 import * as fromInstitutions from "../actions";
 import * as fromCategories from "../../../categories/store/actions";
 
-import { CustomError } from "../../../@shared/utils/custom-error";
 import { httpErrorMessages } from "../../../@shared/utils/http-error-messages";
+import { Institution } from "../../../@shared/models";
+import { CustomError } from "../../../@shared/models/custom-error.model";
 
 export interface State {
   entities: { [_id: string]: Institution };

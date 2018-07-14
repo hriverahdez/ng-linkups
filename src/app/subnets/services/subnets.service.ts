@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { AbstractDataService } from "../../@shared/utils/abstract-data-service";
 import { HttpClient } from "@angular/common/http";
-import { Subnet } from "../models/subnet.model";
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
+import { Subnet } from "../../@shared/models";
+import { AbstractDataService } from "../../@shared/asyncServices/http/abstract-data-service";
 
 @Injectable()
 export class SubnetsService extends AbstractDataService<Subnet> {

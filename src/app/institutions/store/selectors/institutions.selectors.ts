@@ -1,7 +1,7 @@
 import { createSelector } from "@ngrx/store";
 import { toArray } from "../../../@shared/utils//entities-array-helper";
 
-import * as fromRoot from "../../../@core/store";
+import * as fromRoot from "../../../@core/root-store";
 import * as fromFeature from "../reducers";
 import * as fromInstitutions from "../reducers/institutions.reducer";
 

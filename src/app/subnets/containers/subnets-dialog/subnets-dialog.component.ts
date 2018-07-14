@@ -3,8 +3,8 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import * as fromStore from "../../store";
 import { Observable } from "rxjs";
-import { Subnet } from "../../models/subnet.model";
 import { MatDialogRef } from "@angular/material";
+import { Subnet } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-subnets-dialog",

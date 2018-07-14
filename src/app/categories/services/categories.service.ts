@@ -4,9 +4,9 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 
-import { Category } from "../models/category.model";
 import { environment } from "../../../environments/environment";
-import { AbstractDataService } from "../../@shared/utils/abstract-data-service";
+import { Category } from "../../@shared/models";
+import { AbstractDataService } from "../../@shared/asyncServices/http/abstract-data-service";
 
 @Injectable()
 export class CategoriesService extends AbstractDataService<Category> {

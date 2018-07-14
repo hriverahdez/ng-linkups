@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 
-import * as fromRoot from "../../../@core/store";
-import { User } from "../../../@core/models/user.model";
+import * as fromAuth from "../../../auth/store";
 import { Observable } from "rxjs";
+import { User } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-user-profile",
@@ -12,9 +12,9 @@ import { Observable } from "rxjs";
 })
 export class UserProfileComponent implements OnInit {
   currentUser$: Observable<User>;
-  constructor(private rootStore: Store<fromRoot.AppState>) {}
+  constructor(private rootStore: Store<fromAuth.AuthState>) {}
 
   ngOnInit() {
-    this.currentUser$ = this.rootStore.select(fromRoot.getCurrentUser);
+    this.currentUser$ = this.rootStore.select(fromAuth.selectCurrentUser);
   }
 }

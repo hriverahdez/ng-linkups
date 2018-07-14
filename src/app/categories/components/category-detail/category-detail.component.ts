@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { Category } from "../../models/category.model";
+import { Category } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-category",

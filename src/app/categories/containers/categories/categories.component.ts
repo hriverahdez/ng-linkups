@@ -3,9 +3,9 @@ import { Store } from "@ngrx/store";
 
 import { Observable } from "rxjs";
 
-import * as fromRoot from "../../../@core/store";
+import * as fromRoot from "../../../@core/root-store";
 import * as fromStore from "../../store";
-import { Category } from "../../models/category.model";
+import { Category } from "../../../@shared/models";
 
 @Component({
   selector: "lnk-categories",

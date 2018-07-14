@@ -1,0 +1,24 @@
+<nav class="navbar navbar-transparent navbar-absolute">
+    <div class="container-fluid">
+        <div class="navbar-header">            
+            <lnk-nav-toggler></lnk-nav-toggler>
+            <span class="navbar-brand"> {{ appSettings.provinceName }} </span>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a (click)="openSettingsSidebar()">                        
+                        <mat-icon>tune</mat-icon>
+                        <p class="hidden-lg hidden-md">Configuración</p>
+                    </a>
+                </li>
+                <li lnk-navbar-notifications class="nav navbar-nav"></li>
+                
+                <li lnk-nav-dropdown class="dropdown" 
+                    [title]="currentUser.name"
+                    [items]="profileItems" [icon]="'person'"
+                    (onItemClicked)="onUserMenuClick($event)"></li>
+            </ul>
+        </div>
+    </div>
+</nav>

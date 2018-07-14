@@ -1,10 +1,10 @@
 import { createSelector } from "@ngrx/store";
 
-import * as fromRoot from "../../../@core/store";
+import * as fromRoot from "../../../@core/root-store";
 import * as fromFeature from "../reducers";
 import * as fromSubnets from "../reducers/subnets.reducer";
 import { toArray } from "../../../@shared/utils/entities-array-helper";
-import { Subnet } from "../../models/subnet.model";
+import { Subnet } from "../../../@shared/models";
 
 export const getState = createSelector(
   fromFeature.getSubnetsState,

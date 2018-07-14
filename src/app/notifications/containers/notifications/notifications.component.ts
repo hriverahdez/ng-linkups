@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 
 import { Store } from "@ngrx/store";
-import * as fromStore from "../../store";
+// import * as fromStore from "../../store";
 import { Observable } from "rxjs";
-import { Notification } from "../../models/notification.model";
+import { Notification } from "../../../@shared/models/notification.model";
 
 import * as fromServices from "../../services";
 
@@ -15,7 +15,7 @@ import * as fromServices from "../../services";
 export class NotificationsComponent implements OnInit {
   notifications$: Observable<Notification[]>;
 
-  constructor(private store: Store<fromStore.NotificationsState>) {}
+  //   constructor(private store: Store<fromStore.NotificationsState>) {}
 
   ngOnInit() {
     // this.notifications$ = this.store.select(fromStore.getAllNotifications);
