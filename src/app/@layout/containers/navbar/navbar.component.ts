@@ -17,10 +17,11 @@ import { AppSettings } from "../../../settings/models/app-settings.model";
   styleUrls: ["./navbar.component.scss"]
 })
 export class NavbarComponent implements OnInit {
-  profileItems = [
+  profileItems: DropdownItem[] = [
     {
       id: "PROFILE",
-      text: "My Profile"
+      text: "My Profile",
+      url: "/app/users/profile"
     },
     {
       id: "LOGOUT",
@@ -45,6 +46,10 @@ export class NavbarComponent implements OnInit {
   }
 
   onUserMenuClick(item: DropdownItem) {
+    // if (item.id === "PROFILE") {
+    //   this.store.dispatch(new fromRoot.Go({ path: ["/app/users/profile"] }));
+    // }
+
     if (item.id === "LOGOUT") {
       this.store.dispatch(new fromRoot.Logout());
     }

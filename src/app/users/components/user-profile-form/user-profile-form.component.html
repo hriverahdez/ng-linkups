@@ -1,0 +1,30 @@
+<form [formGroup]="profileForm">
+
+  <div class="row">
+    <div class="col-sm-6">        
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Nombre completo" 
+          name="name" formControlName="name">            
+      </mat-form-field>       
+      
+    </div>    
+    <div class="col-sm-6">
+      
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Email" 
+          name="email" formControlName="email">            
+      </mat-form-field>  
+    </div>
+  </div>
+  
+  
+  <div>
+    
+    <button mat-raised-button color="primary"               
+            (click)="save(profileForm)">Guardar</button>
+
+  </div>
+
+</form>
+  

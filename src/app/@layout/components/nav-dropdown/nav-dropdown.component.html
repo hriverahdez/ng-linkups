@@ -9,7 +9,8 @@
             <h5>{{title}}</h5>
         </li>
         <li *ngFor="let item of items">
-            <a (click)="itemClicked(item)">{{item.text}}</a>
+            <a *ngIf="item.url" (click)="itemClicked(item)" [routerLink]="item.url">{{item.text}}</a>
+            <a *ngIf="!item.url" (click)="itemClicked(item)">{{item.text}}</a>
         </li>        
     </ul>
 <!-- </div> -->

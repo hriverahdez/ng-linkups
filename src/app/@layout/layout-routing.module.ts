@@ -38,6 +38,10 @@ const routes: Routes = [
           "../notifications/notifications.module#NotificationsModule"
       },
       {
+        path: "users",
+        loadChildren: "../users/users.module#UsersModule"
+      },
+      {
         path: "settings",
         loadChildren: "../settings/settings.module#SettingsModule"
       },

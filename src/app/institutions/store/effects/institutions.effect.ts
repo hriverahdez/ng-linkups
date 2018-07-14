@@ -49,16 +49,12 @@ export class InstitutionEffects {
     .pipe(
       map((action: institutionActions.AddInstitution) => action.payload),
       switchMap(institution =>
-        this.institutionsService
-          .add(institution)
-          .pipe(
-            map(
-              newInst => new institutionActions.AddInstitutionSuccess(newInst)
-            ),
-            catchError(error =>
-              of(new institutionActions.AddInstitutionFail(error))
-            )
+        this.institutionsService.add(institution).pipe(
+          map(newInst => new institutionActions.AddInstitutionSuccess(newInst)),
+          catchError(error =>
+            of(new institutionActions.AddInstitutionFail(error))
           )
+        )
       )
     );
 
@@ -68,17 +64,15 @@ export class InstitutionEffects {
     .pipe(
       map((action: institutionActions.UpdateInstitution) => action.payload),
       switchMap((institution: Institution) =>
-        this.institutionsService
-          .update(institution)
-          .pipe(
-            map(
-              institution =>
-                new institutionActions.UpdateInstitutionSuccess(institution)
-            ),
-            catchError(error =>
-              of(new institutionActions.UpdateInstitutionFail(error))
-            )
+        this.institutionsService.update(institution).pipe(
+          map(
+            institution =>
+              new institutionActions.UpdateInstitutionSuccess(institution)
+          ),
+          catchError(error =>
+            of(new institutionActions.UpdateInstitutionFail(error))
           )
+        )
       )
     );
 
@@ -88,16 +82,14 @@ export class InstitutionEffects {
     .pipe(
       map((action: institutionActions.DeleteInstitution) => action.payload),
       switchMap(institution =>
-        this.institutionsService
-          .delete(institution)
-          .pipe(
-            map(
-              () => new institutionActions.DeleteInstitutionSuccess(institution)
-            ),
-            catchError(error =>
-              of(new institutionActions.DeleteInstitutionFail(error))
-            )
+        this.institutionsService.delete(institution).pipe(
+          map(
+            () => new institutionActions.DeleteInstitutionSuccess(institution)
+          ),
+          catchError(error =>
+            of(new institutionActions.DeleteInstitutionFail(error))
           )
+        )
       )
     );
 

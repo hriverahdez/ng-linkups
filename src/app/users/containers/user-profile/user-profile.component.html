@@ -1,0 +1,34 @@
+<div class="main-content">
+
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card card-nav-tabs">
+					<div class="card-header" data-background-color="purple">
+						<div class="nav-tabs-navigation">
+							<div class="nav-tabs-wrapper">
+								<h4 class="title">Perfil de usuario</h4>
+								<p class="category">Información general de su cuenta</p>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card-content">
+
+						<div class="tab-content">
+							<div class="tab-pane active">								
+                
+                <lnk-user-profile-form [user]="currentUser$ | async"></lnk-user-profile-form>
+                
+							</div>
+						</div>
+
+          </div>
+          
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
