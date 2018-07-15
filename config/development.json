@@ -1,0 +1,36 @@
+{
+  "api": {
+    "baseUrl": "/api"
+  },
+
+  "auth": {
+      "logoutRedirectUrl": "/login"
+  },
+
+  "paths": {
+    "imagesRoot": "/assets/images/",
+    "userImageFolder": "/assets/images/users/"
+  },
+
+  "localization": {
+    "languages": [
+      {"code": "es", "name": "ES", "culture": "es-ES"},
+      {"code": "en", "name": "EN", "culture": "en-EN"}
+    ],
+    "defaultLanguage": "es"
+  },
+
+  "notifications": {
+    "options": {
+      "timeOut": 5000,
+      "showProgressBar": true,
+      "pauseOnHover": true,
+      "position": ["top", "right"],
+      "theClass": "sy-notification"
+    },
+    "unauthorizedEndpoints": ["api/products"],
+    "notFoundEndpoints": ["api/products", "api/account/login", "api/account/register"]
+  },
+  
+  "debugging": true
+}

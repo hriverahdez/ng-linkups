@@ -3,31 +3,26 @@ import { Injectable } from "@angular/core";
 import { RequestOptions } from "@angular/http";
 import { environment } from "../../../environments/environment";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
+import { Observable, throwError, of } from "rxjs";
 
-import { map, tap, catchError } from "rxjs/operators";
+import { map, tap, catchError, finalize } from "rxjs/operators";
 import { User, UserSettings } from "../../@shared/models";
+import { Router } from "@angular/router";
+import { BaseAuthenticator } from "./base-authenticator";
+import { ConfigService } from "../../app-config.service";
+import { AuthenticationContract } from "./authentication-contract";
 
 @Injectable({ providedIn: "root" })
-export class AuthenticationService {
-  constructor(private http: HttpClient) {}
+export class AuthenticationService extends BaseAuthenticator<User>
+  implements AuthenticationContract<User> {
+  private logoutRedirectUrl = "/login";
 
-  getToken() {
-    return localStorage.getItem("token");
-  }
-
-  getCurrentUser(): User {
-    return JSON.parse(localStorage.getItem("currentUser"));
-  }
-
-  updateCurrentUserInfo(user) {
-    localStorage.setItem("currentUser", JSON.stringify(user));
-  }
-
-  isAuthenticated() {
-    const token = this.getToken();
-    return this.getCurrentUser();
-    // return tokenNotExpired(null, token);
+  constructor(
+    http: HttpClient,
+    configService: ConfigService,
+    private router: Router
+  ) {
+    super(http, configService);
   }
 
   login(user: User): Observable<User> {
@@ -35,6 +30,7 @@ export class AuthenticationService {
     let headers: HttpHeaders = new HttpHeaders({
       Authorization: "Basic " + authEncoded
     });
+
     return this.http
       .post<User>(
         `${environment.apiURL}/auth`,
@@ -43,7 +39,8 @@ export class AuthenticationService {
       )
       .pipe(
         map((loginResponse: any) => {
-          this.storeUserInfo(loginResponse.token, loginResponse.user);
+          this.storeUserInfo(loginResponse.user);
+          this.saveTokenInLocalStorage(loginResponse.token);
           return loginResponse.user;
         })
       );
@@ -62,27 +59,34 @@ export class AuthenticationService {
       )
       .pipe(
         map((registerResponse: any) => {
-          this.storeUserInfo(registerResponse.token, registerResponse.user);
+          this.storeUserInfo(registerResponse.user);
+          this.saveTokenInLocalStorage(registerResponse.token);
           return registerResponse.user;
         })
       );
   }
 
-  storeUserInfo(token, user) {
-    localStorage.setItem("token", token);
-    localStorage.setItem("currentUser", JSON.stringify(user));
-  }
+  /**
+   * Log out user
+   * @param redirect Redirect after logout. Default false
+   */
+  logout(redirect = false) {
+    super.logout();
 
-  logOut() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("currentUser");
+    if (redirect) {
+      const logoutRedirectUrl = this.configService.get("auth")
+        ? this.configService.get("auth").logoutRedirectUrl
+        : this.logoutRedirectUrl;
+
+      this.router.navigateByUrl(logoutRedirectUrl);
+    }
   }
 
   saveUserSettings(settings: UserSettings): Observable<UserSettings> {
     return this.http
       .post<User>(`${environment.apiURL}/users/saveSettings`, settings)
       .pipe(
-        tap((user: User) => this.updateCurrentUserInfo(user)),
+        tap((user: User) => this.storeUserInfo(user)),
         map((user: User) => user.settings),
         catchError(error => throwError(error))
       );

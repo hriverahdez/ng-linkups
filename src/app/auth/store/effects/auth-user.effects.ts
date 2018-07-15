@@ -74,7 +74,7 @@ export class AuthUserEffects {
   @Effect()
   logout$ = this.actions$.ofType(userActions.LOGOUT).pipe(
     map(() => {
-      this.authService.logOut();
+      this.authService.logout();
       return new fromRouter.Go({
         path: ["/login"]
       });

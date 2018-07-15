@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule } from "@angular/core";
+import { NgModule, APP_INITIALIZER } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 
 import { environment } from "../environments/environment";
@@ -16,6 +16,12 @@ import * as sharedGuards from "./@shared/guards";
 
 // Root Component
 import { AppComponent } from "./app.component";
+
+import { ConfigService } from "./app-config.service";
+
+export function configServiceFactory(config: ConfigService) {
+  return () => config.load();
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,7 +39,16 @@ import { AppComponent } from "./app.component";
     AuthModule,
     DashboardModule
   ],
-  providers: [...sharedGuards.guards],
+  providers: [
+    ...sharedGuards.guards,
+    ConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: configServiceFactory,
+      deps: [ConfigService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
