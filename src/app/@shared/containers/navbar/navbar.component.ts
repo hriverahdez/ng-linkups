@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 
 import { DropdownItem } from "../../utils/dropdown";
-import { AppSettings, User } from "../../models";
+import { AppSettings, User, Notification } from "../../models";
+import { NavbarSandbox } from "./navbar.sandbox";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "lnk-navbar",
@@ -21,23 +23,28 @@ export class NavbarComponent implements OnInit {
     }
   ];
 
-  @Input() appSettings: AppSettings;
-  @Input() currentUser: User;
+  appSettings$: Observable<AppSettings> = this.sb.appSettings$;
+  currentUser$: Observable<User> = this.sb.currentUser$;
 
-  @Output() showSettingsSidebar = new EventEmitter();
-  @Output() loggedOut = new EventEmitter();
+  unreadNotifications$: Observable<Notification[]> = this.sb
+    .unreadNotifications$;
 
-  constructor() {}
+  notificationsLoading$: Observable<boolean> = this.sb.notificationsLoading$;
+
+  unreadNotificationsCount$: Observable<number> = this.sb
+    .unreadNotificationsCount$;
+
+  constructor(private sb: NavbarSandbox) {}
 
   ngOnInit() {}
 
   onUserMenuClick(item: DropdownItem) {
     if (item.id === "LOGOUT") {
-      this.loggedOut.emit();
+      this.sb.logOut();
     }
   }
 
   openSettingsSidebar() {
-    this.showSettingsSidebar.emit();
+    this.sb.toggleSidebar();
   }
 }

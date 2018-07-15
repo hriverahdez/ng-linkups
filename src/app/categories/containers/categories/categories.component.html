@@ -1,28 +1,32 @@
-<div class="main-content">
+<lnk-layout>
 
-    <div class="container-fluid">
+    <div class="main-content">
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-nav-tabs" >
-                    <div class="card-header" data-background-color="green">
-                      <lnk-add-new-button class="pull-right" [text]="'Agregar Nueva'" (clicked)="addCategory()"></lnk-add-new-button>
-                      <h4 class="title">Categorías</h4>
-                      <p class="category">Categorización para los tipos de instituciones</p>
-                      <div class="clearfix"></div>
-                    </div>
-
-                    <div class="card-content">
-                        <div class="lnk__expansion-panels-container">
-                            <lnk-category *ngFor="let category of categories$ | async" 
-                                class="lnk__expansion-panel-item"
-                                [category]="category"
-                                (onDeleteRequest)="delete($event)"></lnk-category>
+        <div class="container-fluid">
+    
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-nav-tabs" >
+                        <div class="card-header" data-background-color="green">
+                          <lnk-add-new-button class="pull-right" [text]="'Agregar Nueva'" (clicked)="addCategory()"></lnk-add-new-button>
+                          <h4 class="title">Categorías</h4>
+                          <p class="category">Categorización para los tipos de instituciones</p>
+                          <div class="clearfix"></div>
+                        </div>
+    
+                        <div class="card-content">
+                            <div class="lnk__expansion-panels-container">
+                                <lnk-category *ngFor="let category of categories$ | async" 
+                                    class="lnk__expansion-panel-item"
+                                    [category]="category"
+                                    (onDeleteRequest)="delete($event)"></lnk-category>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+</lnk-layout>
 

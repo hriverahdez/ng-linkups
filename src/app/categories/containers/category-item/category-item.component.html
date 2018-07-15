@@ -1,20 +1,24 @@
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="card">
-          <div class="card-header" data-background-color="green">
-            <h4 class="title">Categoría</h4>
-            <p class="category">Llene los datos para crear una nueva categoría</p>
-          </div>
-          <div class="card-content">
-            <lnk-category-form [category]="category$ | async" 
-                               (onCreate)="create($event)"
-                               (onUpdate)="update($event)"></lnk-category-form>
+<lnk-layout>
+
+    <div class="main-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="card">
+                <div class="card-header" data-background-color="green">
+                  <h4 class="title">Categoría</h4>
+                  <p class="category">Llene los datos para crear una nueva categoría</p>
+                </div>
+                <div class="card-content">
+                  <lnk-category-form [category]="category$ | async" 
+                                     (onCreate)="create($event)"
+                                     (onUpdate)="update($event)"></lnk-category-form>
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>
-      
-    </div>
-  </div>
-</div>
+
+</lnk-layout>

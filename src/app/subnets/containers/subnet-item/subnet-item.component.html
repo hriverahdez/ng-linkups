@@ -1,40 +1,45 @@
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card medium-width-card">
-          <div class="card-header" data-background-color="blue">
-            <h4 class="title">Subred</h4>
-            <p class="category">Llene los datos para crear una nueva subred</p>
-          </div>
-          <div class="card-content">
-              <mat-tab-group class="demo-tab-group">
-                <mat-tab label="Agregar 1">
-                  <ng-template mat-tab-label>
-                    <mat-icon>exposure_plus_1</mat-icon>
-                  </ng-template>
-                  <div class="mat-tab-content">
-                      <lnk-subnet-form 
-                        [subnet]="subnet$ | async"
-                        (onCreate)="createSubnet($event)"
-                        (onUpdate)="updateSubnet($event)"
-                        (onCancel)="cancel()"></lnk-subnet-form>
-                  </div>
-                </mat-tab>
-                <mat-tab label="Agregar Rango">
-                  <ng-template mat-tab-label>
-                    <mat-icon>space_bar</mat-icon>
-                  </ng-template>
-                  <div class="mat-tab-content">
-                    <lnk-subnet-range-form (onCreate)="createSubnetRange($event)"></lnk-subnet-range-form>
-                  </div>
-                </mat-tab>                
-              </mat-tab-group>
+<lnk-layout>
+
+    <div class="main-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card medium-width-card">
+                <div class="card-header" data-background-color="blue">
+                  <h4 class="title">Subred</h4>
+                  <p class="category">Llene los datos para crear una nueva subred</p>
+                </div>
+                <div class="card-content">
+                    <mat-tab-group class="demo-tab-group">
+                      <mat-tab label="Agregar 1">
+                        <ng-template mat-tab-label>
+                          <mat-icon>exposure_plus_1</mat-icon>
+                        </ng-template>
+                        <div class="mat-tab-content">
+                            <lnk-subnet-form 
+                              [subnet]="subnet$ | async"
+                              (onCreate)="createSubnet($event)"
+                              (onUpdate)="updateSubnet($event)"
+                              (onCancel)="cancel()"></lnk-subnet-form>
+                        </div>
+                      </mat-tab>
+                      <mat-tab label="Agregar Rango">
+                        <ng-template mat-tab-label>
+                          <mat-icon>space_bar</mat-icon>
+                        </ng-template>
+                        <div class="mat-tab-content">
+                          <lnk-subnet-range-form (onCreate)="createSubnetRange($event)"></lnk-subnet-range-form>
+                        </div>
+                      </mat-tab>                
+                    </mat-tab-group>
+                  
+                </div>
+              </div>
+            </div>
             
           </div>
         </div>
       </div>
       
-    </div>
-  </div>
-</div>
+
+</lnk-layout>

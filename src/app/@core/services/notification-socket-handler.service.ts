@@ -5,7 +5,7 @@ import { map } from "rxjs/operators";
 import { Notification } from "../../@shared/models/notification.model";
 import { WebsocketService } from "../../@shared/asyncServices/websockets/websocket.service";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class NotificationSocketHandlerService {
   _notifications: Subject<Notification>;
 
@@ -13,7 +13,7 @@ export class NotificationSocketHandlerService {
   constructor(private wsService: WebsocketService<Notification>) {
     this._notifications = <Subject<Notification>>wsService.connect().pipe(
       map(
-        (response: any): Notification => {
+        (response): Notification => {
           return response.data;
         }
       )

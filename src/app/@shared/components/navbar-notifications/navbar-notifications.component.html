@@ -1,25 +1,25 @@
 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" (click)="toggle()" (blur)="hide()">
   <i class="material-icons">notifications</i>
-  <span class="notification" *ngIf="(unreadCount$ | async) > 0" >{{ unreadCount$ | async }}</span>
+  <span class="notification" *ngIf="unreadCount > 0" >{{ unreadCount }}</span>
   <p class="hidden-lg hidden-md">Notifications</p>
 </a>  
 <ul class="dropdown-menu">   
-  <li *ngIf="isLoading$ | async" class="loading-spinner">
+  <li *ngIf="isLoading" class="loading-spinner">
     <mat-spinner [diameter]="35"></mat-spinner>
   </li> 
-  <li *ngIf="!((notifications$ | async)?.length)" class="notifications-empty text-muted">
+  <li *ngIf="!(notifications?.length)" class="notifications-empty text-muted">
     <i>No tiene notificaciones nuevas</i>
   </li>
-  <li *ngFor="let notification of notifications$ | async">
-    <a (click)="itemClicked(item)">
+  <li *ngFor="let notification of notifications">
+    <!-- <a (click)="itemClicked(item)"> -->
       <mat-icon>{{ notification.icon }}</mat-icon>
       {{ notification.message }}      
       <div>Acción realizada por: <strong>{{ notification.user }}</strong></div>
-    </a>
+    <!-- </a> -->
     <hr style="margin: 5px 0 !important;">
   </li>
-  <li *ngIf="((notifications$ | async).length > 8) || !((notifications$ | async)?.length)" >
-    <a routerLink="/app/notifications" class="extra-unread-notifications">
+  <li *ngIf="notifications.length > 10 || !notifications?.length" >
+    <a routerLink="/notifications" class="extra-unread-notifications">
       Ver todas
       <mat-icon> keyboard_arrow_right </mat-icon>
     </a>

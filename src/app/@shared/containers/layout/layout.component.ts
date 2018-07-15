@@ -12,16 +12,16 @@ export class LayoutComponent implements OnInit {
   isLoading$: Observable<boolean>;
   secondarySidebarOpened$: Observable<boolean>;
 
-  currentUser$: Observable<User>;
   appSettings$: Observable<AppSettings>;
+  userSettings$: Observable<UserSettings>;
 
   constructor(private sb: LayoutSandbox) {}
 
   ngOnInit() {
     this.isLoading$ = this.sb.isLoading$;
     this.secondarySidebarOpened$ = this.sb.secondarySidebarOpened$;
-    this.currentUser$ = this.sb.currentUser$;
     this.appSettings$ = this.sb.appSettings$;
+    this.userSettings$ = this.sb.userSettings$;
   }
 
   onSettingsSaved(settings: {
@@ -31,15 +31,7 @@ export class LayoutComponent implements OnInit {
     this.sb.saveSettings(settings.appSettings, settings.userSettings);
   }
 
-  toggle() {
-    this.sb.toggleSidebar();
-  }
-
   close() {
     this.sb.closeSidebar();
-  }
-
-  logOut() {
-    this.sb.logOut();
   }
 }

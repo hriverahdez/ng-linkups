@@ -61,10 +61,10 @@ export function reducer(
     }
 
     case fromAppSettings.SAVE_APP_SETTINGS_SUCCESS: {
-      const settings = action.payload;
+      const appSettings = action.payload;
       return {
         ...state,
-        settings,
+        appSettings,
         loading: false
       };
     }

@@ -1,45 +1,47 @@
-<div class="main-content">
+<lnk-layout>
 
-  <div class="container-fluid">
-    
-    <div class="row">
-			<div class="col-md-12">
-				<div class="card card-nav-tabs">
-					<div class="card-header" data-background-color="blue">
-						<div class="nav-tabs-navigation">
-							<div class="nav-tabs-wrapper">
-                <lnk-add-new-button class="pull-right" [text]="'Agregar Nueva'" (clicked)="addSubnetPage()"></lnk-add-new-button>
-                <h4 class="title">Subredes</h4>
-                <p class="category">Listado de subredes de la provincia</p>              
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
+    <div class="main-content">
 
-					<div class="card-content">
-						<div class="tab-content">
-							<div class="tab-pane active">
-                
-                <div class="lnk__expansion-panels-container">
-                  <lnk-subnet-detail class="lnk__expansion-panel-item"
-                        *ngFor="let subnet of subnets$ | async" 
-												[subnet]="subnet"												
-												(onDeleteRequest)="deleteSubnet($event)"></lnk-subnet-detail>
-                </div>
-								
-								<hr>
-								<label style="margin-right: 15px">Leyenda: </label>
-								<mat-checkbox style="margin-right: 15px" [checked]="true" disabled>En uso</mat-checkbox>
-								<mat-checkbox style="margin-right: 15px" disabled>Disponible</mat-checkbox>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div class="container-fluid">
+          
+          <div class="row">
+                  <div class="col-md-12">
+                      <div class="card card-nav-tabs">
+                          <div class="card-header" data-background-color="blue">
+                              <div class="nav-tabs-navigation">
+                                  <div class="nav-tabs-wrapper">
+                      <lnk-add-new-button class="pull-right" [text]="'Agregar Nueva'" (clicked)="addSubnetPage()"></lnk-add-new-button>
+                      <h4 class="title">Subredes</h4>
+                      <p class="category">Listado de subredes de la provincia</p>              
+                                      <div class="clearfix"></div>
+                                  </div>
+                              </div>
+                          </div>
+      
+                          <div class="card-content">
+                              <div class="tab-content">
+                                  <div class="tab-pane active">
+                      
+                      <div class="lnk__expansion-panels-container">
+                        <lnk-subnet-detail class="lnk__expansion-panel-item"
+                              *ngFor="let subnet of subnets$ | async" 
+                                                      [subnet]="subnet"												
+                                                      (onDeleteRequest)="deleteSubnet($event)"></lnk-subnet-detail>
+                      </div>
+                                      
+                                      <hr>
+                                      <label style="margin-right: 15px">Leyenda: </label>
+                                      <mat-checkbox style="margin-right: 15px" [checked]="true" disabled>En uso</mat-checkbox>
+                                      <mat-checkbox style="margin-right: 15px" disabled>Disponible</mat-checkbox>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
     
-    <!-- <pre>
-      {{subnets$ | async | json}}
-    </pre> -->
-  </div>
-</div>
+        </div>
+      </div>
+      
+
+</lnk-layout>

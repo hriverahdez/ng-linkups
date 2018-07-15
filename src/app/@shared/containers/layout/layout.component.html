@@ -8,6 +8,7 @@
 			
             <lnk-settings 
                 [appSettings]="appSettings$ | async"
+                [userSettings]="userSettings$ | async"
                 (savedSettings)="onSettingsSaved($event)"
                 (closed)="close()"></lnk-settings>
 
@@ -19,12 +20,7 @@
 							style="background-image: url(../assets/img/sidebar-4.jpg)"></div>
 			</div>
 			<div class="main-panel">				
-                <lnk-navbar 
-                    [currentUser]="currentUser$ | async" 
-                    [appSettings]="appSettings$ | async"
-                    (showSettingsSidebar)="toggle()"
-                    (loggedOut)="logOut()"
-                    ></lnk-navbar>
+                <lnk-navbar></lnk-navbar>
                 <ng-content></ng-content>
 				<lnk-footer></lnk-footer>
             </div>

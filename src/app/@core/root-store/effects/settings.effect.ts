@@ -29,23 +29,23 @@ export class SettingsEffects {
     catchError(error => of(new settingsActions.LoadAppSettingsFail(error)))
   );
 
-  //   @Effect()
-  //   saveAppSettings$ = this.actions$
-  //     .ofType(settingsActions.SAVE_APP_SETTINGS)
-  //     .pipe(
-  //       map((action: settingsActions.SaveAppSettings) => action.payload),
-  //       switchMap(appSettings =>
-  //         this.settingsService.add(appSettings).pipe(
-  //           map(
-  //             appSettings =>
-  //               new settingsActions.SaveAppSettingsSuccess(appSettings)
-  //           ),
-  //           catchError(error =>
-  //             of(new settingsActions.SaveAppSettingsFail(error))
-  //           )
-  //         )
-  //       )
-  //     );
+  @Effect()
+  saveAppSettings$ = this.actions$
+    .ofType(settingsActions.SAVE_APP_SETTINGS)
+    .pipe(
+      map((action: settingsActions.SaveAppSettings) => action.payload),
+      switchMap(appSettings =>
+        this.settingsService.add(appSettings).pipe(
+          map(
+            appSettings =>
+              new settingsActions.SaveAppSettingsSuccess(appSettings)
+          ),
+          catchError(error =>
+            of(new settingsActions.SaveAppSettingsFail(error))
+          )
+        )
+      )
+    );
 
   //   @Effect()
   //   saveUserSettings$ = this.actions$
@@ -77,15 +77,15 @@ export class SettingsEffects {
   //       )
   //     );
 
-  //   @Effect({ dispatch: false })
-  //   saveSettingsSuccess$ = this.actions$
-  //     .ofType(settingsActions.SAVE_APP_SETTINGS)
-  //     .pipe(
-  //       tap(() => {
-  //         this.snackbar.openSimpleSnackBar(
-  //           "Configuración guardada exitosamente",
-  //           "Cerrar"
-  //         );
-  //       })
-  //     );
+  @Effect({ dispatch: false })
+  saveSettingsSuccess$ = this.actions$
+    .ofType(settingsActions.SAVE_APP_SETTINGS)
+    .pipe(
+      tap(() => {
+        this.snackbar.openSimpleSnackBar(
+          "Configuración guardada exitosamente",
+          "Cerrar"
+        );
+      })
+    );
 }

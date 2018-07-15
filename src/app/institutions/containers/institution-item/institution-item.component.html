@@ -1,21 +1,25 @@
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card medium-width-card">
-          <div class="card-header" data-background-color="purple">
-            <h4 class="title">Institución</h4>
-            <p class="category">Llene los datos para crear una nueva institución</p>
-          </div>
-          <div class="card-content">
-            <lnk-institution-form [institution]="institution$ | async" 
-                                  [categories]="availableCategories$ | async"
-                                  (onCreate)="create($event)"
-                                  (onUpdate)="update($event)"></lnk-institution-form>
+<lnk-layout>
+
+    <div class="main-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card medium-width-card">
+                <div class="card-header" data-background-color="purple">
+                  <h4 class="title">Institución</h4>
+                  <p class="category">Llene los datos para crear una nueva institución</p>
+                </div>
+                <div class="card-content">
+                  <lnk-institution-form [institution]="institution$ | async" 
+                                        [categories]="availableCategories$ | async"
+                                        (onCreate)="create($event)"
+                                        (onUpdate)="update($event)"></lnk-institution-form>
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>
-      
-    </div>
-  </div>
-</div>
+
+</lnk-layout>

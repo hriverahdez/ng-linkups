@@ -8,6 +8,7 @@ import * as fromStore from "../../store";
 import * as fromComponents from "../../components";
 import { Institution, Category, UserSettings } from "../../../@shared/models";
 import { DialogService } from "../../../@shared/utility/dialog.service";
+import { InstitutionsSandbox } from "../../institutions.sandbox";
 
 @Component({
   selector: "lnk-institutions",
@@ -18,29 +19,24 @@ export class InstitutionsComponent implements OnInit {
   institutions$: Observable<Institution[]>;
   categoriesInUse$: Observable<Category[]>;
 
-  userSettings$: Observable<UserSettings>;
+  showLineNumber$: Observable<boolean>;
 
   constructor(
-    private rootStore: Store<fromRoot.AppState>,
-    private store: Store<fromStore.InstitutionsState>,
+    private sb: InstitutionsSandbox,
     private dialogService: DialogService
   ) {}
 
   ngOnInit() {
-    // this.userSettings$ = this.rootStore.select(fromRoot.sele);
-    this.institutions$ = this.store.select(fromStore.getAllInstitutions);
-    this.categoriesInUse$ = this.store.select(
-      fromStore.getInstitutionCategories
-    );
+    this.showLineNumber$ = this.sb.showLineNumber$;
+    this.institutions$ = this.sb.institutions$;
+    this.categoriesInUse$ = this.sb.categoriesInUse$;
   }
 
-  addInstitution() {
-    this.rootStore.dispatch(
-      new fromRoot.Go({ path: ["/app/institutions/add"] })
-    );
+  goToAddInstitutionPage() {
+    this.sb.goToAddInstitutionPage();
   }
 
   delete(institution: Institution) {
-    this.store.dispatch(new fromStore.DeleteInstitution(institution));
+    this.sb.deleteInstitution(institution);
   }
 }

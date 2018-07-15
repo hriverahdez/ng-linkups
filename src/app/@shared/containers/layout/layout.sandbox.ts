@@ -3,30 +3,30 @@ import { Store } from "@ngrx/store";
 import * as fromRoot from "../../../@core/root-store";
 import * as fromAuth from "../../../auth/store";
 import { Observable } from "rxjs";
-import { User, AppSettings, UserSettings } from "../../models";
+import { User, AppSettings, UserSettings, Notification } from "../../models";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
 })
 export class LayoutSandbox {
+  // (UI) App Loading Status
   isLoading$: Observable<boolean> = this.rootStore.select(
     fromRoot.selectAppIsLoading
   );
 
+  // (UI) App Sidebar Status
   secondarySidebarOpened$: Observable<boolean> = this.rootStore.select(
     fromRoot.selectSecondarySidebarOpened
   );
 
+  // User and Settings
   appSettings$: Observable<AppSettings> = this.rootStore.select(
     fromRoot.selectAppSettings
   );
 
   userSettings$: Observable<UserSettings> = this.authStore.select(
     fromAuth.selectUserSettings
-  );
-
-  currentUser$: Observable<User> = this.authStore.select(
-    fromAuth.selectCurrentUser
   );
 
   constructor(
@@ -42,15 +42,7 @@ export class LayoutSandbox {
     this.rootStore.dispatch(new fromRoot.HideSecondarySidebar());
   }
 
-  toggleSidebar() {
-    this.rootStore.dispatch(new fromRoot.ShowSecondarySidebar());
-  }
-
   closeSidebar() {
     this.rootStore.dispatch(new fromRoot.HideSecondarySidebar());
-  }
-
-  logOut() {
-    this.authStore.dispatch(new fromAuth.Logout());
   }
 }

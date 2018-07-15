@@ -60,18 +60,23 @@ import * as fromContainers from "./containers";
 
 // components
 import * as fromComponents from "./components";
-
-// guards
-import * as fromGuards from "./guards";
+import { UtilityModule } from "./utility";
 
 @NgModule({
-  imports: [...NG_MAT_MODULES, CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [
+    ...NG_MAT_MODULES,
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    UtilityModule.forRoot()
+  ],
   entryComponents: [fromComponents.ConfirmDialogComponent],
   declarations: [...fromContainers.containers, ...fromComponents.components],
   exports: [
     ...NG_MAT_MODULES,
     ...fromContainers.containers,
-    ...fromComponents.components
+    ...fromComponents.components,
+    UtilityModule
   ]
 })
 export class SharedModule {}

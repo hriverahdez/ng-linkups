@@ -8,12 +8,14 @@ import {
   ActivatedRouteSnapshot
 } from "@angular/router";
 
-import * as fromUI from "./ui.reducers";
+import * as fromNotifications from "./notifications.reducer";
 import * as fromSettings from "./settings.reducer";
+import * as fromUI from "./ui.reducers";
 
 export interface AppState {
   ui: fromUI.UIState;
   settings: fromSettings.SettingsState;
+  notifications: fromNotifications.NotificationsState;
   routerReducer: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
@@ -26,6 +28,7 @@ export interface RouterStateUrl {
 export const reducers: ActionReducerMap<AppState> = {
   ui: fromUI.reducer,
   settings: fromSettings.reducer,
+  notifications: fromNotifications.reducer,
   routerReducer: fromRouter.routerReducer
 };
 
@@ -34,9 +37,14 @@ export const getRouterState = createFeatureSelector<
 >("routerReducer");
 
 export const selectUIState = createFeatureSelector<fromUI.UIState>("ui");
+
 export const selectSettingsState = createFeatureSelector<
   fromSettings.SettingsState
 >("settings");
+
+export const selectNotificationsState = createFeatureSelector<
+  fromNotifications.NotificationsState
+>("notifications");
 
 // Router Serializer
 export class CustomSerializer

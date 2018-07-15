@@ -1,37 +1,43 @@
-<div class="main-content">
+<lnk-layout>
 
-	<div class="container-fluid">
+    <div class="main-content">
 
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card card-nav-tabs">
-					<div class="card-header" data-background-color="purple">
-						<div class="nav-tabs-navigation">
-							<div class="nav-tabs-wrapper">
-								<lnk-add-new-button class="pull-right" [text]="'Agregar Nueva'" (clicked)="addInstitution()"></lnk-add-new-button>
-								<h4 class="title">Instituciones</h4>
-								<p class="category">Haga clic sobre una para ver más detalles</p>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
+        <div class="container-fluid">
+    
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-nav-tabs">
+                        <div class="card-header" data-background-color="purple">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    <lnk-add-new-button 
+                                        class="pull-right" [text]="'Agregar Nueva'" 
+                                        (clicked)="goToAddInstitutionPage()"></lnk-add-new-button>
+                                    <h4 class="title">Instituciones</h4>
+                                    <p class="category">Haga clic sobre una para ver más detalles</p>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="card-content">
+                            <div class="tab-content">
+                                <div class="tab-pane active">								
+                                    <lnk-institution-list 
+                                        [institutions]="institutions$ | async" 
+                                        [showLineNumber]="showLineNumber$ | async"
+                                        (onDelete)="delete($event)"></lnk-institution-list>
+                                </div>
+                            </div>
+    
+                            <hr>						
+                            <lnk-category-legend [categories]="categoriesInUse$ | async"></lnk-category-legend>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-					<div class="card-content">
-						<div class="tab-content">
-							<div class="tab-pane active">								
-								<lnk-institution-list 
-									[institutions]="institutions$ | async" 
-									[showLineNumber]="(userSettings$ | async)?.showLineNumber"
-									(onDelete)="delete($event)"></lnk-institution-list>
-							</div>
-						</div>
-
-						<hr>						
-						<lnk-category-legend [categories]="categoriesInUse$ | async"></lnk-category-legend>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+</lnk-layout>

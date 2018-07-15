@@ -4,18 +4,18 @@ import * as io from "socket.io-client";
 import { Observable, Subject } from "rxjs";
 import { environment } from "../../../../environments/environment";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class WebsocketService<T> {
   private socket;
 
   constructor() {}
 
-  connect(): Subject<{ type: string; data: T }> {
+  connect(socketId = "notification"): Subject<{ type: string; data: T }> {
     this.socket = io(environment.wsUrl);
 
     let observable = new Observable(observer => {
-      this.socket.on("notification", data => {
-        console.log("Received message from Websocket Server");
+      this.socket.on(socketId, data => {
+        console.log(`Received ${socketId} from Websocket Server`);
         observer.next(data);
       });
       return () => {
@@ -25,7 +25,7 @@ export class WebsocketService<T> {
 
     let observer = {
       next: (data: T) => {
-        this.socket.emit("notification", JSON.stringify(data));
+        this.socket.emit(socketId, JSON.stringify(data));
       }
     };
 

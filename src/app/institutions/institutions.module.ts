@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { InstitutionsRoutingModule } from "./institutions-routing.module";
@@ -11,7 +10,6 @@ import { EffectsModule } from "@ngrx/effects";
 
 import { reducers, effects } from "./store";
 
-import { AppInterceptor } from "../@shared/utils/interceptor/token.interceptor";
 import { CategoriesModule } from "../categories/categories.module";
 import { SubnetsModule } from "../subnets/subnets.module";
 
@@ -26,11 +24,11 @@ import * as fromServices from "./services";
 
 // guards
 import * as fromGuards from "./guards";
+import { InstitutionsSandbox } from "./institutions.sandbox";
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule,
     ReactiveFormsModule,
     SharedModule,
     InstitutionsRoutingModule,
@@ -41,6 +39,10 @@ import * as fromGuards from "./guards";
   ],
   entryComponents: [fromComponents.InstitutionDetailComponent],
   declarations: [...fromContainers.containers, ...fromComponents.components],
-  providers: [...fromServices.services, ...fromGuards.guards, AppInterceptor]
+  providers: [
+    ...fromServices.services,
+    ...fromGuards.guards,
+    InstitutionsSandbox
+  ]
 })
 export class InstitutionsModule {}

@@ -96,7 +96,7 @@ export class InstitutionEffects {
       institutionActions.ADD_INSTITUTION_SUCCESS,
       institutionActions.UPDATE_INSTITUTION_SUCCESS
     )
-    .pipe(map(() => new fromRoot.Go({ path: ["/app/institutions"] })));
+    .pipe(map(() => new fromRoot.Go({ path: ["/institutions"] })));
 
   @Effect({ dispatch: false })
   handleInstitutionFailure$ = this.actions$

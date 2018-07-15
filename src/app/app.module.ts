@@ -18,6 +18,7 @@ import * as sharedGuards from "./@shared/guards";
 import { AppComponent } from "./app.component";
 
 import { ConfigService } from "./app-config.service";
+import { AppInterceptor } from "./auth/interceptors/token.interceptor";
 
 export function configServiceFactory(config: ConfigService) {
   return () => config.load();
@@ -34,9 +35,10 @@ export function configServiceFactory(config: ConfigService) {
     // App Dependencies
     AppRoutingModule,
     CoreModule.forRoot(),
-    UtilityModule.forRoot(),
+    // UtilityModule.forRoot(),
 
     AuthModule,
+    // TODO: maybe remove eager loading and use lazy loading
     DashboardModule
   ],
   providers: [
@@ -47,7 +49,8 @@ export function configServiceFactory(config: ConfigService) {
       useFactory: configServiceFactory,
       deps: [ConfigService],
       multi: true
-    }
+    },
+    AppInterceptor
   ],
   bootstrap: [AppComponent]
 })

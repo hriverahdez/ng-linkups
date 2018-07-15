@@ -35,8 +35,7 @@ import { reducers, CustomSerializer, effects } from "./root-store";
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule,
     !environment.production ? StoreDevtoolsModule.instrument() : []
-  ],
-  declarations: []
+  ]
 })
 export class CoreModule {
   constructor(

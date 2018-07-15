@@ -13,7 +13,7 @@ import * as fromComponents from "./components";
 
 const ROUTES: Routes = [
   {
-    path: "dashboard",
+    path: "",
     component: fromContainers.DashboardComponent,
     canActivate: [AuthGuard]
   }
