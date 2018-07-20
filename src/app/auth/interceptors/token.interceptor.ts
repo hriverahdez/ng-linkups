@@ -16,7 +16,12 @@ export class TokenInterceptor implements HttpInterceptor {
   private auth: AuthenticationService;
 
   /** Add '*' to array exclude all requests */
-  private excluded = ["/login", "/password", "/register"];
+  private unauthenticatedEndpoints = [
+    "/auth",
+    "/password",
+    "/register",
+    "/config"
+  ];
 
   constructor(private injector: Injector) {
     this.auth = this.injector.get(AuthenticationService);
@@ -37,7 +42,7 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (this.requestExcluded(request)) {
+    if (this.requestIsExcluded(request)) {
       return next.handle(request);
     }
 
@@ -64,12 +69,14 @@ export class TokenInterceptor implements HttpInterceptor {
     );
   }
 
-  requestExcluded(request: HttpRequest<any>) {
-    const hasWildcard = this.excluded.indexOf("*") !== -1;
+  requestIsExcluded(request: HttpRequest<any>) {
+    const hasWildcard = this.unauthenticatedEndpoints.indexOf("*") !== -1;
     if (hasWildcard) return true;
 
     const reqUrl = request.url;
-    return !!this.excluded.find((url: string) => reqUrl.includes(url));
+    return !!this.unauthenticatedEndpoints.find((url: string) =>
+      reqUrl.includes(url)
+    );
   }
 }
 

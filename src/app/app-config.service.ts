@@ -18,29 +18,32 @@ export class ConfigService {
    */
   load() {
     this.hasLoaded.next(false);
-    return new Promise((resolve, reject) => {
-      const configObs = this.http.get<{ env: string }>("config/env.json");
+    // return new Promise((resolve, reject) => {
+    const configObs = this.http.get<{ env: string }>("/config/env.json");
 
-      configObs.subscribe(env_data => {
-        this.env = env_data;
+    configObs.subscribe(env_data => {
+      this.env = env_data;
 
-        this.http
-          .get("/config/" + env_data.env + ".json")
-          .pipe(
-            catchError((error: any) => {
-              return throwError(error.json().error || "Server error");
-            })
-          )
-          .subscribe(data => {
-            env_data.env === "development"
-              ? console.log(".:CONFIG LOADED:.", data)
-              : null;
-            this.config = data;
-            this.hasLoaded.next(true);
-            resolve();
-          });
-      });
+      this.http
+        .get("/config/" + env_data.env + ".json")
+        .pipe(
+          catchError((error: any) => {
+            return throwError(error.json().error || "Server error");
+          })
+        )
+        .subscribe(data => {
+          env_data.env === "development"
+            ? console.log(".:CONFIG LOADED:.", data)
+            : null;
+          this.config = data;
+          this.hasLoaded.next(true);
+          // resolve();
+          return;
+        });
     });
+
+    return configObs.toPromise();
+    // });
   }
 
   configHasLoaded() {

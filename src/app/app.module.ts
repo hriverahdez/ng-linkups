@@ -33,13 +33,12 @@ export function configServiceFactory(config: ConfigService) {
     HttpClientModule,
 
     // App Dependencies
-    AppRoutingModule,
     CoreModule.forRoot(),
     // UtilityModule.forRoot(),
 
     AuthModule,
     // TODO: maybe remove eager loading and use lazy loading
-    DashboardModule
+    AppRoutingModule
   ],
   providers: [
     ...sharedGuards.guards,

@@ -2,36 +2,29 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from "@angular/router";
 import { PageNotFoundComponent } from "./@shared/components/page-not-found/page-not-found.component";
-
-// guards
-// import * as fromGuards from "./guards";
+import { AuthGuard } from "./@shared/guards";
 
 const routes: Routes = [
   {
     path: "dashboard",
-    loadChildren: "./dashboard/dashboard.module#DashboardModule"
+    loadChildren: "./dashboard/dashboard.module#DashboardModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "categories",
-    loadChildren: "./categories/categories.module#CategoriesModule"
+    loadChildren: "./categories/categories.module#CategoriesModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "institutions",
-    loadChildren: "./institutions/institutions.module#InstitutionsModule"
+    loadChildren: "./institutions/institutions.module#InstitutionsModule",
+    canActivate: [AuthGuard]
   },
   {
     path: "subnets",
-    loadChildren: "./subnets/subnets.module#SubnetsModule"
+    loadChildren: "./subnets/subnets.module#SubnetsModule",
+    canActivate: [AuthGuard]
   },
-  //   {
-  //     path: "notifications",
-  //     loadChildren: "./notifications/notifications.module#NotificationsModule"
-  //   },
-  //   {
-  //     path: "users",
-  //     loadChildren: "./users/users.module#UsersModule"
-  //   },
-
   { path: "", redirectTo: "/dashboard", pathMatch: "full" },
   { path: "**", component: PageNotFoundComponent }
 ];

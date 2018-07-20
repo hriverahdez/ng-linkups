@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 
 import { Store } from "@ngrx/store";
 import * as fromRoot from "../../@core/root-store";
-import { filter, map } from "rxjs/operators";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class RegistrationGuard implements CanActivate {
